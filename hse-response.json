@@ -1,0 +1,176 @@
+{
+    "collection": {
+        "version": "0.1",
+        "href": "http://api.sundaya.com/hse/week/20190209",
+        "links": [
+            {
+                "rel": "next",
+                "href": "http://api.sundaya.com/hse/week/20190202",
+                "prompt": "A link to the next sibling of this collection.",
+                "name": "Next Week",
+                "render": "link"
+            },
+            {
+                "rel": "previous",
+                "href": "http://api.sundaya.com/hse/week/20190216",
+                "prompt": "A link to the previous sibling of this collection",
+                "name": "Previous Week",
+                "render": "link"
+            },
+            {
+                "rel": "parent",
+                "href": "http://api.sundaya.com/hse/month/201902",
+                "prompt": "A link to the parent of the requested collection",
+                "name": "Month",
+                "render": "link"
+            },
+            {
+                "rel": "period",
+                "href": "http://vocab.sundaya.com/enum/period/week",
+                "prompt": "The period classifier for this collection as indicated by the name property",
+                "name": "Week"
+            },
+            {
+                "rel": "interval",
+                "href": "http://vocab.sundaya.com/interval",
+                "prompt": "The start and end of this period", 
+                "name": "04/02/2019-09/02/2019"
+            }
+        ],
+        "items": [
+            {
+                "href": "http://api.sundaya.com/day/20190203",
+                "data": [
+                    {
+                        "name": "rowdata",
+                        "value": "30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54",
+                        "prompt": "Sunday"
+                    },
+                    {
+                        "name": "rowtotal",
+                        "value": "17067"
+                    }
+                ]
+            },
+            {
+                "href": "http://api.sundaya.com/day/20190204",
+                "data": [
+                    {
+                        "name": "rowdata",
+                        "value": "3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54",
+                        "prompt": "Monday"
+                    },
+                    {
+                        "name": "rowtotal",
+                        "value": "11601"
+                    }
+                ]
+            },
+            {
+                "href": "http://api.sundaya.com/day/20190205",
+                "data": [
+                    {
+                        "name": "rowdata",
+                        "value": "3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640",
+                        "prompt": "Tuesday"
+                    },
+                    {
+                        "name": "rowtotal",
+                        "value": "29488"
+                    }
+                ]
+            },
+            {
+                "href": "http://api.sundaya.com/day/20190206",
+                "data": [
+                    {
+                        "name": "rowdata",
+                        "value": "30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54",
+                        "prompt": "Wednesday"
+                    },
+                    {
+                        "name": "rowtotal",
+                        "value": "18033"
+                    }
+                ]
+            },
+            {
+                "href": "http://api.sundaya.com/day/20190207",
+                "data": [
+                    {
+                        "name": "rowdata",
+                        "value": "30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54",
+                        "prompt": "Thursday"
+                    },
+                    {
+                        "name": "rowtotal",
+                        "value": "22965"
+                    }
+                ]
+            },
+            {
+                "href": "http://api.sundaya.com/day/20190208",
+                "data": [
+                    {
+                        "name": "rowdata",
+                        "value": "30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54",
+                        "prompt": "Friday"
+                    },
+                    {
+                        "name": "rowtotal",
+                        "value": "28917"
+                    }
+                ]
+            },
+            {
+                "href": "http://api.sundaya.com/day/20190209",
+                "data": [
+                    {
+                        "name": "rowdata",
+                        "value": "3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54",
+                        "prompt": "Saturday"
+                    },
+                    {
+                        "name": "rowtotal",
+                        "value": "18171"
+                    }
+                ]
+            },
+            {
+                "href": "http://api.sundaya.com/week/20190209/hours",
+                "data": [
+                    {
+                        "name": "columntotal",
+                        "value": "10923 7205 9585 10009 5740 3964 10923 7205 9585 10009 5740 3964 10923 7205 9585 10009 5740 3964 10923 7205 9585 10009 5740 3964",
+                        "prompt": "Hourly Totals"
+                    }
+                ]
+            },
+            {
+                "href": "http://api.sundaya.com/week/20190209/timeofday",
+                "data": [
+                    {
+                        "name": "columngrouptotal",
+                        "value": "47426",
+                        "prompt": "Morning"
+                    },
+                    {
+                        "name": "columngrouptotal",
+                        "value": "47426",
+                        "prompt": "Afternoon"
+                    },
+                    {
+                        "name": "columngrouptotal",
+                        "value": "47426",
+                        "prompt": "Evening"
+                    },
+                    {
+                        "name": "columngrouptotal",
+                        "value": "47426",
+                        "prompt": "Night"
+                    }
+                ]
+            }
+        ]
+    }
+}
