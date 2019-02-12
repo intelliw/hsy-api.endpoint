@@ -4,37 +4,61 @@
         "href": "http://api.sundaya.com/hse/week/20190209",
         "links": [
             {
-                "name": "Next",
                 "rel": "next",
+                "name": "Next",
                 "prompt": "A link to the next sibling of this collection.",
                 "href": "http://api.sundaya.com/hse/week/20190202",                
                 "render": "link"
             },
             {
-                "name": "Previous",
                 "rel": "previous",
+                "name": "Previous",
                 "prompt": "A link to the previous sibling of this collection",
                 "href": "http://api.sundaya.com/hse/week/20190216",
                 "render": "link"
             },
             {
-                "name": "Month",
                 "rel": "parent",
+                "name": "Month",
                 "prompt": "A link to the parent of the requested collection",
                 "href": "http://api.sundaya.com/hse/month/201902",
                 "render": "link"
             },
             {
-                "name": "Week",
                 "rel": "period",
-                "prompt": "The period classifier for this collection as indicated by the name property",
+                "name": "Week",
+                "prompt": "The period classifier for the collection as indicated by the name property",
                 "href": "http://api.sundaya.com/cvl/period/week"
             },
             {
-                "name": "04/02/2019-09/02/2019",
                 "rel": "interval",
+                "name": "04/02/2019-09/02/2019",
                 "prompt": "The starting and ending time points for this period",
                 "href": "http://api.sundaya.com/property/interval"
+            },
+            {
+                "rel": "itemdata-period",
+                "name": "Day",
+                "prompt": "The period classifier for each data object in the items collection",
+                "href": "http://api.sundaya.com/cvl/period/day"
+            },
+            {
+                "rel": "itemdata-headings",
+                "name": "Sunday Monday Tuesday Wednesday Thursday Friday Saturday",
+                "prompt": "The column headings for data and totals in the items collection",
+                "href": "http://api.sundaya.com/property/column-heading"
+            },
+            {
+                "rel": "itemdata-subvalue-period",
+                "name": "Hour",
+                "prompt": "The period classifier for each subvalue in the item data object",
+                "href": "http://api.sundaya.com/cvl/period/hour"
+            },
+            {
+                "rel": "itemdata-subvalue-headings",
+                "name": "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24",
+                "prompt": "The row headings for data subvalues in the items collection",
+                "href": "http://api.sundaya.com/property/row-heading"
             }
         ],
         "items": [
@@ -43,12 +67,37 @@
                 "data": [
                     {
                         "name": "harvest-data",
-                        "value": "30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54",
+                        "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44",
                         "prompt": "Sunday"
                     },
                     {
                         "name": "harvest-total",
-                        "value": "17067"
+                        "value": "15396"
+                    },
+                    {
+                        "name": "store-data",
+                        "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44",
+                        "prompt": "Sunday"
+                    },
+                    {
+                        "name": "store-total",
+                        "value": "15396"
+                    },{
+                        "name": "enjoy-data",
+                        "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44",
+                        "prompt": "Sunday"
+                    },
+                    {
+                        "name": "enjoy-total",
+                        "value": "15396"
+                    },{
+                        "name": "grid-data",
+                        "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44",
+                        "prompt": "Sunday"
+                    },
+                    {
+                        "name": "grid-total",
+                        "value": "15396"
                     }
                 ]
             },
@@ -57,12 +106,37 @@
                 "data": [
                     {
                         "name": "harvest-data",
-                        "value": "3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54",
+                        "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44",
                         "prompt": "Monday"
                     },
                     {
-                        "name": "rowtotal",
-                        "value": "11601"
+                        "name": "harvest-total",
+                        "value": "34464"
+                    },
+                    {
+                        "name": "store-data",
+                        "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44",
+                        "prompt": "Monday"
+                    },
+                    {
+                        "name": "store-total",
+                        "value": "34464"
+                    },{
+                        "name": "enjoy-data",
+                        "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44",
+                        "prompt": "Monday"
+                    },
+                    {
+                        "name": "enjoy-total",
+                        "value": "34464"
+                    },{
+                        "name": "grid-data",
+                        "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44",
+                        "prompt": "Monday"
+                    },
+                    {
+                        "name": "grid-total",
+                        "value": "34464"
                     }
                 ]
             },
@@ -71,12 +145,37 @@
                 "data": [
                     {
                         "name": "harvest-data",
-                        "value": "3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640",
+                        "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520",
                         "prompt": "Tuesday"
                     },
                     {
-                        "name": "rowtotal",
-                        "value": "29488"
+                        "name": "harvest-total",
+                        "value": "23972"
+                    },
+                    {
+                        "name": "store-data",
+                        "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520",
+                        "prompt": "Tuesday"
+                    },
+                    {
+                        "name": "store-total",
+                        "value": "23972"
+                    },{
+                        "name": "enjoy-data",
+                        "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520",
+                        "prompt": "Tuesday"
+                    },
+                    {
+                        "name": "enjoy-total",
+                        "value": "23972"
+                    },{
+                        "name": "grid-data",
+                        "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520",
+                        "prompt": "Tuesday"
+                    },
+                    {
+                        "name": "grid-total",
+                        "value": "23972"
                     }
                 ]
             },
@@ -85,12 +184,37 @@
                 "data": [
                     {
                         "name": "harvest-data",
-                        "value": "30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54",
+                        "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000",
                         "prompt": "Wednesday"
                     },
                     {
-                        "name": "rowtotal",
-                        "value": "18033"
+                        "name": "harvest-total",
+                        "value": "30548"
+                    },
+                    {
+                        "name": "store-data",
+                        "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000",
+                        "prompt": "Wednesday"
+                    },
+                    {
+                        "name": "store-total",
+                        "value": "30548"
+                    },{
+                        "name": "enjoy-data",
+                        "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000",
+                        "prompt": "Wednesday"
+                    },
+                    {
+                        "name": "enjoy-total",
+                        "value": "30548"
+                    },{
+                        "name": "grid-data",
+                        "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000",
+                        "prompt": "Wednesday"
+                    },
+                    {
+                        "name": "grid-total",
+                        "value": "30548"
                     }
                 ]
             },
@@ -99,12 +223,37 @@
                 "data": [
                     {
                         "name": "harvest-data",
-                        "value": "30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54",
+                        "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44",
                         "prompt": "Thursday"
                     },
                     {
-                        "name": "rowtotal",
-                        "value": "22965"
+                        "name": "harvest-total",
+                        "value": "38484"
+                    },
+                    {
+                        "name": "store-data",
+                        "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44",
+                        "prompt": "Thursday"
+                    },
+                    {
+                        "name": "store-total",
+                        "value": "38484"
+                    },{
+                        "name": "enjoy-data",
+                        "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44",
+                        "prompt": "Thursday"
+                    },
+                    {
+                        "name": "enjoy-total",
+                        "value": "38484"
+                    },{
+                        "name": "grid-data",
+                        "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44",
+                        "prompt": "Thursday"
+                    },
+                    {
+                        "name": "grid-total",
+                        "value": "38484"
                     }
                 ]
             },
@@ -113,12 +262,39 @@
                 "data": [
                     {
                         "name": "harvest-data",
-                        "value": "30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54",
+                        "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44",
                         "prompt": "Friday"
                     },
                     {
-                        "name": "rowtotal",
-                        "value": "28917"
+                        "name": "harvest-total",
+                        "value": "24156"
+                    },
+                    {
+                        "name": "store-data",
+                        "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44",
+                        "prompt": "Friday"
+                    },
+                    {
+                        "name": "store-total",
+                        "value": "24156"
+                    },
+                    {
+                        "name": "enjoy-data",
+                        "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44",
+                        "prompt": "Friday"
+                    },
+                    {
+                        "name": "enjoy-total",
+                        "value": "24156"
+                    },
+                    {
+                        "name": "grid-data",
+                        "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44",
+                        "prompt": "Friday"
+                    },
+                    {
+                        "name": "grid-total",
+                        "value": "24156"
                     }
                 ]
             },
@@ -127,12 +303,39 @@
                 "data": [
                     {
                         "name": "harvest-data",
-                        "value": "3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54",
+                        "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44",
                         "prompt": "Saturday"
                     },
                     {
-                        "name": "rowtotal",
-                        "value": "18171"
+                        "name": "harvest-total",
+                        "value": "22684"
+                    },
+                    {
+                        "name": "store-data",
+                        "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44",
+                        "prompt": "Saturday"
+                    },
+                    {
+                        "name": "store-total",
+                        "value": "22684"
+                    },
+                    {
+                        "name": "enjoy-data",
+                        "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44",
+                        "prompt": "Saturday"
+                    },
+                    {
+                        "name": "enjoy-total",
+                        "value": "22684"
+                    },
+                    {
+                        "name": "grid-data",
+                        "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44",
+                        "prompt": "Saturday"
+                    },
+                    {
+                        "name": "grid-total",
+                        "value": "22684"
                     }
                 ]
             }
