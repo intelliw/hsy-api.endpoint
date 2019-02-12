@@ -1,62 +1,62 @@
 {
     "collection": {
         "version": "0.1",
-        "href": "http://api.sundaya.com/harvest/week/20190209",
+        "href": "http://api.sundaya.com/hse/week/20190209",
         "links": [
             {
+                "name": "Next",
                 "rel": "next",
-                "href": "http://api.sundaya.com/harvest/week/20190202",
                 "prompt": "A link to the next sibling of this collection.",
-                "name": "Next Week",
+                "href": "http://api.sundaya.com/hse/week/20190202",                
                 "render": "link"
             },
             {
+                "name": "Previous",
                 "rel": "previous",
-                "href": "http://api.sundaya.com/harvest/week/20190216",
                 "prompt": "A link to the previous sibling of this collection",
-                "name": "Previous Week",
+                "href": "http://api.sundaya.com/hse/week/20190216",
                 "render": "link"
             },
             {
-                "rel": "parent",
-                "href": "http://api.sundaya.com/harvest/month/201902",
-                "prompt": "A link to the parent of the requested collection",
                 "name": "Month",
+                "rel": "parent",
+                "prompt": "A link to the parent of the requested collection",
+                "href": "http://api.sundaya.com/hse/month/201902",
                 "render": "link"
             },
             {
+                "name": "Week",
                 "rel": "period",
-                "href": "http://vocab.sundaya.com/enum/period/week",
                 "prompt": "The period classifier for this collection as indicated by the name property",
-                "name": "Week"
+                "href": "http://api.sundaya.com/cvl/period/week"
             },
             {
+                "name": "04/02/2019-09/02/2019",
                 "rel": "interval",
-                "href": "http://vocab.sundaya.com/interval",
-                "prompt": "The descrtiptor for the starting and ending time points, of this period", 
-                "name": "04/02/2019-09/02/2019"
+                "prompt": "The starting and ending time points for this period",
+                "href": "http://api.sundaya.com/property/interval"
             }
         ],
         "items": [
             {
-                "href": "http://api.sundaya.com/harvest/day/20190203",
+                "href": "http://api.sundaya.com/hse/day/20190203",
                 "data": [
                     {
-                        "name": "rowdata",
+                        "name": "harvest-data",
                         "value": "30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54",
                         "prompt": "Sunday"
                     },
                     {
-                        "name": "rowtotal",
+                        "name": "harvest-total",
                         "value": "17067"
                     }
                 ]
             },
             {
-                "href": "http://api.sundaya.com/harvest/day/20190204",
+                "href": "http://api.sundaya.com/hse/day/20190204",
                 "data": [
                     {
-                        "name": "rowdata",
+                        "name": "harvest-data",
                         "value": "3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54",
                         "prompt": "Monday"
                     },
@@ -67,10 +67,10 @@
                 ]
             },
             {
-                "href": "http://api.sundaya.com/harvest/day/20190205",
+                "href": "http://api.sundaya.com/hse/day/20190205",
                 "data": [
                     {
-                        "name": "rowdata",
+                        "name": "harvest-data",
                         "value": "3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640",
                         "prompt": "Tuesday"
                     },
@@ -81,10 +81,10 @@
                 ]
             },
             {
-                "href": "http://api.sundaya.com/harvest/day/20190206",
+                "href": "http://api.sundaya.com/hse/day/20190206",
                 "data": [
                     {
-                        "name": "rowdata",
+                        "name": "harvest-data",
                         "value": "30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54",
                         "prompt": "Wednesday"
                     },
@@ -95,10 +95,10 @@
                 ]
             },
             {
-                "href": "http://api.sundaya.com/harvest/day/20190207",
+                "href": "http://api.sundaya.com/hse/day/20190207",
                 "data": [
                     {
-                        "name": "rowdata",
+                        "name": "harvest-data",
                         "value": "30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54",
                         "prompt": "Thursday"
                     },
@@ -109,10 +109,10 @@
                 ]
             },
             {
-                "href": "http://api.sundaya.com/harvest/day/20190208",
+                "href": "http://api.sundaya.com/hse/day/20190208",
                 "data": [
                     {
-                        "name": "rowdata",
+                        "name": "harvest-data",
                         "value": "30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54",
                         "prompt": "Friday"
                     },
@@ -123,51 +123,16 @@
                 ]
             },
             {
-                "href": "http://api.sundaya.com/harvest/day/20190209",
+                "href": "http://api.sundaya.com/hse/day/20190209",
                 "data": [
                     {
-                        "name": "rowdata",
+                        "name": "harvest-data",
                         "value": "3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54",
                         "prompt": "Saturday"
                     },
                     {
                         "name": "rowtotal",
                         "value": "18171"
-                    }
-                ]
-            },
-            {
-                "href": "http://api.sundaya.com/week/20190209/hours",
-                "data": [
-                    {
-                        "name": "columntotal",
-                        "value": "10923 7205 9585 10009 5740 3964 10923 7205 9585 10009 5740 3964 10923 7205 9585 10009 5740 3964 10923 7205 9585 10009 5740 3964",
-                        "prompt": "Hourly Totals"
-                    }
-                ]
-            },
-            {
-                "href": "http://api.sundaya.com/week/20190209/timeofday",
-                "data": [
-                    {
-                        "name": "columngrouptotal",
-                        "value": "47426",
-                        "prompt": "Morning"
-                    },
-                    {
-                        "name": "columngrouptotal",
-                        "value": "47426",
-                        "prompt": "Afternoon"
-                    },
-                    {
-                        "name": "columngrouptotal",
-                        "value": "47426",
-                        "prompt": "Evening"
-                    },
-                    {
-                        "name": "columngrouptotal",
-                        "value": "47426",
-                        "prompt": "Night"
                     }
                 ]
             }
