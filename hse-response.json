@@ -4,6 +4,25 @@
         "href": "http://api.sundaya.com/hse/week/20190209",
         "links": [
             {
+                "rel": "period",
+                "name": "Week",
+                "prompt": "The period classifier for the collection as indicated by the name property",
+                "href": "http://api.sundaya.com/cvl/period/week"
+            },
+            {
+                "rel": "interval",
+                "name": "04/02/2019-09/02/2019",
+                "prompt": "The starting and ending time points for this period",
+                "href": "http://api.sundaya.com/property/interval"
+            },
+            {
+                "rel": "parent",
+                "name": "Month",
+                "prompt": "A link to the parent of the requested collection",
+                "href": "http://api.sundaya.com/hse/month/201902",
+                "render": "link"
+            },
+            {
                 "rel": "next",
                 "name": "Next",
                 "prompt": "A link to the next sibling of this collection.",
@@ -16,25 +35,6 @@
                 "prompt": "A link to the previous sibling of this collection",
                 "href": "http://api.sundaya.com/hse/week/20190216",
                 "render": "link"
-            },
-            {
-                "rel": "parent",
-                "name": "Month",
-                "prompt": "A link to the parent of the requested collection",
-                "href": "http://api.sundaya.com/hse/month/201902",
-                "render": "link"
-            },
-            {
-                "rel": "period",
-                "name": "Week",
-                "prompt": "The period classifier for the collection as indicated by the name property",
-                "href": "http://api.sundaya.com/cvl/period/week"
-            },
-            {
-                "rel": "interval",
-                "name": "04/02/2019-09/02/2019",
-                "prompt": "The starting and ending time points for this period",
-                "href": "http://api.sundaya.com/property/interval"
             },
             {
                 "rel": "itemdata-period",
