@@ -52,7 +52,7 @@
                 "rel": "subvalue-heading",
                 "name": "6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 1 2 3 4 5",
                 "prompt": "The row headings for data subvalues in the items collection",
-                "href": "http://api.sundaya.com/property/column-headings/period/day"
+                "href": "http://api.sundaya.com/property/column-heading/period/day"
             }
         ],
         "items": [
