@@ -1,6 +1,6 @@
 {
     "collection": {
-        "version": "0.1",
+        "version": "0.2",
         "href": "http://api.sundaya.com/hse/week/20190210",
         "links": [
             {
@@ -37,38 +37,40 @@
                 "render": "link"
             },
             {
-                "rel": "itemdata-period",
+                "rel": "child-period",
                 "name": "Day",
-                "prompt": "The period classifier for each data object in the items collection",
+                "prompt": "The period classifier for data objects in the items collection",
                 "href": "http://api.sundaya.com/cvl/period/day"
             },
             {
-                "rel": "itemdata-headings",
-                "name": "Monday Tuesday Thursday Friday Saturday Saturday Sunday",
-                "prompt": "The column headings for data and totals in the items collection",
-                "href": "http://api.sundaya.com/property/column-heading"
-            },
-            {
-                "rel": "itemdata-subvalue-period",
+                "rel": "subvalue-period",
                 "name": "Hour",
-                "prompt": "The period classifier for each subvalue in the item data object",
+                "prompt": "The period classifier for data subvalues in the items collection",
                 "href": "http://api.sundaya.com/cvl/period/hour"
             },
             {
-                "rel": "itemdata-subvalue-headings",
+                "rel": "subvalue-heading",
                 "name": "6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 1 2 3 4 5",
                 "prompt": "The row headings for data subvalues in the items collection",
-                "href": "http://api.sundaya.com/property/row-heading"
+                "href": "http://api.sundaya.com/property/column-headings/period/day"
             }
         ],
         "items": [
             {
                 "href": "http://api.sundaya.com/hse/day/20190204",
+                "links": [
+                    {
+                        "rel": "heading",
+                        "name": "Monday",
+                        "prompt": "The column heading for the data objects in this items collection",
+                        "href": "http://api.sundaya.com/property/column-heading/period/day/1"
+                    }
+                ],          
                 "data": [
                     {
                         "name": "harvest-data",
                         "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44",
-                        "prompt": "Monday (Harvest)"
+                        "prompt": "Harvest"
                     },
                     {
                         "name": "harvest-total",
@@ -77,7 +79,7 @@
                     {
                         "name": "store-data",
                         "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44",
-                        "prompt": "Monday (Store)"
+                        "prompt": "Store"
                     },
                     {
                         "name": "store-total",
@@ -85,7 +87,7 @@
                     },{
                         "name": "enjoy-data",
                         "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44",
-                        "prompt": "Monday (Enjoy)"
+                        "prompt": "Enjoy"
                     },
                     {
                         "name": "enjoy-total",
@@ -93,7 +95,7 @@
                     },{
                         "name": "grid-data",
                         "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44",
-                        "prompt": "Monday (Grid)"
+                        "prompt": "Grid"
                     },
                     {
                         "name": "grid-total",
@@ -103,11 +105,19 @@
             },
             {
                 "href": "http://api.sundaya.com/hse/day/20190205",
+                "links": [
+                    {
+                        "rel": "heading",
+                        "name": "Tuesday",
+                        "prompt": "The column heading for the data objects in this items collection",
+                        "href": "http://api.sundaya.com/property/column-heading/period/day/2"
+                    }
+                ],          
                 "data": [
                     {
                         "name": "harvest-data",
                         "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44",
-                        "prompt": "Tuesday (Harvest)"
+                        "prompt": "Harvest"
                     },
                     {
                         "name": "harvest-total",
@@ -116,7 +126,7 @@
                     {
                         "name": "store-data",
                         "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44",
-                        "prompt": "Tuesday (Store)"
+                        "prompt": "Store"
                     },
                     {
                         "name": "store-total",
@@ -124,7 +134,7 @@
                     },{
                         "name": "enjoy-data",
                         "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44",
-                        "prompt": "Tuesday (Enjoy)"
+                        "prompt": "Enjoy"
                     },
                     {
                         "name": "enjoy-total",
@@ -132,7 +142,7 @@
                     },{
                         "name": "grid-data",
                         "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44",
-                        "prompt": "Tuesday (Grid)"
+                        "prompt": "Grid"
                     },
                     {
                         "name": "grid-total",
@@ -142,11 +152,19 @@
             },
             {
                 "href": "http://api.sundaya.com/hse/day/20190206",
+                "links": [
+                    {
+                        "rel": "heading",
+                        "name": "Wednesday",
+                        "prompt": "The column heading for the data objects in this items collection",
+                        "href": "http://api.sundaya.com/property/column-heading/period/day/3"
+                    }
+                ],          
                 "data": [
                     {
                         "name": "harvest-data",
                         "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520",
-                        "prompt": "Wednesday (Harvest)"
+                        "prompt": "Harvest"
                     },
                     {
                         "name": "harvest-total",
@@ -155,7 +173,7 @@
                     {
                         "name": "store-data",
                         "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520",
-                        "prompt": "Wednesday (Store)"
+                        "prompt": "Store"
                     },
                     {
                         "name": "store-total",
@@ -163,7 +181,7 @@
                     },{
                         "name": "enjoy-data",
                         "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520",
-                        "prompt": "Wednesday (Enjoy)"
+                        "prompt": "Enjoy"
                     },
                     {
                         "name": "enjoy-total",
@@ -171,7 +189,7 @@
                     },{
                         "name": "grid-data",
                         "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520",
-                        "prompt": "Wednesday (Grid)"
+                        "prompt": "Grid"
                     },
                     {
                         "name": "grid-total",
@@ -181,11 +199,19 @@
             },
             {
                 "href": "http://api.sundaya.com/hse/day/20190207",
+                "links": [
+                    {
+                        "rel": "heading",
+                        "name": "Thursday",
+                        "prompt": "The column heading for the data objects in this items collection",
+                        "href": "http://api.sundaya.com/property/column-heading/period/day/4"
+                    }
+                ],          
                 "data": [
                     {
                         "name": "harvest-data",
                         "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000",
-                        "prompt": "Thursday (Harvest)"
+                        "prompt": "Harvest"
                     },
                     {
                         "name": "harvest-total",
@@ -194,7 +220,7 @@
                     {
                         "name": "store-data",
                         "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000",
-                        "prompt": "Thursday (Store)"
+                        "prompt": "Store"
                     },
                     {
                         "name": "store-total",
@@ -202,7 +228,7 @@
                     },{
                         "name": "enjoy-data",
                         "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000",
-                        "prompt": "Thursday (Enjoy)"
+                        "prompt": "Enjoy"
                     },
                     {
                         "name": "enjoy-total",
@@ -210,7 +236,7 @@
                     },{
                         "name": "grid-data",
                         "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000",
-                        "prompt": "Thursday (Grid)"
+                        "prompt": "Grid"
                     },
                     {
                         "name": "grid-total",
@@ -220,11 +246,19 @@
             },
             {
                 "href": "http://api.sundaya.com/hse/day/20190208",
+                "links": [
+                    {
+                        "rel": "heading",
+                        "name": "Friday",
+                        "prompt": "The column heading for the data objects in this items collection",
+                        "href": "http://api.sundaya.com/property/column-heading/period/day/5"
+                    }
+                ],          
                 "data": [
                     {
                         "name": "harvest-data",
                         "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44",
-                        "prompt": "Friday (Harvest)"
+                        "prompt": "Harvest"
                     },
                     {
                         "name": "harvest-total",
@@ -233,7 +267,7 @@
                     {
                         "name": "store-data",
                         "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44",
-                        "prompt": "Friday (Store)"
+                        "prompt": "Store"
                     },
                     {
                         "name": "store-total",
@@ -241,7 +275,7 @@
                     },{
                         "name": "enjoy-data",
                         "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44",
-                        "prompt": "Friday (Enjoy)"
+                        "prompt": "Enjoy"
                     },
                     {
                         "name": "enjoy-total",
@@ -249,7 +283,7 @@
                     },{
                         "name": "grid-data",
                         "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44",
-                        "prompt": "Friday (Grid)"
+                        "prompt": "Grid"
                     },
                     {
                         "name": "grid-total",
@@ -259,11 +293,19 @@
             },
             {
                 "href": "http://api.sundaya.com/hse/day/20190209",
+                "links": [
+                    {
+                        "rel": "heading",
+                        "name": "Saturday",
+                        "prompt": "The column heading for the data objects in this items collection",
+                        "href": "http://api.sundaya.com/property/column-heading/period/day/6"
+                    }
+                ],          
                 "data": [
                     {
                         "name": "harvest-data",
                         "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44",
-                        "prompt": "Saturday (Harvest)"
+                        "prompt": "Harvest"
                     },
                     {
                         "name": "harvest-total",
@@ -272,7 +314,7 @@
                     {
                         "name": "store-data",
                         "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44",
-                        "prompt": "Saturday (Store)"
+                        "prompt": "Store"
                     },
                     {
                         "name": "store-total",
@@ -281,7 +323,7 @@
                     {
                         "name": "enjoy-data",
                         "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44",
-                        "prompt": "Saturday (Enjoy)"
+                        "prompt": "Enjoy"
                     },
                     {
                         "name": "enjoy-total",
@@ -290,7 +332,7 @@
                     {
                         "name": "grid-data",
                         "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44",
-                        "prompt": "Saturday (Grid)"
+                        "prompt": "Grid"
                     },
                     {
                         "name": "grid-total",
@@ -300,11 +342,19 @@
             },
             {
                 "href": "http://api.sundaya.com/hse/day/20190210",
+                "links": [
+                    {
+                        "rel": "heading",
+                        "name": "Sunday",
+                        "prompt": "The column heading for the data objects in this items collection",
+                        "href": "http://api.sundaya.com/property/column-heading/period/day/7"
+                    }
+                ],          
                 "data": [
                     {
                         "name": "harvest-data",
                         "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44",
-                        "prompt": "Sunday (Harvest)"
+                        "prompt": "Harvest"
                     },
                     {
                         "name": "harvest-total",
@@ -313,7 +363,7 @@
                     {
                         "name": "store-data",
                         "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44",
-                        "prompt": "Sunday (Store)"
+                        "prompt": "Store"
                     },
                     {
                         "name": "store-total",
@@ -322,7 +372,7 @@
                     {
                         "name": "enjoy-data",
                         "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44",
-                        "prompt": "Sunday (Enjoy)"
+                        "prompt": "Enjoy"
                     },
                     {
                         "name": "enjoy-total",
@@ -331,7 +381,7 @@
                     {
                         "name": "grid-data",
                         "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44",
-                        "prompt": "Sunday (Grid)"
+                        "prompt": "Grid"
                     },
                     {
                         "name": "grid-total",
