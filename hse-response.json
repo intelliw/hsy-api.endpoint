@@ -68,7 +68,7 @@
                     {
                         "name": "harvest-data",
                         "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44",
-                        "prompt": "Monday"
+                        "prompt": "Monday (Harvest)"
                     },
                     {
                         "name": "harvest-total",
@@ -77,7 +77,7 @@
                     {
                         "name": "store-data",
                         "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44",
-                        "prompt": "Monday"
+                        "prompt": "Monday (Store)"
                     },
                     {
                         "name": "store-total",
@@ -85,7 +85,7 @@
                     },{
                         "name": "enjoy-data",
                         "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44",
-                        "prompt": "Monday"
+                        "prompt": "Monday (Enjoy)"
                     },
                     {
                         "name": "enjoy-total",
@@ -93,7 +93,7 @@
                     },{
                         "name": "grid-data",
                         "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44",
-                        "prompt": "Monday"
+                        "prompt": "Monday (Grid)"
                     },
                     {
                         "name": "grid-total",
@@ -107,7 +107,7 @@
                     {
                         "name": "harvest-data",
                         "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44",
-                        "prompt": "Tuesday"
+                        "prompt": "Tuesday (Harvest)"
                     },
                     {
                         "name": "harvest-total",
@@ -116,7 +116,7 @@
                     {
                         "name": "store-data",
                         "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44",
-                        "prompt": "Tuesday"
+                        "prompt": "Tuesday (Store)"
                     },
                     {
                         "name": "store-total",
@@ -124,7 +124,7 @@
                     },{
                         "name": "enjoy-data",
                         "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44",
-                        "prompt": "Tuesday"
+                        "prompt": "Tuesday (Enjoy)"
                     },
                     {
                         "name": "enjoy-total",
@@ -132,7 +132,7 @@
                     },{
                         "name": "grid-data",
                         "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44",
-                        "prompt": "Tuesday"
+                        "prompt": "Tuesday (Grid)"
                     },
                     {
                         "name": "grid-total",
@@ -146,7 +146,7 @@
                     {
                         "name": "harvest-data",
                         "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520",
-                        "prompt": "Wednesday"
+                        "prompt": "Wednesday (Harvest)"
                     },
                     {
                         "name": "harvest-total",
@@ -155,7 +155,7 @@
                     {
                         "name": "store-data",
                         "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520",
-                        "prompt": "Wednesday"
+                        "prompt": "Wednesday (Store)"
                     },
                     {
                         "name": "store-total",
@@ -163,7 +163,7 @@
                     },{
                         "name": "enjoy-data",
                         "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520",
-                        "prompt": "Wednesday"
+                        "prompt": "Wednesday (Enjoy)"
                     },
                     {
                         "name": "enjoy-total",
@@ -171,7 +171,7 @@
                     },{
                         "name": "grid-data",
                         "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520",
-                        "prompt": "Wednesday"
+                        "prompt": "Wednesday (Grid)"
                     },
                     {
                         "name": "grid-total",
@@ -185,7 +185,7 @@
                     {
                         "name": "harvest-data",
                         "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000",
-                        "prompt": "Thursday"
+                        "prompt": "Thursday (Harvest)"
                     },
                     {
                         "name": "harvest-total",
@@ -194,7 +194,7 @@
                     {
                         "name": "store-data",
                         "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000",
-                        "prompt": "Thursday"
+                        "prompt": "Thursday (Store)"
                     },
                     {
                         "name": "store-total",
@@ -202,7 +202,7 @@
                     },{
                         "name": "enjoy-data",
                         "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000",
-                        "prompt": "Thursday"
+                        "prompt": "Thursday (Enjoy)"
                     },
                     {
                         "name": "enjoy-total",
@@ -210,7 +210,7 @@
                     },{
                         "name": "grid-data",
                         "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000",
-                        "prompt": "Thursday"
+                        "prompt": "Thursday (Grid)"
                     },
                     {
                         "name": "grid-total",
@@ -224,7 +224,7 @@
                     {
                         "name": "harvest-data",
                         "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44",
-                        "prompt": "Friday"
+                        "prompt": "Friday (Harvest)"
                     },
                     {
                         "name": "harvest-total",
@@ -233,7 +233,7 @@
                     {
                         "name": "store-data",
                         "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44",
-                        "prompt": "Friday"
+                        "prompt": "Friday (Store)"
                     },
                     {
                         "name": "store-total",
@@ -241,7 +241,7 @@
                     },{
                         "name": "enjoy-data",
                         "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44",
-                        "prompt": "Friday"
+                        "prompt": "Friday (Enjoy)"
                     },
                     {
                         "name": "enjoy-total",
@@ -249,7 +249,7 @@
                     },{
                         "name": "grid-data",
                         "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44",
-                        "prompt": "Friday"
+                        "prompt": "Friday (Grid)"
                     },
                     {
                         "name": "grid-total",
@@ -263,7 +263,7 @@
                     {
                         "name": "harvest-data",
                         "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44",
-                        "prompt": "Saturday"
+                        "prompt": "Saturday (Harvest)"
                     },
                     {
                         "name": "harvest-total",
@@ -272,7 +272,7 @@
                     {
                         "name": "store-data",
                         "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44",
-                        "prompt": "Saturday"
+                        "prompt": "Saturday (Store)"
                     },
                     {
                         "name": "store-total",
@@ -281,7 +281,7 @@
                     {
                         "name": "enjoy-data",
                         "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44",
-                        "prompt": "Saturday"
+                        "prompt": "Saturday (Enjoy)"
                     },
                     {
                         "name": "enjoy-total",
@@ -290,7 +290,7 @@
                     {
                         "name": "grid-data",
                         "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44",
-                        "prompt": "Saturday"
+                        "prompt": "Saturday (Grid)"
                     },
                     {
                         "name": "grid-total",
@@ -304,7 +304,7 @@
                     {
                         "name": "harvest-data",
                         "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44",
-                        "prompt": "Sunday"
+                        "prompt": "Sunday (Harvest)"
                     },
                     {
                         "name": "harvest-total",
@@ -313,7 +313,7 @@
                     {
                         "name": "store-data",
                         "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44",
-                        "prompt": "Sunday"
+                        "prompt": "Sunday (Store)"
                     },
                     {
                         "name": "store-total",
@@ -322,7 +322,7 @@
                     {
                         "name": "enjoy-data",
                         "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44",
-                        "prompt": "Sunday"
+                        "prompt": "Sunday (Enjoy)"
                     },
                     {
                         "name": "enjoy-total",
@@ -331,7 +331,7 @@
                     {
                         "name": "grid-data",
                         "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44",
-                        "prompt": "Sunday"
+                        "prompt": "Sunday (Grid)"
                     },
                     {
                         "name": "grid-total",
