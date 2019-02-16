@@ -34,7 +34,7 @@
                     },
                     {
                         "rel": "child", "name": "subitems", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/hse/period/hours/201902040600/201902042400"
+                        "href": "http:/api.sundaya.com/hse/period/hours/201902040600/201902040500"
                     }
                 ],          
                 "data": [
@@ -57,7 +57,7 @@
                     },
                     {
                         "rel": "child", "name": "subitems", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/hse/period/hours/201902050600/201902052400"
+                        "href": "http:/api.sundaya.com/hse/period/hours/201902050600/201902050500"
                     }
                 ],          
                 "data": [
@@ -80,7 +80,7 @@
                     },
                     {
                         "rel": "child", "name": "subitems", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/hse/period/hours/201902060600/201902062400"
+                        "href": "http:/api.sundaya.com/hse/period/hours/201902060600/201902060500"
                     }
                 ],          
                 "data": [
@@ -103,7 +103,7 @@
                     },
                     {
                         "rel": "child", "name": "subitems", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/hse/period/hours/201902070600/201902072400"
+                        "href": "http:/api.sundaya.com/hse/period/hours/201902070600/201902070500"
                     }
                 ],          
                 "data": [
@@ -126,7 +126,7 @@
                     },
                     {
                         "rel": "child", "name": "subitems", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/hse/period/hours/201902080600/201902082400"
+                        "href": "http:/api.sundaya.com/hse/period/hours/201902080600/201902080500"
                     }
                 ],          
                 "data": [
@@ -149,7 +149,7 @@
                     },
                     {
                         "rel": "child", "name": "subitems", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/hse/period/hours/201902090600/201902092400"
+                        "href": "http:/api.sundaya.com/hse/period/hours/201902090600/201902090500"
                     }
                 ],          
                 "data": [
@@ -172,7 +172,7 @@
                     },
                     {
                         "rel": "child", "name": "subitems", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/hse/period/hours/201902100600/201902102400"
+                        "href": "http:/api.sundaya.com/hse/period/hours/201902100600/201902100500"
                     }
                 ],          
                 "data": [
