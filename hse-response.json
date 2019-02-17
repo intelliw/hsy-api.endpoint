@@ -1,189 +1,189 @@
 {
     "collection": {
         "version": "0.2",
-        "href": "http:/api.sundaya.com/hse/period/week/20190210",
+        "href": "http:/api.sundaya.com/hse/week/20190210",
         "links": [
             {
-                "rel": "self", "name": "period", "prompt": "Week", "title": "04/02/2019 - 10/02/2019",
-                "href": "http:/api.sundaya.com/hse/period/week/20190210"
+                "rel": "self", "name": "week", "prompt": "Week", "title": "04/02/2019 - 10/02/2019",
+                "href": "http:/api.sundaya.com/hse/week/20190210"
             },
             {
-                "rel": "child", "name": "items", "prompt": "Days", "title": "Monday Tuesday Wednesday Thursday Friday Saturday Sunday",                
-                "href": "http:/api.sundaya.com/hse/period/days/20190204/20190210"
+                "rel": "item", "name": "week.day", "prompt": "Days", "title": "Monday Tuesday Wednesday Thursday Friday Saturday Sunday",                
+                "href": "http:/api.sundaya.com/hse/day/20190204/20190210"
             },
             {
-                "rel": "up", "name": "parent", "prompt": "Month", "title": "February", 
-                "href": "http:/api.sundaya.com/hse/period/month/201902", "render": "link"                
+                "rel": "up", "name": "week.month", "prompt": "Month", "title": "February", 
+                "href": "http:/api.sundaya.com/hse/month/201902", "render": "link"                
             },
             {
-                "rel": "next", "name": "next", "prompt": "Next", "title": "11/02/2019 - 17/02/2019",
-                "href": "http:/api.sundaya.com/hse/period/week/20190217", "render": "link"
+                "rel": "next", "name": "week.next", "prompt": "Next", "title": "11/02/2019 - 17/02/2019",
+                "href": "http:/api.sundaya.com/hse/week/20190217", "render": "link"
             },
             {
-                "rel": "previous", "name": "previous", "prompt": "Previous", "title": "28/01/2019 - 03/02/2019",
-                "href": "http:/api.sundaya.com/hse/period/week/20190203", "render": "link"
+                "rel": "prev", "name": "week.previous", "prompt": "Previous", "title": "28/01/2019 - 03/02/2019",
+                "href": "http:/api.sundaya.com/hse/week/20190203", "render": "link"
             }
         ],
         "items": [
             {
-                "href": "http:/api.sundaya.com/hse/period/day/20190204",
+                "href": "http:/api.sundaya.com/hse/day/20190204",
                 "links": [
                     { 
-                        "rel": "self", "name": "period", "prompt": "Day", "title": "Monday",
-                        "href": "http:/api.sundaya.com/hse/period/day/20190204", "render": "link"
+                        "rel": "self", "name": "day", "prompt": "Day", "title": "Monday",
+                        "href": "http:/api.sundaya.com/hse/day/20190204", "render": "link"
                     },
                     {
-                        "rel": "child", "name": "subitems", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/hse/period/hours/201902040600/201902040500"
+                        "rel": "item", "name": "day.hours", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
+                        "href": "http:/api.sundaya.com/hse/hour/201902040600/201902040500"
                     }
                 ],          
                 "data": [
-                    { "name": "harvest", "value": "15396" },
-                    { "name": "store", "value": "15396" },
-                    { "name": "enjoy", "value": "15396" },
-                    { "name": "grid", "value": "15396" },
+                    { "name": "harvest.day", "value": "15396" },
+                    { "name": "store.day", "value": "15396" },
+                    { "name": "enjoy.day", "value": "15396" },
+                    { "name": "grid.day", "value": "15396" },
                     { "name": "harvest.hours", "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44" },
-                    { "name": "store.hours", "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44" },
-                    { "name": "enjoy.hours", "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44" },
-                    { "name": "grid.hours", "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44" }
+                    { "name": "store.day.hours", "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44" },
+                    { "name": "enjoy.day.hours", "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44" },
+                    { "name": "grid.day.hours", "value": "54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44 54 3640 33 23 55 44" }
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/hse/period/day/20190205",
+                "href": "http:/api.sundaya.com/hse/day/20190205",
                 "links": [
                     { 
-                        "rel": "self", "name": "period", "prompt": "Day", "title": "Tuesday",
-                        "href": "http:/api.sundaya.com/hse/period/day/20190205", "render": "link"
+                        "rel": "self", "name": "day", "prompt": "Day", "title": "Tuesday",
+                        "href": "http:/api.sundaya.com/hse/day/20190205", "render": "link"
                     },
                     {
-                        "rel": "child", "name": "subitems", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/hse/period/hours/201902050600/201902050500"
+                        "rel": "item", "name": "day.hours", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
+                        "href": "http:/api.sundaya.com/hse/hour/201902050600/201902050500"
                     }
                 ],          
                 "data": [
-                    { "name": "harvest", "value": "34464" },
-                    { "name": "store", "value": "34464" },
-                    { "name": "enjoy", "value": "34464" },
-                    { "name": "grid", "value": "34464" },
-                    { "name": "harvest.hours", "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44" },
-                    { "name": "store.hours", "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44" },
-                    { "name": "enjoy.hours", "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44" },
-                    { "name": "grid.hours", "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44" }
+                    { "name": "harvest.day", "value": "34464" },
+                    { "name": "store.day", "value": "34464" },
+                    { "name": "enjoy.day", "value": "34464" },
+                    { "name": "grid.day", "value": "34464" },
+                    { "name": "harvest.day.hours", "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44" },
+                    { "name": "store.day.hours", "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44" },
+                    { "name": "enjoy.day.hours", "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44" },
+                    { "name": "grid.day.hours", "value": "3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44 3640 3643 33 23 1233 44" }
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/hse/period/day/20190206",
+                "href": "http:/api.sundaya.com/hse/day/20190206",
                 "links": [
                     { 
-                        "rel": "self", "name": "period", "prompt": "Day", "title": "Wednesday",
-                        "href": "http:/api.sundaya.com/hse/period/day/20190206", "render": "link"
+                        "rel": "self", "name": "day", "prompt": "Day", "title": "Wednesday",
+                        "href": "http:/api.sundaya.com/hse/day/20190206", "render": "link"
                     },
                     {
-                        "rel": "child", "name": "subitems", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/hse/period/hours/201902060600/201902060500"
+                        "rel": "item", "name": "day.hours", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
+                        "href": "http:/api.sundaya.com/hse/hour/201902060600/201902060500"
                     }
                 ],          
                 "data": [
-                    { "name": "harvest", "value": "23972" },
-                    { "name": "store", "value": "23972" },
-                    { "name": "enjoy", "value": "23972" },
-                    { "name": "grid", "value": "23972" },
-                    { "name": "harvest.hours", "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520" },
-                    { "name": "store.hours", "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520" },
-                    { "name": "enjoy.hours", "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520" },
-                    { "name": "grid.hours", "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520" }
+                    { "name": "harvest.day", "value": "23972" },
+                    { "name": "store.day", "value": "23972" },
+                    { "name": "enjoy.day", "value": "23972" },
+                    { "name": "grid.day", "value": "23972" },
+                    { "name": "harvest.day.hours", "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520" },
+                    { "name": "store.day.hours", "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520" },
+                    { "name": "enjoy.day.hours", "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520" },
+                    { "name": "grid.day.hours", "value": "54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520 54 30 33 23 2333 3520" }
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/hse/period/day/20190207",
+                "href": "http:/api.sundaya.com/hse/day/20190207",
                 "links": [
                     { 
-                        "rel": "self", "name": "period", "prompt": "Day", "title": "Thursday",
-                        "href": "http:/api.sundaya.com/hse/period/day/20190207", "render": "link"
+                        "rel": "self", "name": "day", "prompt": "Day", "title": "Thursday",
+                        "href": "http:/api.sundaya.com/hse/day/20190207", "render": "link"
                     },
                     {
-                        "rel": "child", "name": "subitems", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/hse/period/hours/201902070600/201902070500"
+                        "rel": "item", "name": "day.hours", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
+                        "href": "http:/api.sundaya.com/hse/hour/201902070600/201902070500"
                     }
                 ],          
                 "data": [
-                    { "name": "harvest", "value": "30548" },
-                    { "name": "store", "value": "30548" },
-                    { "name": "enjoy", "value": "30548" },
-                    { "name": "grid", "value": "30548" },
-                    { "name": "harvest.hours", "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000" },
-                    { "name": "store.hours", "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000" },
-                    { "name": "enjoy.hours", "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000" },
-                    { "name": "grid.hours", "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000" }
+                    { "name": "harvest.day", "value": "30548" },
+                    { "name": "store.day", "value": "30548" },
+                    { "name": "enjoy.day", "value": "30548" },
+                    { "name": "grid.day", "value": "30548" },
+                    { "name": "harvest.day.hours", "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000" },
+                    { "name": "store.day.hours", "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000" },
+                    { "name": "enjoy.day.hours", "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000" },
+                    { "name": "grid.day.hours", "value": "54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000 54 30 33 3520 2000 2000" }
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/hse/period/day/20190208",
+                "href": "http:/api.sundaya.com/hse/day/20190208",
                 "links": [
                     { 
-                        "rel": "self", "name": "period", "prompt": "Day", "title": "Friday",
-                        "href": "http:/api.sundaya.com/hse/period/day/20190208", "render": "link"
+                        "rel": "self", "name": "day", "prompt": "Day", "title": "Friday",
+                        "href": "http:/api.sundaya.com/hse/day/20190208", "render": "link"
                     },
                     {
-                        "rel": "child", "name": "subitems", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/hse/period/hours/201902080600/201902080500"
+                        "rel": "item", "name": "day.hours", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
+                        "href": "http:/api.sundaya.com/hse/hour/201902080600/201902080500"
                     }
                 ],          
                 "data": [
-                    { "name": "harvest", "value": "38484" },
-                    { "name": "store", "value": "38484" },
-                    { "name": "enjoy", "value": "38484" },
-                    { "name": "grid", "value": "38484" },
-                    { "name": "harvest.hours", "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44" },
-                    { "name": "store.hours", "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44" },
-                    { "name": "enjoy.hours", "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44" },
-                    { "name": "grid.hours", "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44" }
+                    { "name": "harvest.day", "value": "38484" },
+                    { "name": "store.day", "value": "38484" },
+                    { "name": "enjoy.day", "value": "38484" },
+                    { "name": "grid.day", "value": "38484" },
+                    { "name": "harvest.day.hours", "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44" },
+                    { "name": "store.day.hours", "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44" },
+                    { "name": "enjoy.day.hours", "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44" },
+                    { "name": "grid.day.hours", "value": "54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44 54 30 3520 3640 2333 44" }
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/hse/period/day/20190209",
+                "href": "http:/api.sundaya.com/hse/day/20190209",
                 "links": [
                     { 
-                        "rel": "self", "name": "period", "prompt": "Day", "title": "Saturday",
-                        "href": "http:/api.sundaya.com/hse/period/day/20190209", "render": "link"
+                        "rel": "self", "name": "day", "prompt": "Day", "title": "Saturday",
+                        "href": "http:/api.sundaya.com/hse/day/20190209", "render": "link"
                     },
                     {
-                        "rel": "child", "name": "subitems", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/hse/period/hours/201902090600/201902090500"
+                        "rel": "item", "name": "day.hours", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
+                        "href": "http:/api.sundaya.com/hse/hour/201902090600/201902090500"
                     }
                 ],          
                 "data": [
-                    { "name": "harvest", "value": "24156" },
-                    { "name": "store", "value": "24156" },
-                    { "name": "enjoy", "value": "24156" },
-                    { "name": "grid", "value": "24156" },
-                    { "name": "harvest.hours", "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44" },
-                    { "name": "store.hours", "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44" },
-                    { "name": "enjoy.hours", "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44" },
-                    { "name": "grid.hours", "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44" }
+                    { "name": "harvest.day", "value": "24156" },
+                    { "name": "store.day", "value": "24156" },
+                    { "name": "enjoy.day", "value": "24156" },
+                    { "name": "grid.day", "value": "24156" },
+                    { "name": "harvest.day.hours", "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44" },
+                    { "name": "store.day.hours", "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44" },
+                    { "name": "enjoy.day.hours", "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44" },
+                    { "name": "grid.day.hours", "value": "54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44 54 3520 33 2333 55 44" }
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/hse/period/day/20190210",
+                "href": "http:/api.sundaya.com/hse/day/20190210",
                 "links": [
                     { 
-                        "rel": "self", "name": "period", "prompt": "Day", "title": "Sunday",
-                        "href": "http:/api.sundaya.com/hse/period/day/20190210", "render": "link"
+                        "rel": "self", "name": "day", "prompt": "Day", "title": "Sunday",
+                        "href": "http:/api.sundaya.com/hse/day/20190210", "render": "link"
                     },
                     {
-                        "rel": "child", "name": "subitems", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/hse/period/hours/201902100600/201902100500"
+                        "rel": "item", "name": "day.hours", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
+                        "href": "http:/api.sundaya.com/hse/hour/201902100600/201902100500"
                     }
                 ],          
                 "data": [
-                    { "name": "harvest", "value": "22684" },
-                    { "name": "store", "value": "22684" },
-                    { "name": "enjoy", "value": "22684" },
-                    { "name": "grid", "value": "22684" },
-                    { "name": "harvest.hours", "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44" },
-                    { "name": "store.hours", "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44" },
-                    { "name": "enjoy.hours", "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44" },
-                    { "name": "grid.hours", "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44" }
+                    { "name": "harvest.day", "value": "22684" },
+                    { "name": "store.day", "value": "22684" },
+                    { "name": "enjoy.day", "value": "22684" },
+                    { "name": "grid.day", "value": "22684" },
+                    { "name": "harvest.day.hours", "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44" },
+                    { "name": "store.day.hours", "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44" },
+                    { "name": "enjoy.day.hours", "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44" },
+                    { "name": "grid.day.hours", "value": "54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44 54 30 3520 23 2000 44" }
                 ]
             }
         ]
