@@ -1,0 +1,257 @@
+{
+    "definitions": {},
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/root.json",
+    "type": "object",
+    "title": "The Root Schema",
+    "required": [
+      "collection"
+    ],
+    "properties": {
+      "collection": {
+        "$id": "#/properties/collection",
+        "type": "object",
+        "title": "The Collection Schema",
+        "required": [
+          "version",
+          "href",
+          "links",
+          "items"
+        ],
+        "properties": {
+          "version": {
+            "$id": "#/properties/collection/properties/version",
+            "type": "string",
+            "title": "The Version Schema",
+            "default": "",
+            "examples": [
+              "0.2"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "href": {
+            "$id": "#/properties/collection/properties/href",
+            "type": "string",
+            "title": "The Href Schema",
+            "default": "",
+            "examples": [
+              "http:/api.sundaya.com/hse/week/20190210"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "links": {
+            "$id": "#/properties/collection/properties/links",
+            "type": "array",
+            "title": "The Links Schema",
+            "items": {
+              "$id": "#/properties/collection/properties/links/items",
+              "type": "object",
+              "title": "The Items Schema",
+              "required": [
+                "rel",
+                "name",
+                "prompt",
+                "title",
+                "href"
+              ],
+              "properties": {
+                "rel": {
+                  "$id": "#/properties/collection/properties/links/items/properties/rel",
+                  "type": "string",
+                  "title": "The Rel Schema",
+                  "default": "",
+                  "examples": [
+                    "self"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "name": {
+                  "$id": "#/properties/collection/properties/links/items/properties/name",
+                  "type": "string",
+                  "title": "The Name Schema",
+                  "default": "",
+                  "examples": [
+                    "week"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "prompt": {
+                  "$id": "#/properties/collection/properties/links/items/properties/prompt",
+                  "type": "string",
+                  "title": "The Prompt Schema",
+                  "default": "",
+                  "examples": [
+                    "Week"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "title": {
+                  "$id": "#/properties/collection/properties/links/items/properties/title",
+                  "type": "string",
+                  "title": "The Title Schema",
+                  "default": "",
+                  "examples": [
+                    "04/02/2019 - 10/02/2019"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "href": {
+                  "$id": "#/properties/collection/properties/links/items/properties/href",
+                  "type": "string",
+                  "title": "The Href Schema",
+                  "default": "",
+                  "examples": [
+                    "http:/api.sundaya.com/hse/week/20190210"
+                  ],
+                  "pattern": "^(.*)$"
+                }
+              }
+            }
+          },
+          "items": {
+            "$id": "#/properties/collection/properties/items",
+            "type": "array",
+            "title": "The Items Schema",
+            "items": {
+              "$id": "#/properties/collection/properties/items/items",
+              "type": "object",
+              "title": "The Items Schema",
+              "required": [
+                "href",
+                "links",
+                "data"
+              ],
+              "properties": {
+                "href": {
+                  "$id": "#/properties/collection/properties/items/items/properties/href",
+                  "type": "string",
+                  "title": "The Href Schema",
+                  "default": "",
+                  "examples": [
+                    "http:/api.sundaya.com/hse/day/20190204"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "links": {
+                  "$id": "#/properties/collection/properties/items/items/properties/links",
+                  "type": "array",
+                  "title": "The Links Schema",
+                  "items": {
+                    "$id": "#/properties/collection/properties/items/items/properties/links/items",
+                    "type": "object",
+                    "title": "The Items Schema",
+                    "required": [
+                      "rel",
+                      "name",
+                      "prompt",
+                      "title",
+                      "href",
+                      "render"
+                    ],
+                    "properties": {
+                      "rel": {
+                        "$id": "#/properties/collection/properties/items/items/properties/links/items/properties/rel",
+                        "type": "string",
+                        "title": "The Rel Schema",
+                        "default": "",
+                        "examples": [
+                          "self"
+                        ],
+                        "pattern": "^(.*)$"
+                      },
+                      "name": {
+                        "$id": "#/properties/collection/properties/items/items/properties/links/items/properties/name",
+                        "type": "string",
+                        "title": "The Name Schema",
+                        "default": "",
+                        "examples": [
+                          "day"
+                        ],
+                        "pattern": "^(.*)$"
+                      },
+                      "prompt": {
+                        "$id": "#/properties/collection/properties/items/items/properties/links/items/properties/prompt",
+                        "type": "string",
+                        "title": "The Prompt Schema",
+                        "default": "",
+                        "examples": [
+                          "Day"
+                        ],
+                        "pattern": "^(.*)$"
+                      },
+                      "title": {
+                        "$id": "#/properties/collection/properties/items/items/properties/links/items/properties/title",
+                        "type": "string",
+                        "title": "The Title Schema",
+                        "default": "",
+                        "examples": [
+                          "Monday"
+                        ],
+                        "pattern": "^(.*)$"
+                      },
+                      "href": {
+                        "$id": "#/properties/collection/properties/items/items/properties/links/items/properties/href",
+                        "type": "string",
+                        "title": "The Href Schema",
+                        "default": "",
+                        "examples": [
+                          "http:/api.sundaya.com/hse/day/20190204"
+                        ],
+                        "pattern": "^(.*)$"
+                      },
+                      "render": {
+                        "$id": "#/properties/collection/properties/items/items/properties/links/items/properties/render",
+                        "type": "string",
+                        "title": "The Render Schema",
+                        "default": "",
+                        "examples": [
+                          "link"
+                        ],
+                        "pattern": "^(.*)$"
+                      }
+                    }
+                  }
+                },
+                "data": {
+                  "$id": "#/properties/collection/properties/items/items/properties/data",
+                  "type": "array",
+                  "title": "The Data Schema",
+                  "items": {
+                    "$id": "#/properties/collection/properties/items/items/properties/data/items",
+                    "type": "object",
+                    "title": "The Items Schema",
+                    "required": [
+                      "name",
+                      "value"
+                    ],
+                    "properties": {
+                      "name": {
+                        "$id": "#/properties/collection/properties/items/items/properties/data/items/properties/name",
+                        "type": "string",
+                        "title": "The Name Schema",
+                        "default": "",
+                        "examples": [
+                          "harvest.day"
+                        ],
+                        "pattern": "^(.*)$"
+                      },
+                      "value": {
+                        "$id": "#/properties/collection/properties/items/items/properties/data/items/properties/value",
+                        "type": "string",
+                        "title": "The Value Schema",
+                        "default": "",
+                        "examples": [
+                          "15396"
+                        ],
+                        "pattern": "^(.*)$"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }  
