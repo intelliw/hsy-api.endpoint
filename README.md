@@ -1,100 +1,100 @@
-# hse-api
-    # Introduction
-    The HSE Energy Management API is REST based and specified in `yaml` with [OpenAPI v2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md).
 
-    The API produces Hypermedia content for client applications to navigate and monitor Energy Assets, based on four energy flows.
+# Introduction
+The HSE Energy Management API is REST based and specified in `yaml` with [OpenAPI v2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md).
 
-      `harvest` - energy *from* renewable source
-      `store` - energy *from* batteries
-      `enjoy` - energy *to* appliances
-      `grid` - energy *from* a public grid
-    
-    API documentation is available through the *Sundaya Developer Portal* at http://developer.sundaya.com. 
+The API produces Hypermedia content for client applications to navigate and monitor Energy Assets, based on four energy flows.
 
-    ## Versions
-    The API endpoint host is http://api.sundaya.com. 
-    
-    All requests to the API endpoint receive the latest version of the API.     
-    
-    Client applications may request a specific version through the `Accept` header.
+  `harvest` - energy *from* renewable source
+  `store` - energy *from* batteries
+  `enjoy` - energy *to* appliances
+  `grid` - energy *from* a public grid
 
-        Accept: application/vnd.sundaya.v1+yaml
+API documentation is available through the *Sundaya Developer Portal* at http://developer.sundaya.com. 
 
-    # Overview
-    The main request path (`hse/`) returns consolidated data for all four energy flows (*Harvest*, *Store*, *Enjoy*, *Grid*). 
+## Versions
+The API endpoint host is http://api.sundaya.com. 
 
-    Optionally clients can filter queries (in the request *Body*) by `category`, `subcategory`, and `product-type`, to restrict data to specific energy assets. 
+All requests to the API endpoint receive the latest version of the API.     
 
-    ## Date-time Format
-    Date and time parameters must be expressed in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format and must conform to [RFC3359](https://tools.ietf.org/html/rfc3339) .
+Client applications may request a specific version through the `Accept` header.
 
-        http://api.sundaya.com/hse/period/{periodID}/{finishes}
+    Accept: application/vnd.sundaya.v1+yaml
 
-    e.g. http://api.sundaya.com/hse/period/week/20190210
+# Overview
+The main request path (`hse/`) returns consolidated data for all four energy flows (*Harvest*, *Store*, *Enjoy*, *Grid*). 
 
-    The compressed version of ISO 8601 is required, without semi colons and with `T` as the time designator, as shown int he examples below.
-    
+Optionally clients can filter queries (in the request *Body*) by `category`, `subcategory`, and `product-type`, to restrict data to specific energy assets. 
 
-    ## Timezones
-    Timezones are not assumed and must be explicitly specified where API parameters allow for a timestamp to be provided. 
+## Date-time Format
+Date and time parameters must be expressed in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format and must conform to [RFC3359](https://tools.ietf.org/html/rfc3339) .
 
-    The Timezone can be specified in UTC or local time as shown:
+    http://api.sundaya.com/hse/period/{periodID}/{finishes}
 
-    - __UTC__, expressed with a trailing `Z` 
-    
-        http://api.sundaya.com/hse/period/week/YYYYMMDDThhmmssZ
-        e.g. http://api.sundaya.com/hse/period/week/201902091830Z == 18:30 UTC
+e.g. http://api.sundaya.com/hse/period/week/20190210
 
-    - __Local__ time with offset 
-    
-        http://api.sundaya.com/hse/period/week/YYYYMMDDThhmmss±hhmm
-        e.g. http://api.sundaya.com/hse/period/week/201902091500-0330 == 18:30 UTC
-    ## Media Types
-    Request `Body` parameters and all response objects are sent and received in JSON. 
+The compressed version of ISO 8601 is required, without semi colons and with `T` as the time designator, as shown int he examples below.
 
-    Clients should use `Accept` and `Content-Type` headers to preserve backward compatibility (in case a new media type or hypermedia scheme is introduced and designated as default).
 
-    These media types are supported:
+## Timezones
+Timezones are not assumed and must be explicitly specified where API parameters allow for a timestamp to be provided. 
 
-        application/json 
-        application/vnd.collection+json
-    
-    ## Headers
-    This following example shows a sample HTTP request and response.
-    ```
-    *** REQUEST ***	
-    GET /hse/period/week/20190209/ HTTP/1.1	
-    Host: api.sundaya.com	
-    Accept: application/vnd.collection+json	
-        
-    *** RESPONSE ***	
-    200 OK HTTP/1.1	
-    Content-Type: application/vnd.collection+json	
-    Content-Length: xxx	
-        
-    { "collection" : {...}, ... }
-    ```
+The Timezone can be specified in UTC or local time as shown:
 
-    ## Link-relation Types
-    Link-relations in Response objects are based on [RFC8288](https://tools.ietf.org/html/rfc8288#page-6). 
+- __UTC__, expressed with a trailing `Z` 
 
-    The following registered types are referenced in the `rel` attribute of the links in an `application/vnd.collection+json` response. 
-    - **self**	- Identifies the link's context.
-      - In `collection.links` it identifies the collection (name = *week*)            
-        - e.g. href=<a>http:/api.sundaya.com/hse/week/20190210</a>
+    http://api.sundaya.com/hse/period/week/YYYYMMDDThhmmssZ
+    e.g. http://api.sundaya.com/hse/period/week/201902091830Z == 18:30 UTC
 
-      - In `collection.items.links` it identifies an item in the collection (name = *day*).
-        - e.g. href=<a>http:/api.sundaya.com/hse/day/20190204</a>
+- __Local__ time with offset 
 
-    - **item** - Identifies child resources of the collection represented by the link's context. 
-      - In `collection.links` it targets the item series whiich make up the collection (name = *week.days*).
-        - e.g. href=<a>http:/api.sundaya.com/hse/day/20190204/20190210</a>
+    http://api.sundaya.com/hse/period/week/YYYYMMDDThhmmss±hhmm
+    e.g. http://api.sundaya.com/hse/period/week/201902091500-0330 == 18:30 UTC
+## Media Types
+Request `Body` parameters and all response objects are sent and received in JSON. 
 
-      - In `collection.items.links` it targets subitems of the item in that context (name = *day.hours*).
-        - e.g. href=<a>http:/api.sundaya.com/hse/hour/201902050600/201902050500</a>
+Clients should use `Accept` and `Content-Type` headers to preserve backward compatibility (in case a new media type or hypermedia scheme is introduced and designated as default).
 
-    - **up** - Identifies the parent the collection or item represented by the link's context (name = *week.month*).
-        
-    - **next** - Identifies the next sibling of the collection or item series represented by the link's context (name = *week.next*).
+These media types are supported:
 
-    - **prev** - Identifies the previous siblings of the collection or item series represented by the link's context (name = *week.previous*).
+    application/json 
+    application/vnd.collection+json
+
+## Headers
+This following example shows a sample HTTP request and response.
+```
+*** REQUEST ***	
+GET /hse/period/week/20190209/ HTTP/1.1	
+Host: api.sundaya.com	
+Accept: application/vnd.collection+json	
+
+*** RESPONSE ***	
+200 OK HTTP/1.1	
+Content-Type: application/vnd.collection+json	
+Content-Length: xxx	
+
+{ "collection" : {...}, ... }
+```
+
+## Link-relation Types
+Link-relations in Response objects are based on [RFC8288](https://tools.ietf.org/html/rfc8288#page-6). 
+
+The following registered types are referenced in the `rel` attribute of the links in an `application/vnd.collection+json` response. 
+- **self**	- Identifies the link's context.
+  - In `collection.links` it identifies the collection (name = *week*)            
+    - e.g. href=<a>http:/api.sundaya.com/hse/week/20190210</a>
+
+  - In `collection.items.links` it identifies an item in the collection (name = *day*).
+    - e.g. href=<a>http:/api.sundaya.com/hse/day/20190204</a>
+
+- **item** - Identifies child resources of the collection represented by the link's context. 
+  - In `collection.links` it targets the item series whiich make up the collection (name = *week.days*).
+    - e.g. href=<a>http:/api.sundaya.com/hse/day/20190204/20190210</a>
+
+  - In `collection.items.links` it targets subitems of the item in that context (name = *day.hours*).
+    - e.g. href=<a>http:/api.sundaya.com/hse/hour/201902050600/201902050500</a>
+
+- **up** - Identifies the parent the collection or item represented by the link's context (name = *week.month*).
+
+- **next** - Identifies the next sibling of the collection or item series represented by the link's context (name = *week.next*).
+
+- **prev** - Identifies the previous siblings of the collection or item series represented by the link's context (name = *week.previous*).
