@@ -8,7 +8,7 @@
                 "href": "http:/api.sundaya.com/hse/week/20190210"
             },
             {
-                "rel": "item", "name": "week.day", "prompt": "Days", "title": "Monday Tuesday Wednesday Thursday Friday Saturday Sunday",                
+                "rel": "item", "name": "week.days", "prompt": "Days", "title": "Monday Tuesday Wednesday Thursday Friday Saturday Sunday",                
                 "href": "http:/api.sundaya.com/hse/day/20190204/20190210"
             },
             {
