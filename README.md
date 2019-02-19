@@ -4,14 +4,14 @@ The HSE Energy Management API is REST based on [OpenAPI v2.0](https://github.com
 
 The API produces Hypermedia content for client applications to navigate and monitor Energy Assets, based on four energy flows.
 
-Flow | From | To
---- | --- | ---
-`harvest` | Renewable sources  | Appliances (`enjoy`), Batteries (`store`)
-`store` | Batteries  (`store`) | Appliances (`enjoy`)
-`enjoy` | - | Appliances
-`grid` | Public Grid | Appliances (`enjoy`), Batteries (`store`).
+Flow | Type | From | To 
+--- | --- |--- | ---
+`harvest` | Renewables  | *Solar PV* | `enjoy` `store`
+`store` | Batteries | `harvest` `grid` | `enjoy`
+`enjoy` | Appliances | `harvest` `grid` `store` | *End-User Consumption*
+`grid` | Public Utility | *Mains Electricity* | `enjoy` `store`
 
-API documentation is available through the *Sundaya Developer Portal* at http://developer.sundaya.com. 
+Extended API documentation is available through the *Sundaya Developer Portal* at http://developer.sundaya.com. 
 
 ## Versions
 The API endpoint host is http://api.sundaya.com. 
