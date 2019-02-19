@@ -1,6 +1,6 @@
 
 # Introduction
-The HSE Energy Management API is REST based and specified in `yaml` with [OpenAPI v2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md).
+The HSE Energy Management API is REST based on [OpenAPI v2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) and specified in `yaml` .
 
 The API produces Hypermedia content for client applications to navigate and monitor Energy Assets, based on four energy flows.
 
