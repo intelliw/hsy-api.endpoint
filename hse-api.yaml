@@ -1,5 +1,10 @@
 # [START swagger]
 swagger: "2.0"
+host: "echo-api.endpoints.hse-api-02.cloud.goog"
+basePath: /
+x-google-endpoints:
+- name: "echo-api.endpoints.hse-api-02.cloud.goog"
+  target: "34.80.99.163"
 info:
   title: "HSE Energy Management"
   version: "1.0.02"
@@ -9,10 +14,10 @@ info:
 
     The API produces Hypermedia content for client applications to navigate and monitor Energy Assets, based on four energy flows.
 
-      `harvest` - energy *from* renewable source
-      `store` - energy *from* batteries
-      `enjoy` - energy *to* appliances
-      `grid` - energy *from* a public grid
+      `harvest` - energy *from* renewable source *to* appliances (`enjoy`) and batteries (`store`).
+      `store` - energy *from* batteries *to* appliances (`enjoy`). 
+      `enjoy` - energy *to* appliances.
+      `grid` - energy *from* the public grid *to* appliances (`enjoy`) and batteries (`store`).
     
     API documentation is available through the *Sundaya Developer Portal* at http://developer.sundaya.com. 
 
@@ -108,11 +113,6 @@ info:
     name: Creative Commons Attribution 4.0 International
     url: 'http://creativecommons.org/licenses/by/4.0/'
   termsOfService: 'https://sundaya.com/terms-of-service/'
-host: "echo-api.endpoints.hse-api-02.cloud.goog"
-basePath: /
-x-google-endpoints:
-- name: "echo-api.endpoints.hse-api-02.cloud.goog"
-  target: "34.80.99.163"
 # [END swagger]
 consumes:
 - "application/json"
