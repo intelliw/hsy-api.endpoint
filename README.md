@@ -8,7 +8,7 @@ Type | Flow | From | To
 --- | --- |--- | ---
 Renewables | `harvest`  | *Solar PV* | `enjoy` `store`
 Batteries | `store` | `harvest` `grid` | `enjoy`
-Appliances | `enjoy` | `harvest` `grid` `store` | *End-User Consumption*
+Appliances | `enjoy` | `harvest` `grid` `store` | *End-Users*
 Public Utility | `grid` | *Mains Electricity* | `enjoy` `store`
 
 

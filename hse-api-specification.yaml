@@ -6,7 +6,7 @@ x-google-endpoints:
 - name: "echo-api.endpoints.hse-api-02.cloud.goog"
   target: "34.80.99.163"
 info:
-  title: "HSE Energy Management"
+  title: "Energy Management"
   version: "1.0.02"
   description: |
     # Introduction
@@ -18,7 +18,7 @@ info:
     --- | --- |--- | ---
     Renewables | `harvest`  | *Solar PV* | `enjoy` `store`
     Batteries | `store` | `harvest` `grid` | `enjoy`
-    Appliances | `enjoy` | `harvest` `grid` `store` | *End-User Consumption*
+    Appliances | `enjoy` | `harvest` `grid` `store` | *End-Users*
     Public Utility | `grid` | *Mains Electricity* | `enjoy` `store`
 
     Extended API documentation is available through the *Sundaya Developer Portal* at http://developer.sundaya.com. 
