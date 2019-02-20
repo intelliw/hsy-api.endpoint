@@ -6,22 +6,37 @@ x-google-endpoints:
 - name: "echo-api.endpoints.hse-api-02.cloud.goog"
   target: "34.80.99.163"
 info:
-  title: "Energy Management"
+  title: "HSE Energy Management"
   version: "1.0.02"
   description: |
     # Introduction
-    The HSE Energy Management API is REST based on [OpenAPI v2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) and specified in `yaml`.
+    The HSE Energy Management API is based on REST / Hypermedia and specified in [OpenAPI v2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md). 
 
-    The API produces Hypermedia content for client applications to navigate and monitor Energy Assets, based on four energy flows.
+    It API allows client applications to monitor and manage Energy Assets, based on four stages of an energy lifecycle, as shown. 
 
-    Type | Flow | From | To 
-    --- | --- |--- | ---
-    Renewables | `harvest`  | *Solar PV* | `enjoy` `store`
-    Batteries | `store` | `harvest` `grid` | `enjoy`
-    Appliances | `enjoy` | `harvest` `grid` `store` | *End-Users*
-    Public Utility | `grid` | *Mains Electricity* | `enjoy` `store`
+    Stage | Type | Energy Assets 
+    --- | --- | ---
+    `harvest` | Renewables | Solar PV
+    `store` | Storage | Battery Management System
+    `enjoy` | Appliances | 
+    `grid` | Public Utility | PV Grid-interactive Inverter
 
-    Extended API documentation is available through the *Sundaya Developer Portal* at http://developer.sundaya.com. 
+    The API and documentation is available through the *Sundaya Developer Portal* at https://developer.sundaya.com. 
+
+    # Overview
+    The `/hse` request path produces a consolidated response containing all energy flows in the following table. 
+    
+    - `store.in` and `store.out` indicate *charge* and *discharge* flows for batteries.
+
+    - `grid.in` indicates feed-in flows to the public grid.
+
+    Flow | From / To   
+     --- |--- 
+    `harvest` |`store.in` `enjoy` `grid.in`
+    `store.out` | `enjoy`
+    `enjoy`  |  `harvest` `store.out` `grid.out`
+    
+    To query specific assets, clients can request by `category`, `subcategory`, and `product-type` (in the request *Body*).
 
     ## Versions
     The API endpoint host is http://api.sundaya.com. 
@@ -31,11 +46,6 @@ info:
     Client applications may request a specific version through the `Accept` header.
 
         Accept: application/vnd.sundaya.v1+yaml
-
-    # Overview
-    The main request path (`hse/`) returns consolidated data for all four energy flows (*Harvest*, *Store*, *Enjoy*, *Grid*). 
-
-    Optionally clients can filter queries (in the request *Body*) by `category`, `subcategory`, and `product-type`, to restrict data to specific energy assets. 
 
     ## Date-time Format
     Date and time parameters must be expressed in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format and must conform to [RFC3359](https://tools.ietf.org/html/rfc3339) .
