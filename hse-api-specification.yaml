@@ -12,7 +12,7 @@ info:
     # Introduction
     The HSE Energy Management API is based on REST / Hypermedia and specified in [OpenAPI v2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md). 
 
-    It API allows client applications to monitor and manage Energy Assets, based on four stages of an energy lifecycle, as shown. 
+    The API allows client applications to monitor and manage Energy Assets, based on four stages of an energy lifecycle. 
 
     Stage | Type | Energy Assets 
     --- | --- | ---
@@ -24,7 +24,7 @@ info:
     The API and documentation is available through the *Sundaya Developer Portal* at https://developer.sundaya.com. 
 
     # Overview
-    The `/hse` request path produces a consolidated response containing all energy flows in the following table. 
+    The `/hse` request path produces a consolidated response containing data for all energy flows as shown in the following table. 
     
     - `store.in` and `store.out` indicate *charge* and *discharge* flows for batteries.
 
@@ -36,7 +36,7 @@ info:
     `store.out` | `enjoy`
     `enjoy`  |  `harvest` `store.out` `grid.out`
     
-    To query specific assets, clients can request by `category`, `subcategory`, and `product-type` (in the request *Body*).
+    To query specific assets, clients can filter requests by `category`, `subcategory`, and `product-type` (in the request *Body*).
 
     ## Versions
     The API endpoint host is http://api.sundaya.com. 
@@ -102,17 +102,20 @@ info:
 
     The following registered types are referenced in the `rel` attribute of the links in an `application/vnd.collection+json` response. 
     - **self**	- Identifies the link's context.
-      - In `collection.links` it identifies the collection (name = *week*)            
+
+        In `collection.links` it identifies the collection (name = *week*)            
+
         - e.g. href=<a>http:/api.sundaya.com/hse/week/20190210</a>
 
-      - In `collection.items.links` it identifies an item in the collection (name = *day*).
+        In `collection.items.links` it identifies an item in the collection (name = *day*).
         - e.g. href=<a>http:/api.sundaya.com/hse/day/20190204</a>
 
     - **item** - Identifies child resources of the collection represented by the link's context. 
-      - In `collection.links` it targets the item series whiich make up the collection (name = *week.days*).
+    
+        In `collection.links` it targets the item series whiich make up the collection (name = *week.days*).
         - e.g. href=<a>http:/api.sundaya.com/hse/day/20190204/20190210</a>
 
-      - In `collection.items.links` it targets subitems of the item in that context (name = *day.hours*).
+        In `collection.items.links` it targets subitems of the item in that context (name = *day.hours*).
         - e.g. href=<a>http:/api.sundaya.com/hse/hour/201902050600/201902050500</a>
 
     - **up** - Identifies the parent the collection or item represented by the link's context (name = *week.month*).
