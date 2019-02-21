@@ -9,34 +9,55 @@ info:
   title: "HSE Energy Management"
   version: "1.0.02"
   description: |
+
     # Introduction
     The HSE Energy Management API is based on REST / Hypermedia and specified in [OpenAPI v2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md). 
 
-    The API allows client applications to monitor and manage Energy Assets, based on four stages of an energy lifecycle. 
+    The API provides energy metrics for four **Flow** types:`harvest`, `store`, `enjoy`, `grid`. 
+    
+    The API response consolidates all four energy flows in each request and reponse, based on a time period.
+    
+    - Clients use the API to manage **Energy Assets** through flexible views of energy metrics and by scheduling use at preferred times.
 
-    Stage | Type | Energy Assets 
+    - Vendor device integrations use the API to monitor and control **Energy Management Devices**.
+    
+    Flow | Energy Asset | Energy Management Device 
     --- | --- | ---
-    `harvest` | Renewables | Solar PV
-    `store` | Storage | Battery Management System
-    `enjoy` | Appliances | 
-    `grid` | Public Utility | PV Grid-interactive Inverter
+    `harvest` | Renewables | PV Modules, PV Grid-interactive Inverter
+    `store` | Storage | Battery Management System (BMS), Energy Storage System (ESS)
+    `enjoy` | Appliances | Multicore Cable Sensors, Switchboard Clamp Sensors, Socket Sensors
+    `grid` | Mains Electricity | Smart Meters
 
     The API and documentation is available through the *Sundaya Developer Portal* at https://developer.sundaya.com. 
 
     # Overview
-    The `/hse` request path produces a consolidated response containing data for all energy flows as shown in the following table. 
     
+    ## Data element names
+
+    The following provides names of all data elements used in the API, in the context of each flow. 
+
     - `store.in` and `store.out` indicate *charge* and *discharge* flows for batteries.
 
-    - `grid.in` indicates feed-in flows to the public grid.
+    - `grid.out` and `grid.in` indicate mains use, and feed-in flows into the public grid.
+
+    - `harvest` indicates renewable generation and always implies `.out`. 
+    
+    - `enjoy` indicates energy use and always implies `.in`. 
+
+    ## Double-entry format 
+
+    Energy flows are based on a 'double entry' format (each flow has an opposite flow). 
+
+    These equal and opposite flows are summarised in the following table: 
 
     Flow | From / To   
      --- |--- 
     `harvest` |`store.in` `enjoy` `grid.in`
     `store.out` | `enjoy`
     `enjoy`  |  `harvest` `store.out` `grid.out`
-    
+     
     To query specific assets, clients can filter requests by `category`, `subcategory`, and `product-type` (in the request *Body*).
+
 
     ## Versions
     The API endpoint host is http://api.sundaya.com. 
@@ -71,7 +92,7 @@ info:
     
         http://api.sundaya.com/hse/period/week/YYYYMMDDThhmmss±hhmm
         e.g. http://api.sundaya.com/hse/period/week/201902091500-0330 == 18:30 UTC
-    ## Media Types
+    ## Media types
     Request `Body` parameters and all response objects are sent and received in JSON. 
 
     Clients should use `Accept` and `Content-Type` headers to preserve backward compatibility (in case a new media type or hypermedia scheme is introduced and designated as default).
@@ -97,7 +118,7 @@ info:
     { "collection" : {...}, ... }
     ```
 
-    ## Link-relation Types
+    ## Link-relation types
     Link-relations in Response objects are based on [RFC8288](https://tools.ietf.org/html/rfc8288#page-6). 
 
     The following registered types are referenced in the `rel` attribute of the links in an `application/vnd.collection+json` response. 
