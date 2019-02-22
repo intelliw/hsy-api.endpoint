@@ -1,0 +1,279 @@
+consumes:
+  - application/vnd.collection+json
+produces:
+  - application/vnd.collection+json
+parameters:
+  deviceId:
+    description: The device identifier
+    name: deviceId
+    in: path
+    required: true
+    type: string
+    example: BBC-PR1202-999
+responses:
+  InvalidArgument:
+    description: The client specified an invalid argument
+    schema:
+      $ref: '#/definitions/invalid-argument'
+  PermissionDenied:
+    description: The client does not have sufficient permission
+    schema:
+      $ref: '#/definitions/permission-denied'
+  NotFound:
+    description: The specified resource was not found
+    schema:
+      $ref: '#/definitions/not-found'
+tags:
+  - description: |
+      Devices monitor device health and energy flows and provide metrics for applicaitons.
+
+        For example, vendor integrations use the data to control and manage the device. 
+        Client applications use the data to analyse energy Flows across :harvest, store, enjoy, grid.
+    name: Device Monitoring Data
+paths:
+  '/devices/{deviceId}/monitoring-data':    
+    post:
+      description: |
+        Logs monitoring data for a device.
+      parameters:
+        - description: Energy Management Device monitoring data
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/monitoring-data'
+      responses:
+        '201':
+          description: Monitoring data was logged successfully
+          headers:
+            Location:
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+              type: string
+          schema:
+            $ref: '#/definitions/monitoring-data'
+        '400':
+          $ref: '#/responses/InvalidArgument'
+        '401':
+          $ref: '#/responses/PermissionDenied'
+      summary: Logs monitoring data from an energy management device
+      tags:
+        - Device Monitoring Data
+    parameters:
+      - $ref: '#/parameters/deviceId'
+definitions:
+  error-details:
+    properties:
+      code:
+        description: The error code.
+        example: NullValue
+        type: string
+      message:
+        description: The error message.
+        example: Period must not be null
+        type: string
+      target:
+        description: The error target.
+        example: Period
+        type: string
+    type: object
+  invalid-argument:
+    type: object
+    properties:
+      code:
+        description: The error code.
+        example: '400'
+        type: string
+      details:
+        items:
+          $ref: '#/definitions/error-details'
+        type: array
+      message:
+        description: The error message.
+        example: The client specified an invalid argument
+        type: string
+      status:
+        description: The error status.
+        example: INVALID_ARGUMENT
+        type: string
+  permission-denied:
+    properties:
+      code:
+        description: The error code.
+        example: '403'
+        type: string
+      details:
+        items:
+          $ref: '#/definitions/error-details'
+        type: array
+      message:
+        description: The error message.
+        example: The client does not have sufficient permission
+        type: string
+      status:
+        description: The error status.
+        example: PERMISSION_DENIED
+        type: string
+    type: object
+  not-found:
+    properties:
+      code:
+        description: The error code.
+        example: '404'
+        type: string
+      details:
+        items:
+          $ref: '#/definitions/error-details'
+        type: array
+      message:
+        description: The error message.
+        example: The specified resource was not found
+        type: string
+      status:
+        description: The error status.
+        example: NOT_FOUND
+        type: string
+    type: object
+  monitoring-data:
+    description: A collection of data items for a monitoring period
+    properties:
+      collection:
+        type: object
+        title: The Collection Schema
+        required:
+        - version
+        - href
+        - links
+        - items
+        properties:
+          version:
+            type: string
+            title: The Version Schema
+            examples:
+            - '0.2'
+            pattern: ^(.*)$
+          href:
+            type: string
+            title: The Href Schema
+            examples:
+            - http:/api.sundaya.com/hse/week/20190210
+          links:
+            type: array
+            title: The Links Schema
+            items:
+              type: object
+              title: The Items Schema
+              required:
+              - rel
+              - name
+              - prompt
+              - title
+              - href
+              properties:
+                rel:
+                  type: string
+                  title: The Rel Schema
+                  examples:
+                  - collection
+                name:
+                  type: string
+                  title: The Name Schema
+                  examples:
+                  - week.month
+                prompt:
+                  type: string
+                  title: The Prompt Schema
+                  examples:
+                  - Month
+                title:
+                  type: string
+                  title: The Title Schema
+                  examples:
+                  - February
+                href:
+                  type: string
+                  title: The Href Schema
+                  examples:
+                  - http:/api.sundaya.com/monitoring-data/month/201902
+          items:
+            type: array
+            title: The Items Schema
+            items:
+              type: object
+              title: The Items Schema
+              required:
+              - href
+              - data
+              properties:
+                href:
+                  type: string
+                  title: The Href Schema
+                  examples:
+                  - http:/api.sundaya.com/hse/day/20190204
+                links:
+                  type: array
+                  title: The Links Schema
+                  items:
+                    type: object
+                    title: The Items Schema
+                    required:
+                    - rel
+                    - name
+                    - prompt
+                    - title
+                    - href
+                    properties:
+                      rel:
+                        type: string
+                        title: The Rel Schema
+                        default: ''
+                        examples:
+                        - item
+                      name:
+                        type: string
+                        title: The Name Schema
+                        default: ''
+                        examples:
+                        - day
+                      prompt:
+                        type: string
+                        title: The Prompt Schema
+                        examples:
+                        - Day
+                      title:
+                        type: string
+                        title: The Title Schema
+                        examples:
+                        - Monday
+                      href:
+                        type: string
+                        title: The Href Schema
+                        examples:
+                        - http:/api.sundaya.com/hse/day/20190204
+                      render:
+                        type: string
+                        title: The Render Schema
+                        default: ''
+                        examples:
+                        - link
+                data:
+                  type: array
+                  title: The Data Schema
+                  items:
+                    type: object
+                    title: The Items Schema
+                    required:
+                    - name
+                    - value
+                    properties:
+                      name:
+                        type: string
+                        title: The Name Schema
+                        examples:
+                        - harvest.day
+                      value:
+                        type: string
+                        title: The Value Schema
+                        examples:
+                        - '15396'
+    type: object
