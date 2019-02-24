@@ -4,7 +4,7 @@ produces:
   - application/vnd.collection+json
 parameters:
   deviceId:
-    description: The device identifier
+    description: The uinique device identifier 
     name: deviceId
     in: path
     required: true

@@ -1,20 +1,20 @@
 {
     "collection": {
         "version": "0.1",
-        "href": "http:/api.sundaya.com/devices/PMS-PR1303-999/monitoring-data",
+        "href": "http:/api.sundaya.com/devices/PMS-PR1303-999/datasets",
         "links": [
             {
                 "rel": "collection", "name": "device.datasetId", "prompt": "The identifier of the monitoring dataset", "title": "EPACK data",
-                "href": "http:/api.sundaya.com/devices/PMS-PR1303-999/monitoring-data/EPACK"
+                "href": "http:/api.sundaya.com/devices/PMS-PR1303-999/datasets/EPACK"
             },
             {
                 "rel": "item", "name": "second", "prompt": "Seconds", "title": "The period classified for the monitoring data batch, expressed in the items.href property as compressed ISO 8601/RFC3339 (YYYYMMDDThhmmss±hhmm)", 
-                "href": "http:/api.sundaya.com/monitoring-data/second"
+                "href": "http:/api.sundaya.com/datasets/second"
             }
         ],
         "items": [
             {
-                "href": "http:/api.sundaya.com/devices/monitoring-data/second/20190209T150006-0330",
+                "href": "http:/api.sundaya.com/devices/datasets/second/20190209T150006-0330",
                 "data": [
                     { "name": "vcell.01", "value": "99" },
                     { "name": "vcell.02", "value": "99" },
@@ -41,7 +41,7 @@
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/devices/monitoring-data/second/20190209T150012-0330",
+                "href": "http:/api.sundaya.com/devices/datasets/second/20190209T150012-0330",
                 "data": [
                     { "name": "vcell.01", "value": "99" },
                     { "name": "vcell.02", "value": "99" },
@@ -68,7 +68,7 @@
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/devices/monitoring-data/second/20190209T150018-0330",
+                "href": "http:/api.sundaya.com/devices/datasets/second/20190209T150018-0330",
                 "data": [
                     { "name": "vcell.01", "value": "99" },
                     { "name": "vcell.02", "value": "99" },
@@ -95,7 +95,7 @@
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/devices/monitoring-data/second/20190209T150024-0330",
+                "href": "http:/api.sundaya.com/devices/datasets/second/20190209T150024-0330",
                 "data": [
                     { "name": "vcell.01", "value": "99" },
                     { "name": "vcell.02", "value": "99" },
@@ -122,7 +122,7 @@
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/devices/monitoring-data/second/20190209T150030-0330",
+                "href": "http:/api.sundaya.com/devices/datasets/second/20190209T150030-0330",
                 "data": [
                     { "name": "vcell.01", "value": "99" },
                     { "name": "vcell.02", "value": "99" },
@@ -149,7 +149,7 @@
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/devices/monitoring-data/second/20190209T150036-0330",
+                "href": "http:/api.sundaya.com/devices/datasets/second/20190209T150036-0330",
                 "data": [
                     { "name": "vcell.01", "value": "99" },
                     { "name": "vcell.02", "value": "99" },
@@ -176,7 +176,7 @@
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/devices/monitoring-data/second/20190209T150042-0330",
+                "href": "http:/api.sundaya.com/devices/datasets/second/20190209T150042-0330",
                 "data": [
                     { "name": "vcell.01", "value": "99" },
                     { "name": "vcell.02", "value": "99" },
@@ -203,7 +203,7 @@
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/devices/monitoring-data/second/20190209T150049-0330",
+                "href": "http:/api.sundaya.com/devices/datasets/second/20190209T150049-0330",
                 "data": [
                     { "name": "vcell.01", "value": "99" },
                     { "name": "vcell.02", "value": "99" },
@@ -230,7 +230,7 @@
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/devices/monitoring-data/second/20190209T150054-0330",
+                "href": "http:/api.sundaya.com/devices/datasets/second/20190209T150054-0330",
                 "data": [
                     { "name": "vcell.01", "value": "99" },
                     { "name": "vcell.02", "value": "99" },
@@ -257,7 +257,7 @@
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/devices/monitoring-data/second/20190209T150100-0330",
+                "href": "http:/api.sundaya.com/devices/datasets/second/20190209T150100-0330",
                 "data": [
                     { "name": "vcell.01", "value": "99" },
                     { "name": "vcell.02", "value": "99" },
