@@ -1,40 +1,40 @@
 {
     "collection": {
         "version": "0.2",
-        "href": "http:/api.sundaya.com/monitoring-data/week/20190210",
+        "href": "http:/api.sundaya.com/energy/hse/period/week/20190210",
         "links": [
             {
                 "rel": "self", "name": "week", "prompt": "Week", "title": "04/02/2019 - 10/02/2019",
-                "href": "http:/api.sundaya.com/monitoring-data/week/20190210"
+                "href": "http:/api.sundaya.com/energy/hse/period/week/20190210"
             },
             {
-                "rel": "collection", "name": "week.days", "prompt": "Days", "title": "Monday Tuesday Wednesday Thursday Friday Saturday Sunday",                
-                "href": "http:/api.sundaya.com/monitoring-data/day/20190204/20190210"
+                "rel": "collection", "name": "week.day", "prompt": "Days", "title": "Monday Tuesday Wednesday Thursday Friday Saturday Sunday",                
+                "href": "http:/api.sundaya.com/energy/hse/interval/day/20190204/20190210"
             },
             {
                 "rel": "up", "name": "week.month", "prompt": "Month", "title": "February", 
-                "href": "http:/api.sundaya.com/monitoring-data/month/201902", "render": "link"                
+                "href": "http:/api.sundaya.com/energy/hse/period/month/201902", "render": "link"                
             },
             {
                 "rel": "next", "name": "week.next", "prompt": "Next", "title": "11/02/2019 - 17/02/2019",
-                "href": "http:/api.sundaya.com/monitoring-data/week/20190217", "render": "link"
+                "href": "http:/api.sundaya.com/energy/hse/period/week/20190217", "render": "link"
             },
             {
                 "rel": "prev", "name": "week.previous", "prompt": "Previous", "title": "28/01/2019 - 03/02/2019",
-                "href": "http:/api.sundaya.com/monitoring-data/week/20190203", "render": "link"
+                "href": "http:/api.sundaya.com/energy/hse/period/week/20190203", "render": "link"
             }
         ],
         "items": [
             {
-                "href": "http:/api.sundaya.com/monitoring-data/day/20190204",
+                "href": "http:/api.sundaya.com/energy/hse/period/day/20190204",
                 "links": [
                     { 
                         "rel": "self", "name": "day", "prompt": "Day", "title": "Monday",
-                        "href": "http:/api.sundaya.com/monitoring-data/day/20190204", "render": "link"
+                        "href": "http:/api.sundaya.com/energy/hse/period/day/20190204", "render": "link"
                     },
                     {
                         "rel": "item", "name": "day.hours", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/monitoring-data/hour/20190204T0600/20190204T0500"
+                        "href": "http:/api.sundaya.com/energy/hse/interval/hour/20190204T0600/20190204T0500"
                     }
                 ],          
                 "data": [
@@ -53,15 +53,15 @@
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/monitoring-data/day/20190205",
+                "href": "http:/api.sundaya.com/energy/hse/period/day/20190205",
                 "links": [
                     { 
                         "rel": "self", "name": "day", "prompt": "Day", "title": "Tuesday",
-                        "href": "http:/api.sundaya.com/monitoring-data/day/20190205", "render": "link"
+                        "href": "http:/api.sundaya.com/energy/hse/period/day/20190205", "render": "link"
                     },
                     {
                         "rel": "item", "name": "day.hours", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/monitoring-data/hour/20190204T0600/20190204T0500"
+                        "href": "http:/api.sundaya.com/energy/hse/interval/hour/20190204T0600/20190204T0500"
                     }
                 ],          
                 "data": [
@@ -80,15 +80,15 @@
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/monitoring-data/day/20190206",
+                "href": "http:/api.sundaya.com/energy/hse/period/day/20190206",
                 "links": [
                     { 
                         "rel": "self", "name": "day", "prompt": "Day", "title": "Wednesday",
-                        "href": "http:/api.sundaya.com/monitoring-data/day/20190206", "render": "link"
+                        "href": "http:/api.sundaya.com/energy/hse/period/day/20190206", "render": "link"
                     },
                     {
                         "rel": "item", "name": "day.hours", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/monitoring-data/hour/20190206T0600/20190206T0500"
+                        "href": "http:/api.sundaya.com/energy/hse/interval/hour/20190206T0600/20190206T0500"
                     }
                 ],          
                 "data": [
@@ -107,15 +107,15 @@
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/monitoring-data/day/20190207",
+                "href": "http:/api.sundaya.com/energy/hse/period/day/20190207",
                 "links": [
                     { 
                         "rel": "self", "name": "day", "prompt": "Day", "title": "Thursday",
-                        "href": "http:/api.sundaya.com/monitoring-data/day/20190207", "render": "link"
+                        "href": "http:/api.sundaya.com/energy/hse/period/day/20190207", "render": "link"
                     },
                     {
                         "rel": "item", "name": "day.hours", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/monitoring-data/hour/20190207T0600/20190207T0500"
+                        "href": "http:/api.sundaya.com/energy/hse/interval/hour/20190207T0600/20190207T0500"
                     }
                 ],          
                 "data": [
@@ -134,15 +134,15 @@
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/monitoring-data/day/20190208",
+                "href": "http:/api.sundaya.com/energy/hse/period/day/20190208",
                 "links": [
                     { 
                         "rel": "self", "name": "day", "prompt": "Day", "title": "Friday",
-                        "href": "http:/api.sundaya.com/monitoring-data/day/20190208", "render": "link"
+                        "href": "http:/api.sundaya.com/energy/hse/period/day/20190208", "render": "link"
                     },
                     {
                         "rel": "item", "name": "day.hours", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/monitoring-data/hour/20190208T0600/20190208T0500"
+                        "href": "http:/api.sundaya.com/energy/hse/interval/hour/20190208T0600/20190208T0500"
                     }
                 ],          
                 "data": [
@@ -161,15 +161,15 @@
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/monitoring-data/day/20190209",
+                "href": "http:/api.sundaya.com/energy/hse/period/day/20190209",
                 "links": [
                     { 
                         "rel": "self", "name": "day", "prompt": "Day", "title": "Saturday",
-                        "href": "http:/api.sundaya.com/monitoring-data/day/20190209", "render": "link"
+                        "href": "http:/api.sundaya.com/energy/hse/period/day/20190209", "render": "link"
                     },
                     {
                         "rel": "item", "name": "day.hours", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/monitoring-data/hour/20190209T0600/20190209T0500"
+                        "href": "http:/api.sundaya.com/energy/hse/interval/hour/20190209T0600/20190209T0500"
                     }
                 ],          
                 "data": [
@@ -188,15 +188,15 @@
                 ]
             },
             {
-                "href": "http:/api.sundaya.com/monitoring-data/day/20190210",
+                "href": "http:/api.sundaya.com/energy/hse/period/day/20190210",
                 "links": [
                     { 
                         "rel": "self", "name": "day", "prompt": "Day", "title": "Sunday",
-                        "href": "http:/api.sundaya.com/monitoring-data/day/20190210", "render": "link"
+                        "href": "http:/api.sundaya.com/energy/hse/period/day/20190210", "render": "link"
                     },
                     {
                         "rel": "item", "name": "day.hours", "prompt": "Hours", "title": "06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 01 02 03 04 05",                
-                        "href": "http:/api.sundaya.com/monitoring-data/hour/20190210T0600/20190210T0500"
+                        "href": "http:/api.sundaya.com/energy/hse/interval/hour/20190210T0600/20190210T0500"
                     }
                 ],          
                 "data": [

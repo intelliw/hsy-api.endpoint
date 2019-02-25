@@ -1,9 +1,9 @@
 # [START swagger]
 swagger: "2.0"
-host: "echo-api.endpoints.hse-api-02.cloud.goog"
+host: "energy-management.hse-api-02.cloud.goog"
 basePath: /
 x-google-endpoints:
-- name: "echo-api.endpoints.hse-api-02.cloud.goog"
+- name: "energy-management.hse-api-02.cloud.goog"
   target: "34.80.99.163"
 info:
   title: "HSE Energy Management"
@@ -15,17 +15,17 @@ info:
 
     The API provides energy metrics for four **Flow** types:`harvest`, `store`, `enjoy`, `grid`. 
     
-    The API response consolidates all four energy flows in each request and reponse, based on a time period.
+    The API response consolidates all four energy flow types based on a period (week, month etc.).
     
-    - Clients use the API to manage **Energy Assets** through flexible views of energy metrics and by scheduling use at preferred times.
+    - Clients can use the API to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times.
 
-    - Vendor device integrations use the API to monitor and control **Energy Management Devices**.
+    - Vendor device integrations can use the API to monitor and control their **Energy Management Devices**.
     
-    Flow | Energy Asset | Energy Management Device 
+    Energy Type | Energy Assets | Energy Management Devices
     --- | --- | ---
     `harvest` | Renewables | PV Modules, PV Grid-interactive Inverter
-    `store` | Storage | Battery Management System (BMS), Energy Storage System (ESS)
-    `enjoy` | Appliances | Multicore Cable Sensors, Switchboard Clamp Sensors, Socket Sensors
+    `store` | Storage | Busbar Controler (BBC), Pack Management System (PMS)
+    `enjoy` | Appliances | Multicore-Cable Current Sensors, Clamp-on Current Sensors
     `grid` | Mains Electricity | Smart Meters
 
     The API and documentation is available through the *Sundaya Developer Portal* at https://developer.sundaya.com. 
@@ -46,7 +46,7 @@ info:
 
     ## Double-entry format 
 
-    Energy flows are based on a 'double entry' format (each flow has an opposite flow). 
+    Energy flows are based on a "double entry" format (each flow has an opposite flow). 
 
     These equal and opposite flows are summarised in the following table: 
 
@@ -71,9 +71,9 @@ info:
     ## Date-time Format
     Date and time parameters must be expressed in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format and must conform to [RFC3359](https://tools.ietf.org/html/rfc3339) .
 
-        http://api.sundaya.com/monitoring-data/{periodId}/{periodEnd}
+        http://api.sundaya.com/energy/{energyTpe}/period/{periodType}/{endDateTime}
 
-    e.g. http://api.sundaya.com/monitoring-data/week/20190210
+    e.g. http:/api.sundaya.com/energy/hse/period/week/20190210
 
     The compressed version of ISO 8601 is required, without semi colons and with `T` as the time designator, as shown int he examples below.
     
@@ -85,13 +85,12 @@ info:
 
     - __UTC__, expressed with a trailing `Z` 
     
-        http://api.sundaya.com/monitoring-data/week/YYYYMMDDThhmmssZ
-        e.g. http://api.sundaya.com/monitoring-data/week/20190209T1830Z == 18:30 UTC
+        e.g. http://api.sundaya.com/energy/hse/period/minute/20190209T0930Z == 09:30 UTC
 
-    - __Local__ time with offset 
+    - __Local__ time in Jakarta with offset 
     
-        http://api.sundaya.com/monitoring-data/week/YYYYMMDDThhmmss±hhmm
-        e.g. http://api.sundaya.com/monitoring-data/week/20190209T1500-0330 == 18:30 UTC
+        http://api.sundaya.com/energy/hse/period/week/YYYYMMDDThhmmss±hhmm
+        e.g. http://api.sundaya.com/energy/hse/period/minute/20190209T1630-0700 == 09:30 UTC
     ## Media types
     Request `Body` parameters and all response objects are sent and received in JSON. 
 
@@ -106,7 +105,7 @@ info:
     This following example shows a sample HTTP request and response.
     ```
     *** REQUEST ***	
-    GET /monitoring-data/week/20190209/ HTTP/1.1	
+    GET /energy/hse/period/week/20190210/ HTTP/1.1	
     Host: api.sundaya.com	
     Accept: application/vnd.collection+json	
         
@@ -122,33 +121,33 @@ info:
     Link-relations in Response objects are based on [RFC8288](https://tools.ietf.org/html/rfc8288#page-6). 
 
     The following registered types are referenced in the `rel` attribute of the links in an `application/vnd.collection+json` response. 
-    - **self**	- Identifies the link's context.
+    - **self**	- Identifies the link"s context.
 
         In `collection.links` it identifies the collection (name = *week*)            
 
-        - e.g. href=<a>http:/api.sundaya.com/monitoring-data/week/20190210</a>
+        - e.g. href=<a>http:/api.sundaya.com/energy/hse/period/week/20190210</a>
 
         In `collection.items.links` it identifies an item in the collection (name = *day*).
-        - e.g. href=<a>http:/api.sundaya.com/monitoring-data/day/20190204</a>
+        - e.g. href=<a>http:/api.sundaya.com/energy/hse/period/day/20190204</a>
 
     - **collection** - in `collection.links` it targets the item series whiich make up the collection (name = *week.days*).
         
-        - e.g. href=<a>http:/api.sundaya.com/monitoring-data/day/20190204/20190210</a>
+        - e.g. href=<a>http:/api.sundaya.com/energy/hse/interval/day/20190204/20190210</a>
 
     - **item** - in `collection.items.links` it targets subitems of the item in that context (name = *day.hours*).
     
-        - e.g. href=<a>http:/api.sundaya.com/monitoring-data/hour/201902050600/201902050500</a>
+        - e.g. href=<a>http:/api.sundaya.com/energy/hse/interval/hour/201902050600/201902050500</a>
 
-    - **up** - Identifies the parent the collection or item represented by the link's context (name = *week.month*).
+    - **up** - Identifies the parent the collection or item represented by the link"s context (name = *week.month*).
         
-    - **next** - Identifies the next sibling of the collection or item series represented by the link's context (name = *week.next*).
+    - **next** - Identifies the next sibling of the collection or item series represented by the link"s context (name = *week.next*).
 
-    - **prev** - Identifies the previous siblings of the collection or item series represented by the link's context (name = *week.previous*).
+    - **prev** - Identifies the previous siblings of the collection or item series represented by the link"s context (name = *week.previous*).
         
   license:
-    name: Creative Commons Attribution 4.0 International
-    url: 'http://creativecommons.org/licenses/by/4.0/'
-  termsOfService: 'https://sundaya.com/terms-of-service/'
+    name: "Creative Commons Attribution 4.0 International"
+    url: "http://creativecommons.org/licenses/by/4.0/"
+  termsOfService: "https://sundaya.com/terms-of-service/"
 # [END swagger]
 consumes:
 - "application/json"
@@ -156,22 +155,28 @@ consumes:
 produces:
 - "application/vnd.collection+json"
 schemes:
-- "https"
+- "http"
 parameters:
-  deviceId:
-    description: The device identifier
-    name: deviceId
+  energyType:
+    description: "The type of energy flow."
+    name: energyType
     in: path
     required: true
+    enum:
+      - hse
+      - harvest
+      - store
+      - enjoy
+      - grid
     type: string
-    example: BBC-PR1202-999
-  periodId:
-    description: 'The duration of the monitoring window.'
-    name: periodId
+  periodType:
+    description: "The duration of an energy monitoring window."
+    name: periodType
     in: path
     required: true
     enum:
       - instant
+      - second
       - hour
       - timeofday
       - day
@@ -181,41 +186,44 @@ parameters:
       - year
       - 5year
     type: string
-  periodEnd:
-    description: 'The ending date (and time) of the period or interval, expressed in compressed ISO 8601/RFC3339 (YYYYMMDDThhmmss±hhmm).'
-    name: periodEnd
+  endDateTime:
+    description: "The ending date (and time) of the period or interval, expressed in compressed ISO 8601/RFC3339 (YYYYMMDDThhmmss±hhmm)."
+    name: endDateTime
     in: path
     required: true
     type: string
     format: date-time
-    example: '20190209T150012-0330'
-  periodStart:
-    description: 'The starting date (and time) of the interval, expressed in compressed ISO 8601/RFC3339 (YYYYMMDDThhmmss±hhmm).'
-    name: periodStart
+    example: "20190209T150012-0330"
+  startDateTime:
+    description: "The starting date (and time) of the interval, expressed in compressed ISO 8601/RFC3339 (YYYYMMDDThhmmss±hhmm)."
+    name: startDateTime
     in: path
     required: true
     type: string
     format: date-time
-    example: '20190209T150012-0330'
+    example: "20190209T150012-0330"
+  deviceId:
+    description: The device identifier
+    name: deviceId
+    in: path
+    required: true
+    type: string
+    example: BBC-PR1202-999
+  datasetType:
+    description: "The type of dataset."
+    name: datasetType
+    in: path
+    required: true
+    enum:
+      - SNMP
+      - EPACK
+    type: string
   siteId:
     description: The site identifier of the installation  
     name: siteId
     in: query
     required: true
     type: string
-responses:
-  InvalidArgument:
-    description: The client specified an invalid argument
-    schema:
-      $ref: '#/definitions/invalid-argument'
-  PermissionDenied:
-    description: The client does not have sufficient permission
-    schema:
-      $ref: '#/definitions/permission-denied'
-  NotFound:
-    description: The specified resource was not found
-    schema:
-      $ref: '#/definitions/not-found'
 tags:
   - description: |
       Devices monitor device health and energy flows and provide metrics for applicaitons.
@@ -224,25 +232,30 @@ tags:
         Client applications use the data to analyse energy Flows across :harvest, store, enjoy, grid.
     name: Device Monitoring Data
 paths:
-  '/monitoring-data/{periodId}/{periodEnd}?site={siteId}':
+  "/energy/{energyType}/period/{periodType}/{endDateTime}":
     get:
       responses:
-        '200':
+        "200":
           description: Monitoring data retrieved successfully
           schema:
-            $ref: '#/definitions/monitoring-data'
-        '401':
-          $ref: '#/responses/PermissionDenied'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/energyData"
+        "401":
+          description: The client does not have sufficient permission
+          schema:
+            $ref: "#/definitions/accessDenied"
+        "404":
+          description: The specified resource was not found
+          schema:
+            $ref: "#/definitions/notFound"
       summary: Retrieves HSE monitoring data for the specified period
       tags:
         - HSE Energy Management
     parameters:
-      - $ref: '#/parameters/periodId'
-      - $ref: '#/parameters/periodEnd'
-      - $ref: '#/parameters/siteId'
-  '/devices/{deviceId}/monitoring-data':    
+      - $ref: "#/parameters/energyType"
+      - $ref: "#/parameters/periodType"
+      - $ref: "#/parameters/endDateTime"
+      - $ref: "#/parameters/siteId"
+  "/devices/{deviceId}/datasets/{datasetType}":    
     post:
       description: |
         Logs monitoring data for a device.
@@ -252,26 +265,27 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/monitoring-data'
+            $ref: "#/definitions/deviceData"
       responses:
-        '201':
-          description: Monitoring data was logged successfully
+        "201":
+          description: "Monitoring data was logged successfully"
           headers:
             Location:
               description: |
                 A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
+        "400":
+          description: The client specified an invalid argument
           schema:
-            $ref: '#/definitions/monitoring-data'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/PermissionDenied'
-      summary: Logs monitoring data from an energy management device
+            $ref: "#/definitions/invalidRequest"
+        "401":
+          description: The client does not have sufficient permission
+          schema:
+            $ref: "#/definitions/accessDenied"
       tags:
         - Device Monitoring Data
     parameters:
-      - $ref: '#/parameters/deviceId'
+      - $ref: "#/parameters/deviceId"
   "/echo":
     post:
       description: "Echo back a given message."
@@ -279,19 +293,19 @@ paths:
       produces:
       - "application/json"
       responses:
-        200:
+        "200":
           description: "Echo"
           schema:
             $ref: "#/definitions/echoMessage"
       parameters:
-      - description: "Test message to echo"
+      - description: "Test, echo back request body"
         in: body
         name: message
         required: true
         schema:
           $ref: "#/definitions/echoMessage"
 definitions:
-  error-details:
+  generalError:
     properties:
       code:
         description: The error code.
@@ -299,23 +313,23 @@ definitions:
         type: string
       message:
         description: The error message.
-        example: Period must not be null
+        example: Illegal input for operation
         type: string
       target:
         description: The error target.
         example: Period
         type: string
     type: object
-  invalid-argument:
+  invalidRequest:
     type: object
     properties:
       code:
         description: The error code.
-        example: '400'
+        example: "400"
         type: string
       details:
         items:
-          $ref: '#/definitions/error-details'
+          $ref: "#/definitions/generalError"
         type: array
       message:
         description: The error message.
@@ -325,15 +339,15 @@ definitions:
         description: The error status.
         example: INVALID_ARGUMENT
         type: string
-  permission-denied:
+  accessDenied:
     properties:
       code:
         description: The error code.
-        example: '403'
+        example: "403"
         type: string
       details:
         items:
-          $ref: '#/definitions/error-details'
+          $ref: "#/definitions/generalError"
         type: array
       message:
         description: The error message.
@@ -344,15 +358,15 @@ definitions:
         example: PERMISSION_DENIED
         type: string
     type: object
-  not-found:
+  notFound:
     properties:
       code:
         description: The error code.
-        example: '404'
+        example: "404"
         type: string
       details:
         items:
-          $ref: '#/definitions/error-details'
+          $ref: "#/definitions/generalError"
         type: array
       message:
         description: The error message.
@@ -363,7 +377,7 @@ definitions:
         example: NOT_FOUND
         type: string
     type: object
-  monitoring-data:
+  energyData:
     description: A collection of data items for a monitoring period
     properties:
       collection:
@@ -379,7 +393,7 @@ definitions:
             type: string
             title: The Version Schema
             examples:
-            - '0.2'
+            - "0.2"
             pattern: ^(.*)$
           href:
             type: string
@@ -423,7 +437,7 @@ definitions:
                   type: string
                   title: The Href Schema
                   examples:
-                  - http:/api.sundaya.com/monitoring-data/month/201902
+                  - http:/api.sundaya.com/energy/hse/period/month/201902
           items:
             type: array
             title: The Items Schema
@@ -455,13 +469,13 @@ definitions:
                       rel:
                         type: string
                         title: The Rel Schema
-                        default: ''
+                        default: ""
                         examples:
                         - item
                       name:
                         type: string
                         title: The Name Schema
-                        default: ''
+                        default: ""
                         examples:
                         - day
                       prompt:
@@ -482,7 +496,7 @@ definitions:
                       render:
                         type: string
                         title: The Render Schema
-                        default: ''
+                        default: ""
                         examples:
                         - link
                 data:
@@ -504,7 +518,39 @@ definitions:
                         type: string
                         title: The Value Schema
                         examples:
-                        - '15396'
+                        - "15396"
+    type: object
+  deviceData:
+    description: A dataset for a device
+    properties:
+      template:
+        type: object
+        title: The Template Schema
+        required:
+        - data
+        properties:
+          data:
+            type: array
+            title: The Data Schema
+            items:
+              type: object
+              title: The Items Schema
+              required:
+              - name
+              - value
+              properties:
+                name:
+                  type: string
+                  title: The Name Schema
+                  default: ''
+                  examples:
+                  - timestamp
+                value:
+                  type: string
+                  title: The Value Schema
+                  default: ''
+                  examples:
+                  - 20190209T150100.912-0700
     type: object
   echoMessage:
     type: "object"
