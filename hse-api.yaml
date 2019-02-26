@@ -9,8 +9,8 @@ info:
   title: "Energy Management"
   version: "1.0.06"
   description: |
-    Energy Management is based on four energy types:`harvest`, `store`, `enjoy`, `grid`. 
-    The API provides metrics for a given period (week, month etc.) and allows client applications to manage **Energy Assets** by navigating graphical views and by scheduling energy use at preferred times. 
+    Energy Management is based on four energy types: The API provides energy metrics for each period (week, month etc.) and allows client applications to manage **Energy Assets** by navigating graphical views and by scheduling energy use at preferred times. 
+
     Vendor device integrations use the API to monitor and control **Energy Management Devices**.
     
     Energy Type | Energy Assets | Energy Management Devices
@@ -36,7 +36,7 @@ paths:
   "/echo":
     post:
       description: "Echo back a given message."
-      operationId: "echo"
+      operationId: "echoPost"
       produces:
       - "application/json"
       responses:
@@ -51,6 +51,28 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/echoMessage"
+  "/echo/{message}":
+    get:
+      description: "Echo back a given message."
+      operationId: "echoMessageGet"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Echo"
+          schema:
+            $ref: "#/definitions/echoMessage"
+      parameters:
+      - description: "Message to echo"
+        in: path
+        name: message
+        enum:
+          - hse
+          - harvest
+          - store
+          - enjoy
+          - grid
+        type: string
   "/auth/info/googlejwt":
     get:
       description: "Returns the requests' authentication information."
