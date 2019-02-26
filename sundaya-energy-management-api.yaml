@@ -9,7 +9,9 @@ info:
   title: "HSE Energy Management"
   version: "1.0.02"
   description: |
-    Energy Management is based on four energy types:`harvest`, `store`, `enjoy`, `grid`. 
+    Energy Management is based on four energy types:    
+    `harvest`, `store`, `enjoy`, `grid`. 
+    
     The API provides energy metrics for a given period (week, month etc.) and allows client applications to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times. 
     Vendor device integrations can use the API to monitor and control their **Energy Management Devices**.
     
