@@ -1,9 +1,9 @@
 # [START swagger]
 swagger: "2.0"
-host: "energy-management.hse-api-02.cloud.goog"
+host: "sundaya.endpoints.hse-api-02.cloud.goog"
 basePath: /
 x-google-endpoints:
-- name: "energy-management.hse-api-02.cloud.goog"
+- name: "sundaya.endpoints.hse-api-02.cloud.goog"
   target: "34.80.99.163"
 info:
   title: "HSE Energy Management"
@@ -75,7 +75,7 @@ info:
 
     e.g. http:/api.sundaya.com/energy/hse/period/week/20190210
 
-    The compressed version of ISO 8601 is required, without semi colons and with `T` as the time designator, as shown int he examples below.
+    The compressed version of ISO 8601 is required, without semi colons and with `T` as the time designator, as shown in examples below.
     
 
     ## Timezones
@@ -156,74 +156,6 @@ produces:
 - "application/vnd.collection+json"
 schemes:
 - "http"
-parameters:
-  energyType:
-    description: "The type of energy flow."
-    name: energyType
-    in: path
-    required: true
-    enum:
-      - hse
-      - harvest
-      - store
-      - enjoy
-      - grid
-    type: string
-  periodType:
-    description: "The duration of an energy monitoring window."
-    name: periodType
-    in: path
-    required: true
-    enum:
-      - instant
-      - second
-      - hour
-      - timeofday
-      - day
-      - week
-      - month
-      - quarter
-      - year
-      - 5year
-    type: string
-  endDateTime:
-    description: "The ending date (and time) of the period or interval, expressed in compressed ISO 8601/RFC3339 (YYYYMMDDThhmmss±hhmm)."
-    name: endDateTime
-    in: path
-    required: true
-    type: string
-    format: date-time
-    example: "20190209T150012-0330"
-  startDateTime:
-    description: "The starting date (and time) of the interval, expressed in compressed ISO 8601/RFC3339 (YYYYMMDDThhmmss±hhmm)."
-    name: startDateTime
-    in: path
-    required: true
-    type: string
-    format: date-time
-    example: "20190209T150012-0330"
-  deviceId:
-    description: The device identifier
-    name: deviceId
-    in: path
-    required: true
-    type: string
-    example: BBC-PR1202-999
-  datasetType:
-    description: "The type of dataset."
-    name: datasetType
-    in: path
-    required: true
-    enum:
-      - SNMP
-      - EPACK
-    type: string
-  siteId:
-    description: The site identifier of the installation  
-    name: siteId
-    in: query
-    required: true
-    type: string
 tags:
   - description: |
       Devices monitor device health and energy flows and provide metrics for applicaitons.
@@ -234,6 +166,10 @@ tags:
 paths:
   "/energy/{energyType}/period/{periodType}/{endDateTime}":
     get:
+      description: Retrieves HSE monitoring data for the specified period
+      operationId: "EnergyPeriodGet"
+      produces:
+      - "application/vnd.collection+json"
       responses:
         "200":
           description: Monitoring data retrieved successfully
@@ -247,25 +183,73 @@ paths:
           description: The specified resource was not found
           schema:
             $ref: "#/definitions/notFound"
-      summary: Retrieves HSE monitoring data for the specified period
-      tags:
-        - HSE Energy Management
-    parameters:
-      - $ref: "#/parameters/energyType"
-      - $ref: "#/parameters/periodType"
-      - $ref: "#/parameters/endDateTime"
-      - $ref: "#/parameters/siteId"
+      parameters:
+      - name: energyType
+        in: path
+        required: true
+        description: "The type of energy flow."
+        enum:
+          - hse
+          - harvest
+          - store
+          - enjoy
+          - grid
+        type: string
+      - name: periodType
+        in: path
+        required: true
+        description: "The duration of an energy monitoring window."
+        enum:
+          - instant
+          - second
+          - hour
+          - timeofday
+          - day
+          - week
+          - month
+          - quarter
+          - year
+          - 5year
+        type: string
+      - name: endDateTime
+        in: path
+        required: true
+        description: "The ending date (and time) of the period or interval, expressed in compressed ISO 8601/RFC3339 (YYYYMMDDThhmmss±hhmm)."
+        type: string
+        format: date-time
+        example: "20190209T150012-0330"
+      - name: siteId
+        in: query
+        required: true
+        description: "The site identifier of the installation"
+        type: string
   "/devices/{deviceId}/datasets/{datasetType}":    
     post:
-      description: |
-        Logs monitoring data for a device.
+      description: "Logs monitoring data for a device."
+      operationId: "devicesDatasetsPost"
+      produces:
+      - "application/json"
       parameters:
-        - description: Energy Management Device monitoring data
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/deviceData"
+      - name: deviceId
+        in: path
+        required: true
+        description: "The device identifier"
+        type: string
+        example: BBC-PR1202-999
+      - name: deviceData
+        in: body
+        required: true
+        description: Energy Management Device monitoring data
+        schema:
+          $ref: "#/definitions/deviceData"
+      - name: datasetType
+        in: path
+        required: true
+        description: "The type of dataset."
+        enum:
+          - SNMP
+          - EPACK
+        type: string
       responses:
         "201":
           description: "Monitoring data was logged successfully"
@@ -274,6 +258,8 @@ paths:
               description: |
                 A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
+          schema:
+            $ref: "#/definitions/echoMessage"
         "400":
           description: The client specified an invalid argument
           schema:
@@ -282,14 +268,10 @@ paths:
           description: The client does not have sufficient permission
           schema:
             $ref: "#/definitions/accessDenied"
-      tags:
-        - Device Monitoring Data
-    parameters:
-      - $ref: "#/parameters/deviceId"
   "/echo":
     post:
       description: "Echo back a given message."
-      operationId: "echo"
+      operationId: "echoPost"
       produces:
       - "application/json"
       responses:
@@ -392,13 +374,13 @@ definitions:
           version:
             type: string
             title: The Version Schema
-            examples:
+            example:
             - "0.2"
             pattern: ^(.*)$
           href:
             type: string
             title: The Href Schema
-            examples:
+            example:
             - http:/api.sundaya.com/hse/week/20190210
           links:
             type: array
@@ -416,27 +398,27 @@ definitions:
                 rel:
                   type: string
                   title: The Rel Schema
-                  examples:
+                  example:
                   - collection
                 name:
                   type: string
                   title: The Name Schema
-                  examples:
+                  example:
                   - week.month
                 prompt:
                   type: string
                   title: The Prompt Schema
-                  examples:
+                  example:
                   - Month
                 title:
                   type: string
                   title: The Title Schema
-                  examples:
+                  example:
                   - February
                 href:
                   type: string
                   title: The Href Schema
-                  examples:
+                  example:
                   - http:/api.sundaya.com/energy/hse/period/month/201902
           items:
             type: array
@@ -451,7 +433,7 @@ definitions:
                 href:
                   type: string
                   title: The Href Schema
-                  examples:
+                  example:
                   - http:/api.sundaya.com/hse/day/20190204
                 links:
                   type: array
@@ -470,34 +452,34 @@ definitions:
                         type: string
                         title: The Rel Schema
                         default: ""
-                        examples:
+                        example:
                         - item
                       name:
                         type: string
                         title: The Name Schema
                         default: ""
-                        examples:
+                        example:
                         - day
                       prompt:
                         type: string
                         title: The Prompt Schema
-                        examples:
+                        example:
                         - Day
                       title:
                         type: string
                         title: The Title Schema
-                        examples:
+                        example:
                         - Monday
                       href:
                         type: string
                         title: The Href Schema
-                        examples:
+                        example:
                         - http:/api.sundaya.com/hse/day/20190204
                       render:
                         type: string
                         title: The Render Schema
                         default: ""
-                        examples:
+                        example:
                         - link
                 data:
                   type: array
@@ -512,12 +494,12 @@ definitions:
                       name:
                         type: string
                         title: The Name Schema
-                        examples:
+                        example:
                         - harvest.day
                       value:
                         type: string
                         title: The Value Schema
-                        examples:
+                        example:
                         - "15396"
     type: object
   deviceData:
@@ -542,15 +524,9 @@ definitions:
                 name:
                   type: string
                   title: The Name Schema
-                  default: ''
-                  examples:
-                  - timestamp
                 value:
                   type: string
                   title: The Value Schema
-                  default: ''
-                  examples:
-                  - 20190209T150100.912-0700
     type: object
   echoMessage:
     type: "object"
