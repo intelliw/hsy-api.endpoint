@@ -1,12 +1,13 @@
 # [START swagger]
+swagger: "2.0"
 host: "sundaya.endpoints.hse-api-02.cloud.goog"
 basePath: /
 x-google-endpoints:
 - name: "sundaya.endpoints.hse-api-02.cloud.goog"
   target: "34.80.99.163"
 info:
-  title: "HSE Energy Management"
-  version: "1.0.03"
+  title: "Energy Management"
+  version: "1.0.06"
   description: |
     # Introduction
     The HSE Energy Management API is based on REST / Hypermedia and specified in [OpenAPI v2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md). 
@@ -23,7 +24,7 @@ info:
     --- | --- | ---
     `harvest` | Renewables | PV Modules, PV Grid-interactive Inverter
     `store` | Storage | Busbar Controler (BBC), Pack Management System (PMS)
-    `enjoy` | Appliances | Multicore-Cable Current Sensors, Clamp-on Current Sensors
+    `enjoy` | Appliances | Current Sensors (Multicore-Cable, Switchboard Clamp, Socket)
     `grid` | Mains Electricity | Smart Meters
 
     The API and documentation is available through the *Sundaya Developer Portal* at https://developer.sundaya.com. 
@@ -40,7 +41,6 @@ produces:
 - "application/json"
 schemes:
 # Uncomment the next line if you configure SSL for this API.
-- "https"
 - "http"
 paths:
   "/echo":
