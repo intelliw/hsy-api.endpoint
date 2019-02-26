@@ -42,6 +42,7 @@ produces:
 schemes:
 # Uncomment the next line if you configure SSL for this API.
 - "http"
+- "https"
 paths:
   "/echo":
     post:
