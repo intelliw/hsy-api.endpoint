@@ -1,18 +1,20 @@
 # [START swagger]
 swagger: "2.0"
-host: "sundaya.endpoints.hse-api-02.cloud.goog"
+host: "api.sundaya.exploresive.com"
 basePath: /
 x-google-endpoints:
-- name: "sundaya.endpoints.hse-api-02.cloud.goog"
+- name: "api.sundaya.exploresive.com"
   target: "34.80.99.163"
 info:
   title: "Energy Management"
-  version: "1.0.06"
+  version: "1.0.07"
   description: |
-    Sundaya's Energy Management is based on four energy types: The API provides metrics for each energy type and period (week, month etc.) and allows client applications to manage **Energy Assets** by navigating graphical views and by scheduling energy use at preferred times. 
-
-    Vendor device integrations use the API to monitor and control **Energy Management Devices**.
+    The Energy Management API provides energy data for a period (week, month etc.) and allows clients to manage their **Energy Assets** by navigating graphical views and scheduling energy use at preferred times. 
     
+    - The `/energy` path provides metrics for these **Energy Types** :`harvest`, `store`, `enjoy`, `grid`. 
+
+    - The `/devices` path is for vendor integrations to log energy flows, and for vendors to monitor and control their **Energy Management Devices**.
+
     Energy Type | Energy Assets | Energy Management Devices
     --- | --- | ---
     `harvest` | Renewable Sources | PV Modules, PV Grid-interactive Inverter
@@ -35,7 +37,7 @@ schemes:
 paths:
   "/echo":
     post:
-      description: "Echo back a given message."
+      description: "Echo back a given message"
       operationId: "echoPost"
       produces:
       - "application/json"
@@ -53,17 +55,17 @@ paths:
           $ref: "#/definitions/echoMessage"
   "/energy/{type}":
     get:
-      description: "Echo back a given message."
-      operationId: "echoMessageGet"
+      description: "Retrieves HSE monitoring data for the specified period."
+      operationId: "energyHseGet"
       produces:
       - "application/json"
       responses:
         200:
-          description: "Echo"
+          description: "Energy data retrieved successfully"
           schema:
             $ref: "#/definitions/echoMessage"
       parameters:
-      - description: "Message to echo"
+      - description: "The type of energy flow"
         in: path
         name: type
         enum:
