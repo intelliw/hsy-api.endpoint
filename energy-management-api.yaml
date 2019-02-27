@@ -9,7 +9,7 @@ info:
   title: "Energy Management"
   version: "1.0.06"
   description: |
-    Energy Management is based on four energy types: The API provides energy metrics for each period (week, month etc.) and allows client applications to manage **Energy Assets** by navigating graphical views and by scheduling energy use at preferred times. 
+    Sundaya's Energy Management is based on four energy types: The API provides metrics for each energy type and period (week, month etc.) and allows client applications to manage **Energy Assets** by navigating graphical views and by scheduling energy use at preferred times. 
 
     Vendor device integrations use the API to monitor and control **Energy Management Devices**.
     
@@ -51,7 +51,7 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/echoMessage"
-  "/echo/{message}":
+  "/energy/{type}":
     get:
       description: "Echo back a given message."
       operationId: "echoMessageGet"
@@ -65,7 +65,7 @@ paths:
       parameters:
       - description: "Message to echo"
         in: path
-        name: message
+        name: type
         enum:
           - hse
           - harvest
