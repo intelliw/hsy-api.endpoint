@@ -1,12 +1,12 @@
 # [START swagger]
 swagger: "2.0"
-host: "sundaya.endpoints.hse-api-02.cloud.goog"
+host: "test.endpoints.hse-api-02.cloud.goog"
 basePath: /
 x-google-endpoints:
-- name: "sundaya.endpoints.hse-api-02.cloud.goog"
-  target: "34.80.99.163"
+- name: "test.endpoints.hse-api-02.cloud.goog"
+  target: "cos3-ip-addr"
 info:
-  title: "Energy Management"
+  title: "Test Management"
   version: "1.0.06"
   description: |
     Energy Management is based on four energy types:`harvest`, `store`, `enjoy`, `grid`. 

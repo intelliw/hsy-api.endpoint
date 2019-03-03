@@ -1,30 +1,13 @@
 # [START swagger]
 swagger: "2.0"
-host: "api.sundaya.exploresive.com"
-basePath: /
-x-google-endpoints:
-- name: "api.sundaya.exploresive.com"
-  target: "34.80.99.163"
 info:
-  title: "Energy Management"
-  version: "1.0.10"
-  description: |
-    The Energy Management API provides energy data for a period (week, month etc.) and allows clients to manage their **Energy Assets** by navigating graphical views and scheduling energy use at preferred times. 
-    
-    - `/energy` provides metrics for these **Energy Types** :`harvest`, `store`, `enjoy`, `grid`. 
-
-    - `/devices` is for vendor integrations to log energy flows, and for vendors to monitor and control their **Energy Management Devices**.
-
-    Energy Type | Energy Assets | Energy Management Devices
-    --- | --- | ---
-    `harvest` | Renewable Sources | PV Modules, PV Grid-interactive Inverter
-    `store` | Batteries | Busbar Controler (BBC), Pack Management System (PMS)
-    `enjoy` | Appliances | Multicore-Cable Current Sensors, Clamp-on Current Sensors
-    `grid` | Mains Electricity | Smart Meters
-  license:
-    name: "Creative Commons Attribution 4.0 International"
-    url: "http://creativecommons.org/licenses/by/4.0/"
-  termsOfService: "https://sundaya.com/terms-of-service/"
+  description: "Endpoint API skleleton."
+  title: "Test Endpoint"
+  version: "1.0.02"
+host: "test01.endpoints.sundaya.cloud.goog"
+x-google-endpoints:
+- name: "test01.endpoints.sundaya.cloud.goog"
+  target: "34.80.74.111"
 # [END swagger]
 consumes:
 - "application/json"
@@ -32,13 +15,13 @@ produces:
 - "application/json"
 schemes:
 # Uncomment the next line if you configure SSL for this API.
+#- "https"
 - "http"
-- "https"
 paths:
   "/echo":
     post:
-      description: "Echo back a given message"
-      operationId: "echoPost"
+      description: "Echo back a given message."
+      operationId: "echo"
       produces:
       - "application/json"
       responses:
@@ -53,28 +36,6 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/echoMessage"
-  "/energy/{type}":
-    get:
-      description: "Retrieves HSE monitoring data for the specified period."
-      operationId: "energyHseGet"
-      produces:
-      - "application/json"
-      responses:
-        200:
-          description: "Energy data retrieved successfully"
-          schema:
-            $ref: "#/definitions/echoMessage"
-      parameters:
-      - description: "The type of energy flow"
-        in: path
-        name: type
-        enum:
-          - hse
-          - harvest
-          - store
-          - enjoy
-          - grid
-        type: string
   "/auth/info/googlejwt":
     get:
       description: "Returns the requests' authentication information."

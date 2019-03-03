@@ -1,12 +1,12 @@
 # [START swagger]
 swagger: "2.0"
-host: "sundaya.endpoints.hse-api-02.cloud.goog"
+host: "api.endpoints.sundaya.cloud.goog"
 basePath: /
 x-google-endpoints:
-- name: "sundaya.endpoints.hse-api-02.cloud.goog"
-  target: "34.80.99.163"
+- name: "api.endpoints.sundaya.cloud.goog"
+  target: "34.80.69.65"
 info:
-  title: "HSE Energy Management"
+  title: "Energy Management"
   version: "1.0.02"
   description: |
     Energy Management is based on four energy types:    
@@ -42,10 +42,10 @@ tags:
         Client applications use the data to analyse energy Flows across :harvest, store, enjoy, grid.
     name: Device Monitoring Data
 paths:
-  "/energy/{energyType}/period/{periodType}/{endDateTime}":
+  "/energy/{energyEnum}/periods/{periodEnum}/{epoch}":
     get:
-      description: Retrieves HSE monitoring data for the specified period
-      operationId: "EnergyPeriodGet"
+      description: Retrieves HSE monitoring data for the requested periods
+      operationId: "EnergyPeriodsGet"
       produces:
       - "application/vnd.collection+json"
       responses:
@@ -62,10 +62,10 @@ paths:
           schema:
             $ref: "#/definitions/notFound"
       parameters:
-      - name: energyType
+      - name: energyEnum
         in: path
         required: true
-        description: "The type of energy flow."
+        description: "The energy type."
         enum:
           - hse
           - harvest
@@ -73,10 +73,10 @@ paths:
           - enjoy
           - grid
         type: string
-      - name: periodType
+      - name: periodEnum
         in: path
         required: true
-        description: "The duration of an energy monitoring window."
+        description: "The energy monitoring time window"
         enum:
           - instant
           - second
@@ -89,10 +89,10 @@ paths:
           - year
           - 5year
         type: string
-      - name: endDateTime
+      - name: epoch
         in: path
-        required: true
-        description: "The ending date (and time) of the period or interval, expressed in compressed ISO 8601/RFC3339 (YYYYMMDDThhmmss±hhmm)."
+        required: false
+        description: "The start date (and time) of the period. Must be in compressed ISO 8601/RFC3339 (YYYYMMDDThhmmss±hhmm)"
         type: string
         format: date-time
         example: "20190209T150012-0330"
