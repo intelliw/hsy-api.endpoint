@@ -1,9 +1,9 @@
 # [START swagger]
 swagger: "2.0"
 info:
-  description: "Endpoint API skleleton."
+  description: "Endpoint API Skeleton."
   title: "Test Endpoint"
-  version: "1.0.02"
+  version: "1.0.03"
 host: "test01.endpoints.sundaya.cloud.goog"
 x-google-endpoints:
 - name: "test01.endpoints.sundaya.cloud.goog"
