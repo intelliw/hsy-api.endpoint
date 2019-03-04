@@ -1,7 +1,7 @@
 # [START swagger]
 swagger: "2.0"
 info:
-  description: "Endpoint for testing Echo API....."
+  description: "Test Google Cloud Endpoints API..."
   title: "Test Endpoint"
   version: "1.0.01"
 host: "test01.endpoints.sundaya2.cloud.goog"
@@ -22,6 +22,8 @@ paths:
     post:
       description: "Echo back a given message."
       operationId: "echo"
+      security:
+      - api_key: []
       produces:
       - "application/json"
       responses:
@@ -75,8 +77,7 @@ definitions:
       email:
         type: "string"
 # This section requires all requests to any path to require an API key.
-security:
-- api_key: []
+security: []
 securityDefinitions:
   # This section configures basic authentication with an API key.
   api_key:
