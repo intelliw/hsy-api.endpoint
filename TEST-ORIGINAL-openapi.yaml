@@ -7,7 +7,7 @@ info:
 host: "test01.endpoints.sundaya2.cloud.goog"
 x-google-endpoints:
 - name: "test01.endpoints.sundaya2.cloud.goog"
-  target: "34.80.34.231
+  target: "34.80.34.231"
 # [END swagger]
 consumes:
 - "application/json"
