@@ -1,9 +1,9 @@
 # [START swagger]
 swagger: "2.0"
 info:
-  description: "Test Google Cloud Endpoints API..."
+  description: "Endpoint for testing Echo API.,,,"
   title: "Test Endpoint"
-  version: "1.0.01"
+  version: "1.0.02"
 host: "test01.endpoints.sundaya2.cloud.goog"
 x-google-endpoints:
 - name: "test01.endpoints.sundaya2.cloud.goog"
@@ -22,8 +22,6 @@ paths:
     post:
       description: "Echo back a given message."
       operationId: "echo"
-      security:
-      - api_key: []
       produces:
       - "application/json"
       responses:
@@ -38,6 +36,8 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/echoMessage"
+      security:
+      - api_key: []
   "/auth/info/googlejwt":
     get:
       description: "Returns the requests' authentication information."

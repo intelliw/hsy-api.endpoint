@@ -4,7 +4,7 @@ host: "api.endpoints.sundaya2.cloud.goog"
 basePath: /
 x-google-endpoints:
 - name: "api.endpoints.sundaya2.cloud.goog"
-  target: "34.80.78.182"
+  target: "34.80.69.65"
 info:
   title: "Energy Management"
   version: "1.0.02"

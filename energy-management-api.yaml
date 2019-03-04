@@ -1,24 +1,24 @@
 # [START swagger]
 swagger: "2.0"
-host: "api.sundaya.exploresive.com"
-basePath: /
+host: "api.endpoints.sundaya2.cloud.goog"
 x-google-endpoints:
-- name: "api.sundaya.exploresive.com"
-  target: "34.80.99.163"
+- name: "api.endpoints.sundaya2.cloud.goog"
+  target: "34.80.78.182"
+basePath: /
 info:
   title: "Energy Management"
-  version: "1.0.10"
+  version: "1.0.01"
   description: |
-    The Energy Management API provides energy data for a period (week, month etc.) and allows clients to manage their **Energy Assets** by navigating graphical views and scheduling energy use at preferred times. 
+    Energy Management is based on four energy types:    
+    `harvest`, `store`, `enjoy`, `grid`. 
     
-    - `/energy` provides metrics for these **Energy Types** :`harvest`, `store`, `enjoy`, `grid`. 
-
-    - `/devices` is for vendor integrations to log energy flows, and for vendors to monitor and control their **Energy Management Devices**.
-
+    The API provides energy metrics for a given period (week, month etc.) and allows client applications to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times. 
+    Vendor device integrations can use the API to monitor and control their **Energy Management Devices**.
+    
     Energy Type | Energy Assets | Energy Management Devices
     --- | --- | ---
-    `harvest` | Renewable Sources | PV Modules, PV Grid-interactive Inverter
-    `store` | Batteries | Busbar Controler (BBC), Pack Management System (PMS)
+    `harvest` | Renewables | PV Modules, PV Grid-interactive Inverter
+    `store` | Storage | Busbar Controler (BBC), Pack Management System (PMS)
     `enjoy` | Appliances | Multicore-Cable Current Sensors, Clamp-on Current Sensors
     `grid` | Mains Electricity | Smart Meters
   license:
