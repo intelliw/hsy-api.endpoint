@@ -7,7 +7,7 @@ x-google-endpoints:
 basePath: /
 info:
   title: "Energy Management"
-  version: "1.0.01"
+  version: "0.0.03"
   description: |
     Energy Management is based on four energy types:    
     `harvest`, `store`, `enjoy`, `grid`. 

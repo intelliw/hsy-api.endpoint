@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "Endpoint for testing Echo API.,,,"
   title: "Test Endpoint"
-  version: "1.0.02"
+  version: "0.0.03"
 host: "test01.endpoints.sundaya2.cloud.goog"
 x-google-endpoints:
 - name: "test01.endpoints.sundaya2.cloud.goog"
