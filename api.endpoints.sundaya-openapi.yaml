@@ -1,27 +1,44 @@
 # [START swagger]
 swagger: "2.0"
-info:
-  description: "Endpoint for testing Echo API.,,,"
-  title: "Test Endpoint"
-  version: "0.0.03"
-host: "test01.endpoints.sundaya2.cloud.goog"
+host: "api.endpoints.sundaya.cloud.goog"
 x-google-endpoints:
-- name: "test01.endpoints.sundaya2.cloud.goog"
-  target: "34.80.34.231"
+- name: "api.endpoints.sundaya.cloud.goog"
+  target: "34.80.69.65"
+basePath: /
+info:
+  title: "Energy Management"
+  version: "0.0.03"
+  description: |
+    Energy Management is based on four energy types:    
+    `harvest`, `store`, `enjoy`, `grid`. 
+    
+    The API provides energy metrics for a given period (week, month etc.) and allows client applications to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times. 
+    Vendor device integrations can use the API to monitor and control their **Energy Management Devices**.
+    
+    Energy Type | Energy Assets | Energy Management Devices
+    --- | --- | ---
+    `harvest` | Renewables | PV Modules, PV Grid-interactive Inverter
+    `store` | Storage | Busbar Controler (BBC), Pack Management System (PMS)
+    `enjoy` | Appliances | Multicore-Cable Current Sensors, Clamp-on Current Sensors
+    `grid` | Mains Electricity | Smart Meters
+  license:
+    name: "Creative Commons Attribution 4.0 International"
+    url: "http://creativecommons.org/licenses/by/4.0/"
+  termsOfService: "https://sundaya.com/terms-of-service/"
 # [END swagger]
 consumes:
 - "application/json"
 produces:
 - "application/json"
 schemes:
-# Uncomment the next line if you configure SSL for this API.
+# Uncomment after configuring SSL for this API.
 #- "https"
 - "http"
 paths:
-  "/echo":
-    post:
-      description: "Echo back a given message."
-      operationId: "echo"
+  "/v":
+    get:
+      description: "Echo back the API version"
+      operationId: "versions.v.get"
       produces:
       - "application/json"
       responses:
@@ -31,53 +48,44 @@ paths:
             $ref: "#/definitions/echoMessage"
       parameters:
       - description: "Message to echo"
-        in: body
+        in: query
         name: message
-        required: true
-        schema:
-          $ref: "#/definitions/echoMessage"
-      security:
-      - api_key: []
-  "/auth/info/googlejwt":
+        type: string
+      tags:
+        - Versions 
+  "/energy/{type}":
     get:
-      description: "Returns the requests' authentication information."
-      operationId: "auth_info_google_jwt"
+      description: "Retrieves HSE monitoring data for the specified period."
+      operationId: "energymanagement.energy.type.get"
       produces:
       - "application/json"
       responses:
         200:
-          description: "Authenication info."
+          description: "Energy data retrieved successfully"
           schema:
-            $ref: "#/definitions/authInfoResponse"
-      security:
-      - google_jwt: []
-  "/auth/info/googleidtoken":
-    get:
-      description: "Returns the requests' authentication information."
-      operationId: "authInfoGoogleIdToken"
-      produces:
-      - "application/json"
-      responses:
-        200:
-          description: "Authenication info."
-          schema:
-            $ref: "#/definitions/authInfoResponse"
-      security:
-      - google_id_token: []
+            $ref: "#/definitions/echoMessage"
+      parameters:
+      - description: "The type of energy flow"
+        in: path
+        name: type
+        enum:
+          - hse
+          - harvest
+          - store
+          - enjoy
+          - grid
+        type: string
+      tags:
+        - Energy Management 
 definitions:
   echoMessage:
     type: "object"
     properties:
       message:
         type: "string"
-  authInfoResponse:
-    properties:
-      id:
-        type: "string"
-      email:
-        type: "string"
 # This section requires all requests to any path to require an API key.
-security: []
+security:
+- api_key: []
 securityDefinitions:
   # This section configures basic authentication with an API key.
   api_key:
