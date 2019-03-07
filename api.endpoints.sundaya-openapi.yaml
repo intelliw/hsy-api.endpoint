@@ -37,20 +37,15 @@ schemes:
 paths:
   "/v":
     get:
-      description: "Echo back the API version"
+      description: "Returns a list of versions which are still supported and which may be requested through the `Accept` request header"
       operationId: "versions.v.get"
       produces:
       - "application/json"
       responses:
         200:
-          description: "Echo"
+          description: "Version retrieved"
           schema:
-            $ref: "#/definitions/echoMessage"
-      parameters:
-      - description: "Message to echo"
-        in: query
-        name: message
-        type: string
+            $ref: "#/definitions/genericMessage"
       tags:
         - Versions 
   "/energy/{type}":
@@ -63,7 +58,7 @@ paths:
         200:
           description: "Energy data retrieved successfully"
           schema:
-            $ref: "#/definitions/echoMessage"
+            $ref: "#/definitions/genericMessage"
       parameters:
       - description: "The type of energy flow"
         in: path
@@ -78,7 +73,7 @@ paths:
       tags:
         - Energy Management 
 definitions:
-  echoMessage:
+  genericMessage:
     type: "object"
     properties:
       message:
