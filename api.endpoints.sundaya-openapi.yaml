@@ -7,12 +7,12 @@ x-google-endpoints:
 basePath: /
 info:
   title: "Energy Management"
-  version: "0.0.05"
+  version: "0.0.06"
   description: |
-    Our Energy Management is based on four **Energy Types**:    
-    `harvest`, `store`, `enjoy`, `grid`. 
+    Our Energy Management is based on four **Energy Types**:
+    `harvest`, `store`, `enjoy`, `grid`
     
-    The API provides two routes for measuring and managing these energy types. 
+    The API provides two routes for measuring and managing energy.
     
     The `/energy` path provides consolidated data for a period (week, month etc.) and allows clients to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times. 
     
@@ -40,13 +40,13 @@ schemes:
 paths:
   "/v":
     get:
-      description: "Returns a list of versions which are still supported and which may be requested through the `Accept` request header"
+      description: "Returns a list of versions which are still supported. Older versions can be requested through the `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://endpointsportal.sundaya.cloud.goog/docs/api.endpoints.sundaya.cloud.goog/0/c/Getting%20Started/Standards%20&%20Conventions))."
       operationId: "versions.v.get"
       produces:
       - "application/json"
       responses:
         200:
-          description: "Version retrieved"
+          description: "Versions retrieved."
           schema:
             $ref: "#/definitions/genericMessage"
       tags:
@@ -59,13 +59,13 @@ paths:
       - "application/json"
       responses:
         200:
-          description: "Energy data retrieved successfully"
+          description: "Energy data retrieved."
           schema:
             $ref: "#/definitions/genericMessage"
       parameters:
       - name: type
         in: path
-        description: "The type of energy flow"
+        description: "The type of energy flow."
         type: string
         default: hse
         enum:
@@ -76,7 +76,7 @@ paths:
           - grid
       - name: period
         in: path
-        description: "The energy monitoring time window"
+        description: "The unit of time for which total energy is aggregated. The only exception is 'instant' which refers to energy measured at a single point in time, without any aggregation or total."
         type: string
         default: week
         enum:
@@ -90,16 +90,16 @@ paths:
           - quarter
           - year
           - 5year
+      - name: epoch
+        in: path
+        description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm)."
+        type: string
+        format: date-time
       - name: siteId
         in: query
         required: true
-        description: "The site identifier of the installed energy assets"
+        description: "Identifier of the site where energy assets are installed."
         type: string
-      - name: epoch
-        in: path
-        description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm). If omitted defaults to current date and time."
-        type: string
-        format: date-time
       tags:
         - Energy Management 
 definitions:
