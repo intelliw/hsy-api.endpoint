@@ -74,11 +74,6 @@ paths:
           - store
           - enjoy
           - grid
-      - name: siteId
-        in: query
-        required: true
-        description: "The site identifier of the installed energy assets"
-        type: string
       - name: period
         in: path
         description: "The energy monitoring time window"
@@ -95,6 +90,11 @@ paths:
           - quarter
           - year
           - 5year
+      - name: siteId
+        in: query
+        required: true
+        description: "The site identifier of the installed energy assets"
+        type: string
       - name: epoch
         in: path
         description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm). If omitted defaults to current date and time."
