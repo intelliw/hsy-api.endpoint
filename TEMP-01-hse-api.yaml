@@ -1,0 +1,148 @@
+# [START swagger]
+swagger: "2.0"
+host: "sundaya.endpoints.hse-api-02.cloud.goog"
+basePath: /
+x-google-endpoints:
+- name: "sundaya.endpoints.hse-api-02.cloud.goog"
+  target: "34.80.99.163"
+info:
+  title: "Energy Management"
+  version: "1.0.06"
+  description: |
+    Energy Management is based on four energy types: The API provides energy metrics for each period (week, month etc.) and allows client applications to manage **Energy Assets** by navigating graphical views and by scheduling energy use at preferred times. 
+
+    Vendor device integrations use the API to monitor and control **Energy Management Devices**.
+    
+    Energy Type | Energy Assets | Energy Management Devices
+    --- | --- | ---
+    `harvest` | Renewable Sources | PV Modules, PV Grid-interactive Inverter
+    `store` | Batteries | Busbar Controler (BBC), Pack Management System (PMS)
+    `enjoy` | Appliances | Multicore-Cable Current Sensors, Clamp-on Current Sensors
+    `grid` | Mains Electricity | Smart Meters
+  license:
+    name: "Creative Commons Attribution 4.0 International"
+    url: "http://creativecommons.org/licenses/by/4.0/"
+  termsOfService: "https://sundaya.com/terms-of-service/"
+# [END swagger]
+consumes:
+- "application/json"
+produces:
+- "application/json"
+schemes:
+# Uncomment the next line if you configure SSL for this API.
+- "http"
+- "https"
+paths:
+  "/echo/{message}":
+    post:
+      description: "Echo back a given message."
+      operationId: "echoPost"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Echo"
+          schema:
+            $ref: "#/definitions/echoMessage"
+      parameters:
+      - description: "Message to echo"
+        in: body
+        name: longMessage
+        required: true
+        schema:
+          $ref: "#/definitions/echoMessage"
+    get:
+      description: "Echo back a given message."
+      operationId: "echoGet"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Echo"
+          schema:
+            $ref: "#/definitions/echoMessage"
+    parameters:
+    - description: "Message to echo"
+      in: path
+      name: message
+      enum:
+        - hse
+        - harvest
+        - store
+        - enjoy
+        - grid
+      type: string
+  "/auth/info/googlejwt":
+    get:
+      description: "Returns the requests' authentication information."
+      operationId: "auth_info_google_jwt"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Authenication info."
+          schema:
+            $ref: "#/definitions/authInfoResponse"
+      security:
+      - google_jwt: []
+  "/auth/info/googleidtoken":
+    get:
+      description: "Returns the requests' authentication information."
+      operationId: "authInfoGoogleIdToken"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Authentication info."
+          schema:
+            $ref: "#/definitions/authInfoResponse"
+      security:
+      - google_id_token: []
+definitions:
+  echoMessage:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+  authInfoResponse:
+    properties:
+      id:
+        type: "string"
+      email:
+        type: "string"
+# This section requires all requests to any path to require an API key.
+security:
+- api_key: []
+securityDefinitions:
+  # This section configures basic authentication with an API key.
+  api_key:
+    type: "apiKey"
+    name: "key"
+    in: "query"
+  # This section configures authentication using Google API Service Accounts
+  # to sign a json web token. This is mostly used for server-to-server
+  # communication.
+  google_jwt:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    # This must match the 'iss' field in the JWT.
+    x-google-issuer: "jwt-client.endpoints.sample.google.com"
+    # Update this with your service account's email address.
+    x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/jwk/YOUR-SERVICE-ACCOUNT-EMAIL"
+    # This must match the "aud" field in the JWT. You can add multiple
+    # audiences to accept JWTs from multiple clients.
+    x-google-audiences: "echo.endpoints.sample.google.com"
+  # This section configures authentication using Google OAuth2 ID Tokens.
+  # ID Tokens can be obtained using OAuth2 clients, and can be used to access
+  # your API on behalf of a particular user.
+  google_id_token:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    x-google-issuer: "https://accounts.google.com"
+    x-google-jwks_uri: "https://www.googleapis.com/oauth2/v3/certs"
+    # Your OAuth2 client's Client ID must be added here. You can add
+    # multiple client IDs to accept tokens from multiple clients.
+    x-google-audiences: "YOUR-CLIENT-ID"
+

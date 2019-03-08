@@ -1,0 +1,26 @@
+/{period}/{epoch}
+
+      - name: period
+        in: path
+        description: "The energy monitoring time window"
+        type: string
+        required: false
+        default: week
+        enum:
+          - instant
+          - second
+          - hour
+          - timeofday
+          - day
+          - week
+          - month
+          - quarter
+          - year
+          - 5year
+      - name: epoch
+        in: path
+        description: "The start date (and time) of the period, in compressed ISO 8601/RFC3339 (YYYYMMDDThhmmss±hhmm). Defaults to the present date and time."
+        type: string
+        format: date-time
+        required: false
+        example: "20190209T150012-0330"

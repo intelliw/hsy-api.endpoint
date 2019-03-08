@@ -7,7 +7,7 @@ x-google-endpoints:
 basePath: /
 info:
   title: "Energy Management"
-  version: "0.0.04"
+  version: "0.0.05"
   description: |
     Our Energy Management is based on four **Energy Types**:    
     `harvest`, `store`, `enjoy`, `grid`. 
@@ -51,10 +51,10 @@ paths:
             $ref: "#/definitions/genericMessage"
       tags:
         - Versions 
-  "/energy/{type}":
+  "/energy/{type}/{period}/{epoch}":
     get:
       description: "Retrieves HSE monitoring data for the specified period."
-      operationId: "energymanagement.energy.type.get"
+      operationId: "energymanagement.energy.get"
       produces:
       - "application/json"
       responses:
@@ -63,16 +63,43 @@ paths:
           schema:
             $ref: "#/definitions/genericMessage"
       parameters:
-      - description: "The type of energy flow"
+      - name: type
         in: path
-        name: type
+        description: "The type of energy flow"
+        type: string
+        default: hse
         enum:
           - hse
           - harvest
           - store
           - enjoy
           - grid
+      - name: siteId
+        in: query
+        required: true
+        description: "The site identifier of the installed energy assets"
         type: string
+      - name: period
+        in: path
+        description: "The energy monitoring time window"
+        type: string
+        default: week
+        enum:
+          - instant
+          - second
+          - hour
+          - timeofday
+          - day
+          - week
+          - month
+          - quarter
+          - year
+          - 5year
+      - name: epoch
+        in: path
+        description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm). If omitted defaults to current date and time."
+        type: string
+        format: date-time
       tags:
         - Energy Management 
 definitions:
