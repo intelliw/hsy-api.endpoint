@@ -7,20 +7,20 @@ x-google-endpoints:
 basePath: /
 info:
   title: "Energy Management"
-  version: "0.0.03"
+  version: "0.0.04"
   description: |
     Energy Management is based on four energy types:    
     `harvest`, `store`, `enjoy`, `grid`. 
     
-    The API provides energy metrics for a given period (week, month etc.) and allows client applications to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times. 
-    Vendor device integrations can use the API to monitor and control their **Energy Management Devices**.
+    The `/energy` API provides consolidated energy data for a period (week, month etc.) and allows clients to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times. 
+    Vendor device integrations can use the `/devices` API to monitor and control their **Energy Management Devices**.
     
-    Energy Type | Energy Assets | Energy Management Devices
+    Type | Energy Assets | Energy Management Devices
     --- | --- | ---
-    `harvest` | Renewables | PV Modules, PV Grid-interactive Inverter
+    `harvest` | Renewables | PV Module Strings, Maximum Power Point Tracker (MPPT)
     `store` | Storage | Busbar Controler (BBC), Pack Management System (PMS)
-    `enjoy` | Appliances | Multicore-Cable Current Sensors, Clamp-on Current Sensors
-    `grid` | Mains Electricity | Smart Meters
+    `enjoy` | Appliances | Multicore-Cable Current Sensors, Switchboard Clamp Sensors
+    `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverter
   license:
     name: "Creative Commons Attribution 4.0 International"
     url: "http://creativecommons.org/licenses/by/4.0/"
