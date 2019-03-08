@@ -12,8 +12,8 @@ info:
     Energy Management is based on four energy types:    
     `harvest`, `store`, `enjoy`, `grid`. 
     
-    The `/energy` API provides consolidated energy data for a period (week, month etc.) and allows clients to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times. 
-    Vendor device integrations can use the `/devices` API to monitor and control their **Energy Management Devices**.
+    The `/energy` path provides consolidated energy data for a period (week, month etc.) and allows clients to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times. 
+    Vendor device integrations can use the `/devices` path to monitor and control their **Energy Management Devices**.
     
     Type | Energy Assets | Energy Management Devices
     --- | --- | ---
