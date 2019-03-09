@@ -54,7 +54,7 @@ paths:
   "/energy/{type}/{period}/{epoch}":
     get:
       description: "Retrieves HSE monitoring data for the specified period."
-      operationId: "energymanagement.energy.get"
+      operationId: "energy.type.get"
       produces:
       - "application/json"
       parameters:
@@ -109,7 +109,7 @@ paths:
           schema:
             $ref: "#/definitions/notFound"
       tags:
-        - Energy Management 
+        - Energy 
   "/devices/{id}/datasets/{type}":
     post:
       description: "Logs monitoring data for a device."
