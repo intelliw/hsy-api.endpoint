@@ -157,33 +157,33 @@ paths:
 definitions:
   collectionData:
     description: Generic data array for Collection+JSON documents.
-    required:
-    - data
-    properties:
-      data:
-        type: array
-        items:
-          type: object
-          required:
-          - name
-          - value
-          properties:
-            name:
-                type: string
-            value:
-                type: string
-    type: object
+    items:
+      type: object
+      required:
+      - name
+      - value
+      properties:
+        name:
+            type: string
+        value:
+            type: string
+    type: array
   collectionLinks:
     description: Generic array of links for Collection+JSON documents.
+    required:
+    - links
     properties:
       links:
         type: array
         items:
           type: object
           required:
-          - name
           - rel
+          - name
+          - prompt
+          - title
           - href
+          - render
           properties:
             rel:
               type: string
@@ -195,16 +195,21 @@ definitions:
               type: string
             href:
               type: string
-            render:
+            render: 
               type: string
-    type: object
+    type: array
   deviceData:
     description: Device data items collection.
     properties:
       items:
         type: array
         items:
-          $ref: "#/definitions/collectionData"
+          type: object
+          required:
+          - data
+          properties:
+            data:
+              $ref: "#/definitions/collectionData"
     type: object        
   energyData:
     description: Energy data items collection.
@@ -221,6 +226,14 @@ definitions:
             type: string
           href:
             type: string
+          links:
+            type: array
+            items:
+              $ref: "#/definitions/collectionLinks"
+          items:
+            type: array
+            items:
+              $ref: "#/definitions/collectionData"
     type: object        
   genericMessage:
     type: "object"
