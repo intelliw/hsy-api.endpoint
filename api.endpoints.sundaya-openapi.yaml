@@ -71,7 +71,7 @@ paths:
           - grid
       - name: period
         in: path
-        description: "The unit of time for which total energy is aggregated. The only exception is 'instant' which refers to energy measured at a single point in time, without any aggregation or total."
+        description: "The unit of time for which total energy is aggregated. The only exception is 'instant' which refers to energy measured at a single point in time, without aggregation."
         type: string
         default: week
         enum:
