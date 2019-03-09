@@ -133,7 +133,7 @@ paths:
         required: true
         description: "Data to be logged."
         schema:
-          $ref: "#/definitions/deviceData"
+          $ref: "#/definitions/energyData"
       responses:
         201:
           description: "Monitoring data logged."
@@ -208,7 +208,20 @@ definitions:
           $ref: "#/definitions/collectionData"
     type: object        
   energyData:
-    $ref: "#/definitions/collectionLinks"
+    description: Energy data items collection.
+    properties:
+      collection:
+        type: object
+        required:
+        - items
+        items:
+          type: array
+          items:
+            type: object
+            required:
+            - data
+            $ref: "#/definitions/collectionData"
+    type: object        
   genericMessage:
     type: "object"
     properties:
