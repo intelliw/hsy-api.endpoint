@@ -133,7 +133,7 @@ paths:
         required: true
         description: "Data to be logged."
         schema:
-          $ref: "#/definitions/energyData"
+          $ref: "#/definitions/deviceData"
       responses:
         201:
           description: "Monitoring data logged."
@@ -157,6 +157,8 @@ paths:
 definitions:
   collectionData:
     description: Generic data array for Collection+JSON documents.
+    required:
+    - data
     properties:
       data:
         type: array
@@ -184,17 +186,17 @@ definitions:
           - href
           properties:
             rel:
-                type: string
+              type: string
             name:
-                type: string
+              type: string
             prompt:
-                type: string
+              type: string
             title:
-                type: string
+              type: string
             href:
-                type: string
+              type: string
             render:
-                type: string
+              type: string
     type: object
   deviceData:
     description: Device data items collection.
@@ -202,9 +204,6 @@ definitions:
       items:
         type: array
         items:
-          type: object
-          required:
-          - data
           $ref: "#/definitions/collectionData"
     type: object        
   energyData:
@@ -213,14 +212,15 @@ definitions:
       collection:
         type: object
         required:
-        - items
-        items:
-          type: array
-          items:
-            type: object
-            required:
-            - data
-            $ref: "#/definitions/collectionData"
+        - version
+        - href
+        - links
+        - items        
+        properties:
+          version:
+            type: string
+          href:
+            type: string
     type: object        
   genericMessage:
     type: "object"
