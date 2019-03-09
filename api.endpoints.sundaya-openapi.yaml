@@ -155,34 +155,60 @@ paths:
       tags:
         - Devices 
 definitions:
+  collectionData:
+    description: Generic data array for Collection+JSON documents.
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          required:
+          - name
+          - value
+          properties:
+            name:
+                type: string
+            value:
+                type: string
+    type: object
+  collectionLinks:
+    description: Generic array of links for Collection+JSON documents.
+    properties:
+      links:
+        type: array
+        items:
+          type: object
+          required:
+          - name
+          - rel
+          - href
+          properties:
+            rel:
+                type: string
+            name:
+                type: string
+            prompt:
+                type: string
+            title:
+                type: string
+            href:
+                type: string
+            render:
+                type: string
+    type: object
   deviceData:
-    description: Data for a device.
+    description: Device data items collection.
     properties:
       items:
         type: array
         items:
-            type: object
-            title: The Items Schema
-            required:
-            - data
-            properties:
-            data:
-                type: array
-                title: The Data Schema
-                items:
-                    type: object
-                    title: The Items Schema
-                    required:
-                    - name
-                    - value
-                    properties:
-                        name:
-                            type: string
-                            title: The Name Schema
-                        value:
-                            type: string
-                            title: The Value Schema
-    type: object
+          type: object
+          required:
+          - data
+          $ref: "#/definitions/collectionData"
+    type: object        
+  energyData:
+    $ref: "#/definitions/collectionLinks"
   genericMessage:
     type: "object"
     properties:
