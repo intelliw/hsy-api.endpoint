@@ -1,7 +1,7 @@
 {
     "template": {
         "data": [
-            { "name": "timestamp", "value": "20190209T150006.032-0700" },
+            { "name": "event.time", "value": "20190209T150006.032-0700" },
             { "name": "vcell.01", "value": "99" },
             { "name": "vcell.02", "value": "99" },
             { "name": "vcell.03", "value": "99" },
@@ -26,7 +26,7 @@
             { "name": "cmos.status", "value": "open" }
         ],
         "data": [
-            { "name": "timestamp", "value": "20190209T150012.012-0700" },
+            { "name": "event.time", "value": "20190209T150012.012-0700" },
             { "name": "vcell.01", "value": "99" },
             { "name": "vcell.02", "value": "99" },
             { "name": "vcell.03", "value": "99" },
@@ -51,7 +51,7 @@
             { "name": "cmos.status", "value": "open" }
         ],
         "data": [
-            { "name": "timestamp", "value": "20190209T150018.052-0700" },
+            { "name": "event.time", "value": "20190209T150018.052-0700" },
             { "name": "vcell.01", "value": "99" },
             { "name": "vcell.02", "value": "99" },
             { "name": "vcell.03", "value": "99" },
@@ -76,7 +76,7 @@
             { "name": "cmos.status", "value": "open" }
         ],
         "data": [
-            { "name": "timestamp", "value": "20190209T150024.322-0700" },
+            { "name": "event.time", "value": "20190209T150024.322-0700" },
             { "name": "vcell.01", "value": "99" },
             { "name": "vcell.02", "value": "99" },
             { "name": "vcell.03", "value": "99" },
@@ -101,7 +101,7 @@
             { "name": "cmos.status", "value": "open" }
         ],
         "data": [
-            { "name": "timestamp", "value": "20190209T150030.222-0700" },
+            { "name": "event.time", "value": "20190209T150030.222-0700" },
             { "name": "vcell.01", "value": "99" },
             { "name": "vcell.02", "value": "99" },
             { "name": "vcell.03", "value": "99" },
@@ -126,7 +126,7 @@
             { "name": "cmos.status", "value": "open" }
         ],
         "data": [
-            { "name": "timestamp", "value": "20190209T150036.022-0700" },
+            { "name": "event.time", "value": "20190209T150036.022-0700" },
             { "name": "vcell.01", "value": "99" },
             { "name": "vcell.02", "value": "99" },
             { "name": "vcell.03", "value": "99" },
@@ -151,7 +151,7 @@
             { "name": "cmos.status", "value": "open" }
         ],
         "data": [
-            { "name": "timestamp", "value": "20190209T150042.382-0700" },
+            { "name": "event.time", "value": "20190209T150042.382-0700" },
             { "name": "vcell.01", "value": "99" },
             { "name": "vcell.02", "value": "99" },
             { "name": "vcell.03", "value": "99" },
@@ -176,7 +176,7 @@
             { "name": "cmos.status", "value": "open" }
         ],
         "data": [
-            { "name": "timestamp", "value": "20190209T150048.022-0700" },
+            { "name": "event.time", "value": "20190209T150048.022-0700" },
             { "name": "vcell.01", "value": "99" },
             { "name": "vcell.02", "value": "99" },
             { "name": "vcell.03", "value": "99" },
@@ -201,7 +201,7 @@
             { "name": "cmos.status", "value": "open" }
         ],
         "data": [
-            { "name": "timestamp", "value": "20190209T150054.022-0700" },
+            { "name": "event.time", "value": "20190209T150054.022-0700" },
             { "name": "vcell.01", "value": "99" },
             { "name": "vcell.02", "value": "99" },
             { "name": "vcell.03", "value": "99" },
@@ -226,7 +226,7 @@
             { "name": "cmos.status", "value": "open" }
         ],
         "data": [
-            { "name": "timestamp", "value": "20190209T150100.022-0700" },
+            { "name": "event.time", "value": "20190209T150100.022-0700" },
             { "name": "vcell.01", "value": "99" },
             { "name": "vcell.02", "value": "99" },
             { "name": "vcell.03", "value": "99" },

@@ -20,10 +20,10 @@ info:
     
     Type | Assets | Devices
     --- | --- | ---
-    `harvest` | Renewables | PV Module Strings, Maximum Power Point Tracker (MPPT)
-    `store` | Storage | Busbar Controler (BBC), Pack Management System (PMS)
+    `harvest` | Renewables | PV Modules, Maximum Power Point Trackers (MPPT)
+    `store` | Storage | Busbar Controlers (BBC), Pack Management Systems (PMS)
     `enjoy` | Appliances | Multicore-Cable Current Sensors, Switchboard Clamp Sensors
-    `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverter
+    `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters
   license:
     name: "Creative Commons Attribution 4.0 International"
     url: "http://creativecommons.org/licenses/by/4.0/"
@@ -34,7 +34,7 @@ consumes:
 produces:
 - "application/json"
 schemes:
-# Uncomment after configuring SSL for this API.
+# Uncomment after configuring SSL.
 #- "https"
 - "http"
 paths:
@@ -57,11 +57,6 @@ paths:
       operationId: "energymanagement.energy.get"
       produces:
       - "application/json"
-      responses:
-        200:
-          description: "Energy data retrieved."
-          schema:
-            $ref: "#/definitions/genericMessage"
       parameters:
       - name: type
         in: path
@@ -100,14 +95,171 @@ paths:
         required: true
         description: "Identifier of the site where energy assets are installed."
         type: string
+      responses:
+        200:
+          description: "Energy data retrieved."
+          schema:
+            $ref: "#/definitions/genericMessage"
+        401:
+          description: The client does not have sufficient permission
+          schema:
+            $ref: "#/definitions/accessDenied"
+        404:
+          description: The specified resource was not found
+          schema:
+            $ref: "#/definitions/notFound"
       tags:
         - Energy Management 
+  "/devices/{id}/datasets/{type}":
+    post:
+      description: "Logs monitoring data for a device."
+      operationId: "devices.datasets.post"
+      produces:
+      - "application/json"
+      parameters:
+      - name: id
+        in: path
+        description: "The device identifier."
+        type: string
+      - name: type
+        in: path
+        description: "The type of dataset."
+        enum:
+          - MPPT-SNMP
+          - PMS-EPACK
+        type: string
+      - name: device-data
+        in: body
+        required: true
+        description: "Data to be logged."
+        schema:
+          $ref: "#/definitions/deviceData"
+      responses:
+        201:
+          description: "Monitoring data logged."
+          headers:
+            Location:
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+              type: string
+          schema:
+            $ref: "#/definitions/genericMessage"
+        400:
+          description: The client specified an invalid argument
+          schema:
+            $ref: "#/definitions/invalidRequest"
+        401:
+          description: The client does not have sufficient permission
+          schema:
+            $ref: "#/definitions/accessDenied"
+      tags:
+        - Devices 
 definitions:
+  deviceData:
+    description: Data for a device.
+    properties:
+      items:
+        type: array
+        items:
+            type: object
+            title: The Items Schema
+            required:
+            - data
+            properties:
+            data:
+                type: array
+                title: The Data Schema
+                items:
+                    type: object
+                    title: The Items Schema
+                    required:
+                    - name
+                    - value
+                    properties:
+                        name:
+                            type: string
+                            title: The Name Schema
+                        value:
+                            type: string
+                            title: The Value Schema
+    type: object
   genericMessage:
     type: "object"
     properties:
       message:
         type: "string"
+  generalError:
+    properties:
+      code:
+        description: The error code.
+        example: NullValue
+        type: string
+      message:
+        description: The error message.
+        example: Illegal input for operation
+        type: string
+      target:
+        description: The error target.
+        example: Period
+        type: string
+    type: object
+  invalidRequest:
+    type: object
+    properties:
+      code:
+        description: The error code.
+        example: "400"
+        type: string
+      details:
+        items:
+          $ref: "#/definitions/generalError"
+        type: array
+      message:
+        description: The error message.
+        example: The client specified an invalid argument
+        type: string
+      status:
+        description: The error status.
+        example: INVALID_ARGUMENT
+        type: string
+  accessDenied:
+    properties:
+      code:
+        description: The error code.
+        example: "403"
+        type: string
+      details:
+        items:
+          $ref: "#/definitions/generalError"
+        type: array
+      message:
+        description: The error message.
+        example: The client does not have sufficient permission
+        type: string
+      status:
+        description: The error status.
+        example: PERMISSION_DENIED
+        type: string
+    type: object
+  notFound:
+    properties:
+      code:
+        description: The error code.
+        example: "404"
+        type: string
+      details:
+        items:
+          $ref: "#/definitions/generalError"
+        type: array
+      message:
+        description: The error message.
+        example: The specified resource was not found
+        type: string
+      status:
+        description: The error status.
+        example: NOT_FOUND
+        type: string
+    type: object
 # This section requires all requests to any path to require an API key.
 security:
 - api_key: []
