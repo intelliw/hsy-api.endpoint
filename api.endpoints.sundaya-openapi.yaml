@@ -164,39 +164,34 @@ definitions:
       - value
       properties:
         name:
-            type: string
+          type: string
         value:
-            type: string
+          type: string
     type: array
   collectionLinks:
     description: Generic array of links for Collection+JSON documents.
-    required:
-    - links
-    properties:
-      links:
-        type: array
-        items:
-          type: object
-          required:
-          - rel
-          - name
-          - prompt
-          - title
-          - href
-          - render
-          properties:
-            rel:
-              type: string
-            name:
-              type: string
-            prompt:
-              type: string
-            title:
-              type: string
-            href:
-              type: string
-            render: 
-              type: string
+    items:
+      type: object
+      required:
+      - rel
+      - name
+      - prompt
+      - title
+      - href
+      - render
+      properties:
+        rel:
+          type: string
+        name:
+          type: string
+        prompt:
+          type: string
+        title:
+          type: string
+        href:
+          type: string
+        render:
+          type: string
     type: array
   deviceData:
     description: Device data items collection.
@@ -227,13 +222,22 @@ definitions:
           href:
             type: string
           links:
-            type: array
-            items:
-              $ref: "#/definitions/collectionLinks"
+            $ref: "#/definitions/collectionLinks"
           items:
             type: array
             items:
-              $ref: "#/definitions/collectionData"
+              type: object
+              required:
+              - href
+              - links
+              - data
+              properties:
+                href:
+                  type: string
+                links:
+                  $ref: "#/definitions/collectionLinks"
+                data:
+                  $ref: "#/definitions/collectionData"    
     type: object        
   genericMessage:
     type: "object"
