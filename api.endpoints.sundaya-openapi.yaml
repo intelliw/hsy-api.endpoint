@@ -120,7 +120,6 @@ paths:
       - name: id
         in: path
         description: "The device identifier."
-        type: string
       - name: type
         in: path
         description: "The type of dataset."
@@ -136,7 +135,7 @@ paths:
           $ref: "#/definitions/deviceData"
       responses:
         201:
-          description: "Monitoring data logged."
+          description: "Dataset logged."
           headers:
             Location:
               description: |
@@ -157,6 +156,7 @@ paths:
 definitions:
   collectionData:
     description: Generic data array for Collection+JSON documents.
+    type: array
     items:
       type: object
       required:
@@ -167,9 +167,9 @@ definitions:
           type: string
         value:
           type: string
-    type: array
   collectionLinks:
     description: Generic array of links for Collection+JSON documents.
+    type: array
     items:
       type: object
       required:
@@ -192,10 +192,12 @@ definitions:
           type: string
         render:
           type: string
-    type: array
   deviceData:
     description: Device data items collection.
+    type: object
     properties:
+      href:
+        type: string
       items:
         type: array
         items:
@@ -205,9 +207,9 @@ definitions:
           properties:
             data:
               $ref: "#/definitions/collectionData"
-    type: object        
   energyData:
     description: Energy data items collection.
+    type: object
     properties:
       collection:
         type: object
@@ -238,13 +240,13 @@ definitions:
                   $ref: "#/definitions/collectionLinks"
                 data:
                   $ref: "#/definitions/collectionData"    
-    type: object        
   genericMessage:
     type: "object"
     properties:
       message:
         type: "string"
   generalError:
+    type: object
     properties:
       code:
         description: The error code.
@@ -258,7 +260,6 @@ definitions:
         description: The error target.
         example: Period
         type: string
-    type: object
   invalidRequest:
     type: object
     properties:
@@ -279,6 +280,7 @@ definitions:
         example: INVALID_ARGUMENT
         type: string
   accessDenied:
+    type: object
     properties:
       code:
         description: The error code.
@@ -296,8 +298,8 @@ definitions:
         description: The error status.
         example: PERMISSION_DENIED
         type: string
-    type: object
   notFound:
+    type: object
     properties:
       code:
         description: The error code.
@@ -315,7 +317,6 @@ definitions:
         description: The error status.
         example: NOT_FOUND
         type: string
-    type: object
 # This section requires all requests to any path to require an API key.
 security:
 - api_key: []

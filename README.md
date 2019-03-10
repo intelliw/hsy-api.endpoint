@@ -48,7 +48,7 @@ To query specific assets, clients can filter requests by `category`, `subcategor
 
 
 ## Versions
-The API endpoint host is http://api.sundaya.com. 
+The API endpoint host is http://api.endpoints.sundaya.cloud.goog. 
 
 All requests to the API endpoint receive the latest version of the API.     
 
@@ -59,9 +59,9 @@ Client applications may request a specific version through the `Accept` header.
 ## Date-time Format
 Date and time parameters must be expressed in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format and must conform to [RFC3359](https://tools.ietf.org/html/rfc3339) .
 
-    http://api.sundaya.com/hse/{periodID}/{end}
+    http://api.endpoints.sundaya.cloud.goog/hse/{periodID}/{end}
 
-e.g. http://api.sundaya.com/hse/week/20190210
+e.g. http://api.endpoints.sundaya.cloud.goog/hse/week/20190210
 
 The compressed version of ISO 8601 is required, without semi colons and with `T` as the time designator, as shown int he examples below.
 
@@ -73,13 +73,13 @@ The Timezone can be specified in UTC or local time as shown:
 
 - __UTC__, expressed with a trailing `Z` 
 
-    http://api.sundaya.com/hse/week/YYYYMMDDThhmmssZ
-    e.g. http://api.sundaya.com/hse/week/201902091830Z == 18:30 UTC
+    http://api.endpoints.sundaya.cloud.goog/hse/week/YYYYMMDDThhmmssZ
+    e.g. http://api.endpoints.sundaya.cloud.goog/hse/week/201902091830Z == 18:30 UTC
 
 - __Local__ time with offset 
 
-    http://api.sundaya.com/hse/week/YYYYMMDDThhmmss±hhmm
-    e.g. http://api.sundaya.com/hse/week/201902091500-0330 == 18:30 UTC
+    http://api.endpoints.sundaya.cloud.goog/hse/week/YYYYMMDDThhmmss±hhmm
+    e.g. http://api.endpoints.sundaya.cloud.goog/hse/week/201902091500-0330 == 18:30 UTC
 ## Media types
 Request `Body` parameters and all response objects are sent and received in JSON. 
 
@@ -95,7 +95,7 @@ This following example shows a sample HTTP request and response.
 ```
 *** REQUEST ***	
 GET /hse/week/20190209/ HTTP/1.1	
-Host: api.sundaya.com	
+Host: api.endpoints.sundaya.cloud.goog	
 Accept: application/vnd.collection+json	
     
 *** RESPONSE ***	
@@ -114,18 +114,18 @@ The following registered types are referenced in the `rel` attribute of the link
 
     In `collection.links` it identifies the collection (name = *week*)            
 
-    - e.g. href=<a>http:/api.sundaya.com/hse/week/20190210</a>
+    - e.g. href=<a>http:/api.endpoints.sundaya.cloud.goog/hse/week/20190210</a>
 
     In `collection.items.links` it identifies an item in the collection (name = *day*).
-    - e.g. href=<a>http:/api.sundaya.com/hse/day/20190204</a>
+    - e.g. href=<a>http:/api.endpoints.sundaya.cloud.goog/hse/day/20190204</a>
 
 - **item** - Identifies child resources of the collection represented by the link's context. 
 
     In `collection.links` it targets the item series whiich make up the collection (name = *week.days*).
-    - e.g. href=<a>http:/api.sundaya.com/hse/day/20190204/20190210</a>
+    - e.g. href=<a>http:/api.endpoints.sundaya.cloud.goog/hse/day/20190204/20190210</a>
 
     In `collection.items.links` it targets subitems of the item in that context (name = *day.hours*).
-    - e.g. href=<a>http:/api.sundaya.com/hse/hour/201902050600/201902050500</a>
+    - e.g. href=<a>http:/api.endpoints.sundaya.cloud.goog/hse/hour/201902050600/201902050500</a>
 
 - **up** - Identifies the parent the collection or item represented by the link's context (name = *week.month*).
     

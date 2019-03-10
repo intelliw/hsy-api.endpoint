@@ -30,7 +30,7 @@ properties:
         title: The Href Schema
         default: ''
         examples:
-        - http:/api.sundaya.com/hse/week/20190210
+        - http:/api.endpoints.sundaya.cloud.goog/hse/week/20190210
         pattern: ^(.*)$
       links:
         $id: '#/properties/collection/properties/links'
@@ -85,7 +85,7 @@ properties:
               title: The Href Schema
               default: ''
               examples:
-              - http:/api.sundaya.com/hse/week/20190210
+              - http:/api.endpoints.sundaya.cloud.goog/hse/week/20190210
               pattern: ^(.*)$
       items:
         $id: '#/properties/collection/properties/items'
@@ -106,7 +106,7 @@ properties:
               title: The Href Schema
               default: ''
               examples:
-              - http:/api.sundaya.com/hse/day/20190204
+              - http:/api.endpoints.sundaya.cloud.goog/hse/day/20190204
               pattern: ^(.*)$
             links:
               $id: '#/properties/collection/properties/items/items/properties/links'
@@ -162,7 +162,7 @@ properties:
                     title: The Href Schema
                     default: ''
                     examples:
-                    - http:/api.sundaya.com/hse/day/20190204
+                    - http:/api.endpoints.sundaya.cloud.goog/hse/day/20190204
                     pattern: ^(.*)$
                   render:
                     $id: '#/properties/collection/properties/items/items/properties/links/items/properties/render'

@@ -156,7 +156,7 @@ definitions:
             type: string
             title: The Href Schema
             examples:
-            - http:/api.sundaya.com/hse/week/20190210
+            - http:/api.endpoints.sundaya.cloud.goog/hse/week/20190210
           links:
             type: array
             title: The Links Schema
@@ -194,7 +194,7 @@ definitions:
                   type: string
                   title: The Href Schema
                   examples:
-                  - http:/api.sundaya.com/monitoring-data/month/201902
+                  - http:/api.endpoints.sundaya.cloud.goog/monitoring-data/month/201902
           items:
             type: array
             title: The Items Schema
@@ -209,7 +209,7 @@ definitions:
                   type: string
                   title: The Href Schema
                   examples:
-                  - http:/api.sundaya.com/hse/day/20190204
+                  - http:/api.endpoints.sundaya.cloud.goog/hse/day/20190204
                 links:
                   type: array
                   title: The Links Schema
@@ -249,7 +249,7 @@ definitions:
                         type: string
                         title: The Href Schema
                         examples:
-                        - http:/api.sundaya.com/hse/day/20190204
+                        - http:/api.endpoints.sundaya.cloud.goog/hse/day/20190204
                       render:
                         type: string
                         title: The Render Schema
