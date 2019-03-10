@@ -90,10 +90,10 @@ paths:
         description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm)."
         type: string
         format: date-time
-      - name: siteId
+      - name: site
         in: query
         required: true
-        description: "Identifier of the site where energy assets are installed."
+        description: "Identifier of the customer site where energy assets have been installed."
         type: string
       responses:
         200:
@@ -120,6 +120,7 @@ paths:
       - name: id
         in: path
         description: "The device identifier."
+        type: string
       - name: type
         in: path
         description: "The type of dataset."
