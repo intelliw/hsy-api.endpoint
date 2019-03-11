@@ -38,19 +38,17 @@ schemes:
 #- "https"
 - "http"
 paths:
-  "/v":
+  "/versions":
     get:
       description: "Returns a list of versions which are still supported. Older versions can be requested through the `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://endpointsportal.sundaya.cloud.goog/docs/api.endpoints.sundaya.cloud.goog/0/c/Getting%20Started/Standards%20&%20Conventions))."
-      operationId: "versions.v.get"
+      operationId: "diagnostics.versions.get"
       produces:
       - "application/json"
       responses:
         200:
-          description: "Versions retrieved."
-          schema:
-            $ref: "#/definitions/genericMessage"
+          $ref: "#/responses/diagnosticsResponse"
       tags:
-        - Versions 
+        - Diagnostics
   "/energy/{type}/{period}/{epoch}":
     get:
       description: "Retrieves HSE monitoring data for the specified period."
@@ -154,6 +152,11 @@ paths:
             $ref: "#/definitions/accessDenied"
       tags:
         - Devices 
+responses:
+  diagnosticsResponse:
+    description: "Diagnostics retrieved."
+    schema:
+      $ref: "#/definitions/genericMessage"
 definitions:
   collectionData:
     description: Generic data array for Collection+JSON documents.
