@@ -46,9 +46,11 @@ paths:
       - "application/json"
       responses:
         200:
-          $ref: "#/responses/generic-200-ok"
+          $ref: "#/responses/200-ok"
         401:
-          $ref: "#/responses/generic-401-unauthorized"
+          $ref: "#/responses/401-unauthorized"
+        500:
+          $ref: "#/responses/500-internal-server-error"
       tags:
         - Diagnostics
   "/energy/{energy}/{period}/{epoch}":
@@ -61,18 +63,16 @@ paths:
       - $ref: "#/parameters/energy"  
       - $ref: "#/parameters/period"
       - $ref: "#/parameters/epoch"
-      - name: site
-        in: query
-        required: true
-        description: "Identifier of the customer site where energy assets have been installed."
-        type: string
+      - $ref: "#/parameters/site"
       responses:
         200:
-          $ref: "#/responses/generic-200-ok"
+          $ref: "#/responses/energy-data"
         401:
-          $ref: "#/responses/generic-401-unauthorized"
+          $ref: "#/responses/401-unauthorized"
         404:
-          $ref: "#/responses/generic-404-not-found"
+          $ref: "#/responses/404-not-found"
+        500:
+          $ref: "#/responses/500-internal-server-error"
       tags:
         - Energy 
   "/devices/{device}/datasets/{dataset}":
@@ -87,11 +87,13 @@ paths:
       - $ref: "#/parameters/device-data"
       responses:
         201:
-          $ref: "#/responses/generic-201-created"
+          $ref: "#/responses/201-created"
         400:
-          $ref: "#/responses/generic-400-bad-request"
+          $ref: "#/responses/400-bad-request"
         401:
-          $ref: "#/responses/generic-401-unauthorized"
+          $ref: "#/responses/401-unauthorized"
+        500:
+          $ref: "#/responses/500-internal-server-error"
       tags:
         - Devices 
 parameters:
@@ -130,6 +132,12 @@ parameters:
     description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm)."
     type: string
     format: date-time
+  site:  
+    name: site
+    in: query
+    required: true
+    description: "Identifier of the customer site where energy assets have been installed."
+    type: string
   device:
     name: device
     in: path
@@ -164,11 +172,11 @@ parameters:
               data:
                 $ref: "#/definitions/collectionData"
 responses:
-  generic-200-ok:
+  200-ok:
     description: "Data retrieved."
     schema:
       $ref: "#/definitions/genericMessage"
-  generic-201-created:
+  201-created:
     description: "Resource created."
     schema:
       $ref: "#/definitions/genericMessage"
@@ -177,7 +185,7 @@ responses:
         description: |
           A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
         type: string
-  generic-400-bad-request:
+  400-bad-request:
     description: The client specified an invalid argument
     schema:
       type: object
@@ -198,7 +206,7 @@ responses:
           description: The error status.
           example: INVALID_ARGUMENT
           type: string
-  generic-401-unauthorized:
+  401-unauthorized:
     description: The client does not have sufficient permission
     schema:
       type: object
@@ -219,7 +227,7 @@ responses:
           description: The error status.
           example: PERMISSION_DENIED
           type: string
-  generic-404-not-found:
+  404-not-found:
     description: The resource was not found
     schema:
       type: object
@@ -240,6 +248,10 @@ responses:
           description: The error status.
           example: NOT_FOUND
           type: string
+  500-internal-server-error:
+    description: "The server encountered an unexpected condition."
+    schema:
+      $ref: "#/definitions/genericMessage"
   energy-data:
     description: Energy data items collection.
     schema:
