@@ -4,11 +4,12 @@ host: "api.endpoints.sundaya.cloud.goog"
 x-google-endpoints:
 - name: "api.endpoints.sundaya.cloud.goog"
   target: "34.80.69.65"
-basePath: /
+basePath: "/"
 info:
   title: "Energy Management"
   version: "0.0.06"
   description: |
+    "
     Our Energy Management is based on four **Energy Types**:
     `harvest`, `store`, `enjoy`, `grid`
     
@@ -24,6 +25,8 @@ info:
     `store` | Storage | Busbar Controlers (BBC), Pack Management Systems (PMS)
     `enjoy` | Appliances | Multicore-Cable Current Sensors, Switchboard Clamp Sensors
     `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters
+
+    "
   license:
     name: "Creative Commons Attribution 4.0 International"
     url: "http://creativecommons.org/licenses/by/4.0/"
@@ -45,14 +48,14 @@ paths:
       produces:
       - "application/json"
       responses:
-        200:
+        "200":
           $ref: "#/responses/200-ok"
-        401:
+        "401":
           $ref: "#/responses/401-unauthorized"
-        500:
+        "500":
           $ref: "#/responses/500-internal-server-error"
       tags:
-        - Diagnostics
+        - "Diagnostics"
   "/energy/{energy}/{period}/{epoch}":
     get:
       description: "Retrieves HSE monitoring data for the specified period."
@@ -65,16 +68,18 @@ paths:
       - $ref: "#/parameters/epoch"
       - $ref: "#/parameters/site"
       responses:
-        200:
+        "200":
           $ref: "#/responses/energy-data"
-        401:
+        "400":
+          $ref: "#/responses/400-bad-request"
+        "401":
           $ref: "#/responses/401-unauthorized"
-        404:
+        "404":
           $ref: "#/responses/404-not-found"
-        500:
+        "500":
           $ref: "#/responses/500-internal-server-error"
       tags:
-        - Energy 
+        - "Energy" 
   "/devices/{device}/datasets/{dataset}":
     post:
       description: "Logs monitoring data for a device."
@@ -86,78 +91,78 @@ paths:
       - $ref: "#/parameters/dataset"
       - $ref: "#/parameters/device-data"
       responses:
-        201:
+        "201":
           $ref: "#/responses/201-created"
-        400:
+        "400":
           $ref: "#/responses/400-bad-request"
-        401:
+        "401":
           $ref: "#/responses/401-unauthorized"
-        500:
+        "500":
           $ref: "#/responses/500-internal-server-error"
       tags:
-        - Devices 
+        - "Devices"
 parameters:
   energy:
-    name: energy
+    name: "energy"
     in: path
     description: "The type of energy flow."
     type: string
-    default: hse
+    default: "hse"
     enum:
-      - hse
-      - harvest
-      - store
-      - enjoy
-      - grid
+      - "hse"
+      - "harvest"
+      - "store"
+      - "enjoy"
+      - "grid"
   period:
-    name: period
+    name: "period"
     in: path
     description: "The time window for which total energy is aggregated. The only exception is 'instant' which measures energy at a single point in time, without aggregation."
     type: string
-    default: week
+    default: "week"
     enum:
-      - instant
-      - second
-      - hour
-      - timeofday
-      - day
-      - week
-      - month
-      - quarter
-      - year
-      - 5year
+      - "instant"
+      - "second"
+      - "hour"
+      - "timeofday"
+      - "day"
+      - "week"
+      - "month"
+      - "quarter"
+      - "year"
+      - "5year"
   epoch:
-    name: epoch
+    name: "epoch"
     in: path
     description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm)."
     type: string
     format: date-time
   site:  
-    name: site
+    name: "site"
     in: query
     required: true
     description: "Identifier of the customer site where energy assets have been installed."
     type: string
   device:
-    name: device
+    name: "device"
     in: path
     description: "The device identifier."
     type: string
   dataset:  
-    name: dataset
+    name: "dataset"
     in: path
     description: "The type of dataset."
     type: string
     enum:
-      - MPPT-SNMP
-      - PMS-EPACK
+      - "MPPT-SNMP"
+      - "PMS-EPACK"
   device-data:
-    name: device-data
+    name: "device-data"
     in: body
     required: true
     description: "Data to be logged."
     schema:
-      description: Device data items collection.
+      description: "Device data items collection."
       type: object
       properties:
         href:
@@ -167,7 +172,7 @@ parameters:
           items:
             type: object
             required:
-            - data
+            - "data"
             properties:
               data:
                 $ref: "#/definitions/collectionData"
@@ -183,15 +188,15 @@ responses:
     headers:
       Location:
         description: |
-          A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+          "A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource."
         type: string
   400-bad-request:
-    description: The client specified an invalid argument
+    description: "The client specified an invalid argument"
     schema:
       type: object
       properties:
         code:
-          description: The error code.
+          description: "The error code."
           example: "400"
           type: string
         details:
@@ -199,20 +204,20 @@ responses:
             $ref: "#/definitions/genericErrorMessage"
           type: array
         message:
-          description: The error message.
-          example: The client specified an invalid argument
+          description: "The error message."
+          example: "The client specified an invalid argument."
           type: string
         status:
-          description: The error status.
-          example: INVALID_ARGUMENT
+          description: "The error status."
+          example: "INVALID_ARGUMENT"
           type: string
   401-unauthorized:
-    description: The client does not have sufficient permission
+    description: "The client does not have sufficient permission."
     schema:
       type: object
       properties:
         code:
-          description: The error code.
+          description: "The error code."
           example: "403"
           type: string
         details:
@@ -220,20 +225,20 @@ responses:
             $ref: "#/definitions/genericErrorMessage"
           type: array
         message:
-          description: The error message.
-          example: The client does not have sufficient permission
+          description: "The error message."
+          example: "The client does not have sufficient permission."
           type: string
         status:
-          description: The error status.
-          example: PERMISSION_DENIED
+          description: "The error status."
+          example: "PERMISSION_DENIED"
           type: string
   404-not-found:
-    description: The resource was not found
+    description: "The resource was not found."
     schema:
       type: object
       properties:
         code:
-          description: The error code.
+          description: "The error code."
           example: "404"
           type: string
         details:
@@ -241,29 +246,29 @@ responses:
             $ref: "#/definitions/genericErrorMessage"
           type: array
         message:
-          description: The error message.
-          example: The specified resource was not found
+          description: "The error message."
+          example: "The specified resource was not found."
           type: string
         status:
-          description: The error status.
-          example: NOT_FOUND
+          description: "The error status."
+          example: "NOT_FOUND"
           type: string
   500-internal-server-error:
     description: "The server encountered an unexpected condition."
     schema:
       $ref: "#/definitions/genericMessage"
   energy-data:
-    description: Energy data items collection.
+    description: "Energy data items collection."
     schema:
       type: object
       properties:
         collection:
           type: object
           required:
-          - version
-          - href
-          - links
-          - items        
+          - "version"
+          - "href"
+          - "links"
+          - "items"
           properties:
             version:
               type: string
@@ -276,9 +281,9 @@ responses:
               items:
                 type: object
                 required:
-                - href
-                - links
-                - data
+                - "href"
+                - "links"
+                - "data"
                 properties:
                   href:
                     type: string
@@ -288,30 +293,30 @@ responses:
                     $ref: "#/definitions/collectionData"    
 definitions:
   collectionData:
-    description: Generic data array for Collection+JSON documents.
+    description: "Generic data array for Collection+JSON documents."
     type: array
     items:
       type: object
       required:
-      - name
-      - value
+      - "name"
+      - "value"
       properties:
         name:
           type: string
         value:
           type: string
   collectionLinks:
-    description: Generic array of links for Collection+JSON documents.
+    description: "Generic array of links for Collection+JSON documents."
     type: array
     items:
       type: object
       required:
-      - rel
-      - name
-      - prompt
-      - title
-      - href
-      - render
+      - "rel"
+      - "name"
+      - "prompt"
+      - "title"
+      - "href"
+      - "render"
       properties:
         rel:
           type: string
@@ -326,24 +331,24 @@ definitions:
         render:
           type: string
   genericMessage:
-    type: "object"
+    type: object
     properties:
       message:
-        type: "string"
+        type: string
   genericErrorMessage:
     type: object
     properties:
       code:
-        description: The error code.
-        example: NullValue
+        description: "The error code."
+        example: "NullValue"
         type: string
       message:
-        description: The error message.
-        example: Illegal input for operation
+        description: "The error message."
+        example: "Illegal input for operation."
         type: string
       target:
-        description: The error target.
-        example: Period
+        description: "The error target."
+        example: "Period"
         type: string
 # This section requires all requests to any path to require an API key.
 security:
@@ -353,7 +358,7 @@ securityDefinitions:
   api_key:
     type: "apiKey"
     name: "key"
-    in: "query"
+    in: query
   # This section configures authentication using Google API Service Accounts
   # to sign a json web token. This is mostly used for server-to-server
   # communication.
