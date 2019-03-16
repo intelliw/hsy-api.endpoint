@@ -9,8 +9,7 @@ info:
   title: "Energy Management"
   version: "0.0.06"
   description: |
-    "
-    Our Energy Management is based on four **Energy Types**:
+    "Our Energy Management is based on four **Energy Types**:
     `harvest`, `store`, `enjoy`, `grid`
     
     The API provides two routes for measuring and managing energy.
@@ -24,9 +23,9 @@ info:
     `harvest` | Renewables | PV Modules, Maximum Power Point Trackers (MPPT)
     `store` | Storage | Busbar Controlers (BBC), Pack Management Systems (PMS)
     `enjoy` | Appliances | Multicore-Cable Current Sensors, Switchboard Clamp Sensors
-    `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters
+    `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters"
 
-    "
+    
   license:
     name: "Creative Commons Attribution 4.0 International"
     url: "http://creativecommons.org/licenses/by/4.0/"
@@ -34,8 +33,10 @@ info:
 # [END swagger]
 consumes:
 - "application/json"
+- "application/vnd.collection+json"
 produces:
 - "application/json"
+- "application/vnd.collection+json"
 schemes:
 # Uncomment after configuring SSL.
 #- "https"
@@ -56,16 +57,21 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "Diagnostics"
-  "/energy/{energy}/{period}/{epoch}":
+  "/energy/{energy}/{period}/{epoch}/{number}":
     get:
       description: "Retrieves HSE monitoring data for the specified period."
       operationId: "energy.type.get"
       produces:
-      - "application/json"
+      - "application/vnd.collection+json"
       parameters:
       - $ref: "#/parameters/energy"  
       - $ref: "#/parameters/period"
       - $ref: "#/parameters/epoch"
+      - name: "number"
+        in: path
+        description: "The number of periods to return starting at epoch. This defaults to 1."
+        type: integer
+        format: int64
       - $ref: "#/parameters/site"
       responses:
         "200":
