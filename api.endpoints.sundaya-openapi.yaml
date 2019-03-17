@@ -9,7 +9,7 @@ info:
   title: "Energy Management"
   version: "0.0.06"
   description: |
-    "Our Energy Management is based on four **Energy Types**:
+    Our Energy Management is based on four **Energy Types**:
     `harvest`, `store`, `enjoy`, `grid`
     
     The API provides two routes for measuring and managing energy.
@@ -23,7 +23,7 @@ info:
     `harvest` | Renewables | PV Modules, Maximum Power Point Trackers (MPPT)
     `store` | Storage | Busbar Controlers (BBC), Pack Management Systems (PMS)
     `enjoy` | Appliances | Multicore-Cable Current Sensors, Switchboard Clamp Sensors
-    `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters"
+    `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters
     
   license:
     name: "Creative Commons Attribution 4.0 International"
