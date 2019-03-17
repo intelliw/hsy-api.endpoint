@@ -9,6 +9,7 @@ info:
   title: "Energy Management"
   version: "0.0.06"
   description: |
+  '
     Our Energy Management is based on four **Energy Types**:
     `harvest`, `store`, `enjoy`, `grid`
     
@@ -24,7 +25,7 @@ info:
     `store` | Storage | Busbar Controlers (BBC), Pack Management Systems (PMS)
     `enjoy` | Appliances | Multicore-Cable Current Sensors, Switchboard Clamp Sensors
     `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters
-    
+  '
   license:
     name: "Creative Commons Attribution 4.0 International"
     url: "http://creativecommons.org/licenses/by/4.0/"
