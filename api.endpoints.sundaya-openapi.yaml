@@ -9,15 +9,15 @@ info:
   title: "Energy Management"
   version: "0.0.06"
   description: |
-  '
+  "
     Our Energy Management is based on four **Energy Types**:
     `harvest`, `store`, `enjoy`, `grid`
     
     The API provides routes for measuring and managing energy.
     
-    - The `/energy` path provides consolidated data for a period (week, month etc.) and allows clients to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times. 
+    The `/energy` path provides consolidated data for a period (week, month etc.) and allows clients to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times. 
     
-    - Vendor device integrations can use the `/devices` path to monitor and control **Energy Management Devices**.
+    Vendor device integrations can use the `/devices` path to monitor and control **Energy Management Devices**.
     
     Type | Assets | Devices
     --- | --- | ---
@@ -25,7 +25,7 @@ info:
     `store` | Storage | Busbar Controlers (BBC), Pack Management Systems (PMS)
     `enjoy` | Appliances | Multicore-Cable Current Sensors, Switchboard Clamp Sensors
     `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters
-  '
+  "
   license:
     name: "Creative Commons Attribution 4.0 International"
     url: "http://creativecommons.org/licenses/by/4.0/"
