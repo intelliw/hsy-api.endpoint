@@ -9,7 +9,6 @@ info:
   title: "Energy Management"
   version: "0.0.06"
   description: |
-  "
     Our Energy Management is based on four **Energy Types**:
     `harvest`, `store`, `enjoy`, `grid`
     
@@ -25,7 +24,6 @@ info:
     `store` | Storage | Busbar Controlers (BBC), Pack Management Systems (PMS)
     `enjoy` | Appliances | Multicore-Cable Current Sensors, Switchboard Clamp Sensors
     `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters
-  "
   license:
     name: "Creative Commons Attribution 4.0 International"
     url: "http://creativecommons.org/licenses/by/4.0/"
@@ -36,7 +34,7 @@ schemes:
 #- "https"
 - "http"
 paths:
-  "/api/versions":
+  "/api/versionsx":
     get:
       description: "Returns a list of versions which are still supported. Older versions can be requested through the `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://endpointsportal.sundaya.cloud.goog/docs/api.endpoints.sundaya.cloud.goog/0/c/Getting%20Started/Standards%20&%20Conventions))."
       operationId: "diagnostics.api.versions.get"
