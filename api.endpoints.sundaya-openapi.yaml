@@ -16,7 +16,7 @@ info:
     
     - The `/energy` path provides consolidated data for a period (week, month etc.) and allows clients to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times. 
     
-    - Vendor device integrations can use the `/devices` path to monitor and control their **Energy Management Devices**.
+    - Vendor device integrations can use the `/devices` path to monitor and control **Energy Management Devices**.
     
     Type | Assets | Devices
     --- | --- | ---
