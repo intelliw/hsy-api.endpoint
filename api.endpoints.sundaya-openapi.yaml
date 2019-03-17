@@ -24,28 +24,23 @@ info:
     `store` | Storage | Busbar Controlers (BBC), Pack Management Systems (PMS)
     `enjoy` | Appliances | Multicore-Cable Current Sensors, Switchboard Clamp Sensors
     `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters"
-
     
   license:
     name: "Creative Commons Attribution 4.0 International"
     url: "http://creativecommons.org/licenses/by/4.0/"
   termsOfService: "https://sundaya.com/terms-of-service/"
 # [END swagger]
-consumes:
-- "application/json"
-- "application/vnd.collection+json"
-produces:
-- "application/json"
-- "application/vnd.collection+json"
 schemes:
 # Uncomment after configuring SSL.
 #- "https"
 - "http"
 paths:
-  "/versions":
+  "/api/versions":
     get:
       description: "Returns a list of versions which are still supported. Older versions can be requested through the `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://endpointsportal.sundaya.cloud.goog/docs/api.endpoints.sundaya.cloud.goog/0/c/Getting%20Started/Standards%20&%20Conventions))."
-      operationId: "diagnostics.versions.get"
+      operationId: "diagnostics.api.versions.get"
+      consumes:
+      - ""
       produces:
       - "application/json"
       responses:
@@ -59,10 +54,13 @@ paths:
         - "Diagnostics"
   "/energy/{energy}/{period}/{epoch}/{number}":
     get:
-      description: "Retrieves HSE monitoring data for the specified period."
-      operationId: "energy.type.get"
+      description: "Retrieves energy monitoring data for a period. [Try this API](http://api.endpoints.sundaya.cloud.goog/energy?site:999)"
+      operationId: "energy.type.period.epoch.get"
+      consumes:
+      - "application/json"
       produces:
       - "application/vnd.collection+json"
+      - "text/html"
       parameters:
       - $ref: "#/parameters/energy"  
       - $ref: "#/parameters/period"
@@ -86,10 +84,28 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "Energy" 
+  "/devices/{device}/config/{epoch}":
+    get:
+      description: "Returns historical configuration data including identifiers of subitems such as battery assembly, MCU board, and Mosfet board."
+      operationId: "devices.device.config.epoch.get"
+      consumes:
+      - ""
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/parameters/device"
+      - $ref: "#/parameters/epoch"
+      responses:
+        "200":
+          $ref: "#/responses/200-ok"
+      tags:
+        - "Devices"
   "/devices/{device}/datasets/{dataset}":
     post:
       description: "Logs monitoring data for a device."
-      operationId: "devices.datasets.post"
+      operationId: "devices.device.dataset.post"
+      consumes:
+      - "application/json
       produces:
       - "application/json"
       parameters:
