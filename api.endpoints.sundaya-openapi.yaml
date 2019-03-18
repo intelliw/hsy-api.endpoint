@@ -13,7 +13,7 @@ info:
 
     `harvest`, `store`, `enjoy`, `grid`
     
-    ..and the following paths for measuring and managing energy resources.
+    ..and the following paths for managing energy resources.
     
     The `/energy` path provides periodic consolidation (week, month etc.) of data from energy monitoring devices, for clients to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times. 
     
