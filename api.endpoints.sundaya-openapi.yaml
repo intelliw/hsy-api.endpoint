@@ -9,15 +9,15 @@ info:
   title: "Energy Management"
   version: "0.0.07"
   description: |
-    The Energy Management API is based on four **Energy Types**:
+    The Energy Management API is based on four energy **Types**:
 
     `harvest`, `store`, `enjoy`, `grid`
     
-    ..and the following paths for managing energy resources.
+    ..and the following resource paths for managing energy.
     
-    The `/energy` path provides periodic consolidation (week, month etc.) of data from energy monitoring devices, for clients to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times. 
+    The `/energy` path provides periodic consolidation (week, month etc.) of data from energy monitoring devices, for clients to manage energy **Assets** through graphical views and by scheduling energy use at preferred times. 
     
-    The `/devices` path is for vendors and field engineers to monitor and control **Energy Management Devices**.
+    The `/devices` path is for vendors and field engineers to monitor and control energy management **Devices**.
     
     Type | Assets | Devices
     --- | --- | ---
@@ -53,7 +53,7 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "Diagnostics"
-  "/energy/{energy}/{period}/{epoch}/{number}":
+  "/energy/{energy}/{period}/{epoch}/{duration}":
     get:
       description: "Retrieves energy monitoring data for a period. [Try this API](http://api.endpoints.sundaya.cloud.goog/energy?site:999)"
       operationId: "energy.type.period.epoch.get"
@@ -66,7 +66,7 @@ paths:
       - $ref: "#/parameters/energy"  
       - $ref: "#/parameters/period"
       - $ref: "#/parameters/epoch"
-      - name: "number"
+      - name: "duration"
         in: path
         description: "The number of periods to return starting at epoch. This defaults to 1."
         type: integer
