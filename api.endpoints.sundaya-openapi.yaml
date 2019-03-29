@@ -53,9 +53,9 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "Diagnostics"
-  "/energy/{energy}/{period}/{epoch}/{duration}":
+  "/energy/{energy}/periods/{period}/{epoch}/{duration}":
     get:
-      description: "Retrieves energy monitoring data for a period. [Try this API](http://api.endpoints.sundaya.cloud.goog/energy?site:999)"
+      description: "Retrieves energy monitoring data for a period. [Try this API](http://api.endpoints.sundaya.cloud.goog/energy/hse/periods/week/20150204/1?site=999)"
       operationId: "energy.type.period.epoch.get"
       consumes:
       - "application/json"
@@ -87,7 +87,7 @@ paths:
         - "Energy" 
   "/devices/{device}/config/{epoch}":
     get:
-      description: "Returns historical configuration data including identifiers of subitems such as battery assembly, MCU board, and Mosfet board."
+      description: "Returns historical configuration data including identifiers of subitems such as battery assembly, MCU board, and Mosfet board. . [Try this API](http://api.endpoints.sundaya.cloud.goog/devices/999)"
       operationId: "devices.device.config.epoch.get"
       consumes:
       - ""
@@ -146,6 +146,7 @@ parameters:
     enum:
       - "instant"
       - "second"
+      - "minute"
       - "hour"
       - "timeofday"
       - "day"
@@ -153,11 +154,11 @@ parameters:
       - "month"
       - "quarter"
       - "year"
-      - "5year"
+      - "fiveyear"
   epoch:
     name: "epoch"
     in: path
-    description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm)."
+    description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm) and based on the period."
     type: string
     format: date-time
   site:  
@@ -241,7 +242,7 @@ responses:
       properties:
         code:
           description: "The error code."
-          example: "403"
+          example: "401"
           type: string
         details:
           items:
