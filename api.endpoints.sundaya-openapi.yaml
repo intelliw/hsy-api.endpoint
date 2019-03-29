@@ -22,7 +22,7 @@ info:
     Type | Assets | Devices
     --- | --- | ---
     `harvest` | Renewables | PV Modules, Maximum Power Point Trackers (MPPT)
-    `store` | Storage | Busbar Controlers (BBC), Pack Management Systems (PMS)
+    `store` | Storage | Busbar Controllers (BBC), Pack Management Systems (PMS)
     `enjoy` | Appliances | Multicore-Cable Current Sensors, Switchboard Clamp Sensors
     `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters
     
