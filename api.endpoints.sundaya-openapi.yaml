@@ -72,6 +72,7 @@ paths:
         type: integer
         format: int64
       - $ref: "#/parameters/site"
+      - $ref: "#/parameters/product-filter"
       responses:
         "200":
           $ref: "#/responses/energy-data"
@@ -200,6 +201,49 @@ parameters:
             properties:
               data:
                 $ref: "#/definitions/collectionData"
+  product-filter:
+    name: "product-spec"
+    in: body
+    required: false
+    description: "An optional filter specification to restrict query data to the specified product types, categories and subcategories only."
+    schema:
+      description: "Product type and categories."
+      type: object
+      properties:
+        product-filter:
+          type: array
+          items:
+            type: object
+            required:
+            - "type"
+            - "category"
+            properties:
+              type:
+                description: "A valid Product Type."
+                type: string
+                enum:
+                  - Electricity Meter
+                  - LED Lighting
+                  - Air Conditioning
+                  - Industrial PV
+                  - Residential PV
+                  - Home Battery
+                  - Ulitium
+                  - JouleBox
+                  - PV Solar Panel
+              category:
+                description: "A list of product Categories and Subcategories belonging to the `product-type`."
+                type: array
+                items:
+                  type: object
+                  required:
+                  - "category"
+                  - "subcategory"
+                  properties:
+                    category:
+                      type: string
+                    subcategory:
+                      type: string
 responses:
   200-ok:
     description: "Data retrieved."
