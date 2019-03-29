@@ -162,6 +162,7 @@ parameters:
     description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm) and based on the period."
     type: string
     format: date-time
+    default: "20190325"
   site:  
     name: "site"
     in: query
