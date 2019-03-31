@@ -359,10 +359,26 @@ responses:
                   links:
                     $ref: "#/definitions/collectionLinks"
                   data:
-                    $ref: "#/definitions/collectionData"    
+                    $ref: "#/definitions/collectionDataNested"    
 definitions:
+  collectionDataNested:
+    description: "Two-tier data array for hierarchical Collection+JSON data."
+    type: array
+    items:
+      type: object
+      required:
+      - "name"
+      - "value"
+      - "data"
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        data:
+          $ref: "#/definitions/collectionData"
   collectionData:
-    description: "Generic data array for Collection+JSON documents."
+    description: "Generic data array for Collection+JSON data."
     type: array
     items:
       type: object
