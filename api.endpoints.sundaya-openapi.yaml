@@ -206,7 +206,7 @@ parameters:
     name: "product-filter"
     in: body
     required: false
-    description: "An optional filter specification to restrict query data to the specified product types, categories and subcategories only."
+    description: "An optional filter specification to restrict query data to the specified  categories, subcategories and product types."
     schema:
       description: "Product type and categories."
       type: object
