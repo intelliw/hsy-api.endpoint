@@ -17,7 +17,7 @@ info:
     
     API clients can manage energy **Assets** through graphical views and by scheduling energy use at preferred times. 
     
-    The `/devices` path is for vendors and field engineers to monitor and control energy management **Devices**.
+    The `/devices` path is for vendors and field engineers to monitor and control the operation of energy management **Devices**.
     
     Type | Assets | Devices
     --- | --- | ---
