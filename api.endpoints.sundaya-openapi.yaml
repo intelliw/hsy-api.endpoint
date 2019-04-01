@@ -15,7 +15,9 @@ info:
     
     ..and the following resource paths for managing energy.
     
-    The `/energy` path provides periodic consolidation of data from energy monitoring devices (week, month etc.), for clients to manage energy **Assets** through graphical views and by scheduling energy use at preferred times. 
+    The `/energy` path provides periodic consolidation of data from energy monitoring devices (week, month etc.) 
+    
+    API clients can manage energy **Assets** through graphical views and by scheduling energy use at preferred times. 
     
     The `/devices` path is for vendors and field engineers to monitor and control energy management **Devices**.
     
