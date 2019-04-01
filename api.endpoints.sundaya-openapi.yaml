@@ -203,7 +203,7 @@ parameters:
               data:
                 $ref: "#/definitions/collectionData"
   product-filter:
-    name: "product-spec"
+    name: "product-filter"
     in: body
     required: false
     description: "An optional filter specification to restrict query data to the specified product types, categories and subcategories only."
@@ -216,35 +216,60 @@ parameters:
           items:
             type: object
             required:
-            - "type"
             - "category"
             properties:
-              type:
-                description: "A valid Product Type."
-                type: string
-                enum:
-                  - Electricity Meter
-                  - LED Lighting
-                  - Air Conditioning
-                  - Industrial PV
-                  - Residential PV
-                  - Home Battery
-                  - Ulitium
-                  - JouleBox
-                  - PV Solar Panel
               category:
-                description: "A list of product Categories and Subcategories belonging to the `product-type`."
-                type: array
+                type: array  
                 items:
                   type: object
                   required:
-                  - "category"
+                  - "name"
                   - "subcategory"
                   properties:
-                    category:
+                    name:
+                      description: "A valid product Category."
                       type: string
+                      enum:
+                      - Components
+                      - Solutions
+                      - Solutions & Components
                     subcategory:
-                      type: string
+                      type: array  
+                      items:
+                        type: object
+                        required:
+                        - "name"
+                        - "type"
+                        properties:
+                          name:
+                            description: "A valid Subcategory for the product Category."
+                            type: string
+                            enum:
+                            - Harvest
+                            - Counting
+                            - Replacing
+                            - Solar Home Kits
+                            - Saving & Enjoy
+                          type:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - "name"
+                              properties:
+                                name:
+                                  description: "A valid product Type for the product Category and Subcategory."
+                                  type: string
+                                  enum:
+                                  - Electricity Meter
+                                  - LED Lighting
+                                  - Air Conditioning
+                                  - Industrial PV
+                                  - Residential PV
+                                  - Home Battery
+                                  - Ulitium
+                                  - JouleBox
+                                  - PV Solar Panel
 responses:
   200-ok:
     description: "Data retrieved."

@@ -1,0 +1,31 @@
+{ "product-filter": [
+    { "category": [
+        { "name" : "Solutions",
+          "subcategory": [
+            { "name" : "Solar Home Kits",
+              "type": [
+                "JouleBox",
+                "Ulitium"
+              ]
+            },
+            { "name" : "Replacing",
+              "type": [
+                "Industrial PV",
+                "Residential PV"
+              ]
+            }
+          ]
+        },
+        { "name" : "Components",
+          "subcategory": [
+            { "name" : "Harvest",
+              "type": [
+                "PV Solar Panel"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]  
+}
