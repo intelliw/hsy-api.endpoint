@@ -104,6 +104,16 @@ paths:
       responses:
         "200":
           $ref: "#/responses/200-ok"
+        "400":
+          $ref: "#/responses/400-bad-request"
+        "401":
+          $ref: "#/responses/401-unauthorized"
+        "404":
+          $ref: "#/responses/404-not-found"
+        "415":
+          $ref: "#/responses/415-unsupported-media-type"
+        "500":
+          $ref: "#/responses/500-internal-server-error"
       tags:
         - "Devices"
   "/devices/{device}/datasets/{dataset}":
@@ -233,10 +243,7 @@ parameters:
                     name:
                       description: "A valid product Category."
                       type: string
-                      enum:
-                      - Components
-                      - Solutions
-                      - Solutions & Components
+                      $ref: "#/definitions/enumProductCategory"
                     subcategory:
                       type: array  
                       items:
@@ -248,12 +255,7 @@ parameters:
                           name:
                             description: "A valid Subcategory for the product Category."
                             type: string
-                            enum:
-                            - Harvest
-                            - Counting
-                            - Replacing
-                            - Solar Home Kits
-                            - Saving & Enjoy
+                            $ref: "#/definitions/enumSubcategory"
                           type:
                             type: array
                             items:
@@ -264,118 +266,40 @@ parameters:
                                 name:
                                   description: "A valid product Type for the product Category and Subcategory."
                                   type: string
-                                  enum:
-                                  - Electricity Meter
-                                  - LED Lighting
-                                  - Air Conditioning
-                                  - Industrial PV
-                                  - Residential PV
-                                  - Home Battery
-                                  - Ulitium
-                                  - JouleBox
-                                  - PV Solar Panel
+                                  $ref: "#/definitions/enumProductType"
 responses:
   200-ok:
     description: "Data retrieved."
     schema:
-      $ref: "#/definitions/genericMessage"
+      $ref: "#/definitions/messageContainer"
   201-created:
     description: "Resource created."
     schema:
-      $ref: "#/definitions/genericMessage"
+      $ref: "#/definitions/messageContainer"
     headers:
       Location:
-        description: |
-          "A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource."
+        description: "A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource."
         type: string
   400-bad-request:
     description: "The client specified an invalid argument"
     schema:
-      type: object
-      properties:
-        code:
-          description: "The error code."
-          example: "400"
-          type: string
-        details:
-          items:
-            $ref: "#/definitions/genericErrorMessage"
-          type: array
-        message:
-          description: "The error message."
-          example: "The client specified an invalid argument."
-          type: string
-        status:
-          description: "The error status."
-          example: "INVALID_ARGUMENT"
-          type: string
+      $ref: "#/definitions/messageContainer"
   401-unauthorized:
     description: "The client does not have sufficient permission."
     schema:
-      type: object
-      properties:
-        code:
-          description: "The error code."
-          example: "401"
-          type: string
-        details:
-          items:
-            $ref: "#/definitions/genericErrorMessage"
-          type: array
-        message:
-          description: "The error message."
-          example: "The client does not have sufficient permission."
-          type: string
-        status:
-          description: "The error status."
-          example: "PERMISSION_DENIED"
-          type: string
+      $ref: "#/definitions/messageContainer"
   404-not-found:
     description: "The resource was not found."
     schema:
-      type: object
-      properties:
-        code:
-          description: "The error code."
-          example: "404"
-          type: string
-        details:
-          items:
-            $ref: "#/definitions/genericErrorMessage"
-          type: array
-        message:
-          description: "The error message."
-          example: "The specified resource was not found."
-          type: string
-        status:
-          description: "The error status."
-          example: "NOT_FOUND"
-          type: string
+      $ref: "#/definitions/messageContainer"
   415-unsupported-media-type:
     description: "The requested Accept header type is not supported."
     schema:
-      type: object
-      properties:
-        code:
-          description: "The error code."
-          example: "415"
-          type: string
-        details:
-          items:
-            $ref: "#/definitions/genericErrorMessage"
-          type: array
-        message:
-          description: "The error message."
-          example: "The specified resource was not found."
-          type: string
-        status:
-          description: "The error status."
-          example: "UNSUPPORTED_MEDIA_TYPE"
-          type: string
+      $ref: "#/definitions/messageContainer"
   500-internal-server-error:
     description: "The server encountered an unexpected condition."
     schema:
-      $ref: "#/definitions/genericMessage"
+      $ref: "#/definitions/messageContainer"
   energy-data:
     description: "Energy data items collection."
     schema:
@@ -409,9 +333,9 @@ responses:
                   links:
                     $ref: "#/definitions/collectionLinks"
                   data:
-                    $ref: "#/definitions/collectionDataNested"    
+                    $ref: "#/definitions/collectionDataContainer"    
 definitions:
-  collectionDataNested:
+  collectionDataContainer:
     description: "Two-tier data array for hierarchical Collection+JSON data."
     type: array
     items:
@@ -465,26 +389,56 @@ definitions:
           type: string
         render:
           type: string
-  genericMessage:
+  messageDetail:
     type: object
     properties:
       message:
+        description: "The message text."
         type: string
-  genericErrorMessage:
+        example: "NullValue"
+      target:
+        description: "The target of the message."
+        type: string
+        example: "period parameter"
+  messageContainer:
+    description: "Code and status with message details."
     type: object
     properties:
       code:
-        description: "The error code."
-        example: "NullValue"
+        description: "The response or error code."
         type: string
-      message:
-        description: "The error message."
+        example: "200"
+      status:
+        description: "The status of the response or error."
+        type: string
         example: "Illegal input for operation."
-        type: string
-      target:
-        description: "The error target."
-        example: "period"
-        type: string
+      details:
+        type: array
+        items:
+          $ref: "#/definitions/messageDetail"
+  enumProductCategory:
+    enum:
+    - Components
+    - Solutions
+    - Solutions & Components
+  enumProductType:
+    enum:
+    - Electricity Meter
+    - LED Lighting
+    - Air Conditioning
+    - Industrial PV
+    - Residential PV
+    - Home Battery
+    - Ulitium
+    - JouleBox
+    - PV Solar Panel
+  enumSubcategory:  
+    enum:
+    - Harvest
+    - Counting
+    - Replacing
+    - Solar Home Kits
+    - Saving & Enjoy    
 # This section requires all requests to any path to require an API key.
 security:
 - api_key: []
