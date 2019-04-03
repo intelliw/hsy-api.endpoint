@@ -225,7 +225,7 @@ parameters:
       description: "Product type and categories."
       type: object
       properties:
-        product-filter:
+        products:
           type: array
           items:
             type: object
