@@ -4,14 +4,14 @@
           "subcategory": [
             { "name" : "Solar Home Kits",
               "type": [
-                "JouleBox",
-                "Ulitium"
+                { "name" : "JouleBox" },
+                { "name" : "Ulitium" }
               ]
             },
             { "name" : "Replacing",
               "type": [
-                "Industrial PV",
-                "Residential PV"
+                { "name" : "Industrial PV" },
+                { "name" : "Residential PV" }
               ]
             }
           ]
@@ -20,7 +20,7 @@
           "subcategory": [
             { "name" : "Harvest",
               "type": [
-                "PV Solar Panel"
+                { "name" : "PV Solar Panel" }
               ]
             }
           ]
