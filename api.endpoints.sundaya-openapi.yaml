@@ -215,12 +215,12 @@ parameters:
             - "data"
             properties:
               data:
-                $ref: "#/definitions/collectionData"
+                $ref: "#/definitions/collectionDataDetail"
   product-filter:
     name: "product-filter"
     in: body
     required: false
-    description: "An optional filter specification to restrict query data to the specified  categories, subcategories and product types."
+    description: "An optional product filter to restrict data to specific categories, subcategories and product types."
     schema:
       description: "Product type and categories."
       type: object
@@ -255,7 +255,7 @@ parameters:
                           name:
                             description: "A valid Subcategory for the product Category."
                             type: string
-                            $ref: "#/definitions/enumSubcategory"
+                            $ref: "#/definitions/enumProductSubcategory"
                           type:
                             type: array
                             items:
@@ -271,11 +271,11 @@ responses:
   200-ok:
     description: "Data retrieved."
     schema:
-      $ref: "#/definitions/messageContainer"
+      $ref: "#/definitions/genericMessage"
   201-created:
     description: "Resource created."
     schema:
-      $ref: "#/definitions/messageContainer"
+      $ref: "#/definitions/genericMessage"
     headers:
       Location:
         description: "A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource."
@@ -283,23 +283,23 @@ responses:
   400-bad-request:
     description: "The client specified an invalid argument"
     schema:
-      $ref: "#/definitions/messageContainer"
+      $ref: "#/definitions/genericMessage"
   401-unauthorized:
     description: "The client does not have sufficient permission."
     schema:
-      $ref: "#/definitions/messageContainer"
+      $ref: "#/definitions/genericMessage"
   404-not-found:
     description: "The resource was not found."
     schema:
-      $ref: "#/definitions/messageContainer"
+      $ref: "#/definitions/genericMessage"
   415-unsupported-media-type:
     description: "The requested Accept header type is not supported."
     schema:
-      $ref: "#/definitions/messageContainer"
+      $ref: "#/definitions/genericMessage"
   500-internal-server-error:
     description: "The server encountered an unexpected condition."
     schema:
-      $ref: "#/definitions/messageContainer"
+      $ref: "#/definitions/genericMessage"
   energy-data:
     description: "Energy data items collection."
     schema:
@@ -333,9 +333,9 @@ responses:
                   links:
                     $ref: "#/definitions/collectionLinks"
                   data:
-                    $ref: "#/definitions/collectionDataContainer"    
+                    $ref: "#/definitions/collectionData"    
 definitions:
-  collectionDataContainer:
+  collectionData:
     description: "Two-tier data array for hierarchical Collection+JSON data."
     type: array
     items:
@@ -350,9 +350,9 @@ definitions:
         value:
           type: string
         data:
-          $ref: "#/definitions/collectionData"
-  collectionData:
-    description: "Generic data array for Collection+JSON data."
+          $ref: "#/definitions/collectionDataDetail"
+  collectionDataDetail:
+    description: "Generic data elements array for Collection+JSON data."
     type: array
     items:
       type: object
@@ -389,18 +389,7 @@ definitions:
           type: string
         render:
           type: string
-  messageDetail:
-    type: object
-    properties:
-      message:
-        description: "The message text."
-        type: string
-        example: "NullValue"
-      target:
-        description: "The target of the message."
-        type: string
-        example: "period parameter"
-  messageContainer:
+  genericMessage:
     description: "Code and status with message details."
     type: object
     properties:
@@ -415,7 +404,18 @@ definitions:
       details:
         type: array
         items:
-          $ref: "#/definitions/messageDetail"
+          $ref: "#/definitions/genericMesssageDetail"
+  genericMesssageDetail:
+    type: object
+    properties:
+      message:
+        description: "The message text."
+        type: string
+        example: "NullValue"
+      target:
+        description: "The target of the message."
+        type: string
+        example: "period parameter"
   enumProductCategory:
     enum:
     - Components
@@ -432,7 +432,7 @@ definitions:
     - Ulitium
     - JouleBox
     - PV Solar Panel
-  enumSubcategory:  
+  enumProductSubcategory:  
     enum:
     - Harvest
     - Counting
