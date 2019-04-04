@@ -112,7 +112,7 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "Devices"
-  "/devices/{device}/datasets/{dataset}":
+  "/devices/{device}/datasets/{device-dataset}":
     post:
       description: "Logs monitoring data for a device."
       operationId: "devices.device.dataset.post"
@@ -183,7 +183,7 @@ parameters:
     name: "site"
     in: query
     required: true
-    description: "Identifier of the customer site where energy assets have been installed."
+    description: "The customer site where energy assets are installed."
     type: string
   device:
     name: "device"
@@ -204,15 +204,7 @@ parameters:
     required: true
     description: "Data to be logged for a device and its dataset schema."
     schema:
-      description: "A list of device data items to be logged."
-      type: object
-      properties:
-        href:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: "#/definitions/collectionDataDetail"
+      $ref: "#/definitions/deviceDatasetData"
   product-catalogue-items:
     name: "product-catalogue-items"
     in: body
@@ -418,6 +410,21 @@ definitions:
         - "Ulitium"
         - "JouleBox"
         - "PV Solar Panel"
+  deviceDatasetData:
+    description: "A list of device data items to be logged."
+    type: object
+    properties:
+      href:
+        type: string
+      data:
+        type: array
+        items:
+          type: object
+          required:
+          - "data"
+          properties:
+            data:
+              $ref: "#/definitions/collectionDataDetail"
 # This section requires all requests to any path to require an API key.
 security:
 - api_key: []
