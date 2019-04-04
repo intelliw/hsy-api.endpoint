@@ -68,16 +68,12 @@ paths:
       - $ref: "#/parameters/energy"  
       - $ref: "#/parameters/period"
       - $ref: "#/parameters/epoch"
-      - name: "duration"
-        in: path
-        description: "The number of periods to return starting at epoch. This defaults to 1."
-        type: integer
-        format: int64
+      - $ref: "#/parameters/duration"
       - $ref: "#/parameters/site"
-      - $ref: "#/parameters/product-filter"
+      - $ref: "#/parameters/product-catalogue-items"
       responses:
         "200":
-          $ref: "#/responses/energy-data"
+          $ref: "#/responses/200-energy-data"
         "400":
           $ref: "#/responses/400-bad-request"
         "401":
@@ -126,8 +122,8 @@ paths:
       - "application/json"
       parameters:
       - $ref: "#/parameters/device"
-      - $ref: "#/parameters/dataset"
-      - $ref: "#/parameters/device-data"
+      - $ref: "#/parameters/device-dataset"
+      - $ref: "#/parameters/device-dataset-data"
       responses:
         "201":
           $ref: "#/responses/201-created"
@@ -177,6 +173,12 @@ parameters:
     type: string
     format: date-time
     default: "20190325"
+  duration:
+    name: "duration"
+    in: path
+    description: "The number of periods to return starting at epoch. This defaults to 1."
+    type: integer
+    format: int64
   site:  
     name: "site"
     in: query
@@ -188,16 +190,16 @@ parameters:
     in: path
     description: "The device identifier."
     type: string
-  dataset:  
-    name: "dataset"
+  device-dataset:  
+    name: "device-dataset"
     in: path
     description: "The type of dataset."
     type: string
     enum:
       - "MPPT-SNMP"
       - "PMS-EPACK"
-  device-data:
-    name: "device-data"
+  device-dataset-data:
+    name: "device-dataset-data"
     in: body
     required: true
     description: "Data to be logged."
@@ -216,57 +218,19 @@ parameters:
             properties:
               data:
                 $ref: "#/definitions/collectionDataDetail"
-  product-filter:
-    name: "product-filter"
+  product-catalogue-items:
+    name: "product-catalogue-items"
     in: body
     required: false
     description: "An optional product filter to restrict data to specific categories, subcategories and product types."
     schema:
-      description: "Product type and categories."
+      description: "Product categories."
       type: object
       properties:
-        products:
-          type: array
+        product-catalogue-items:
           items:
-            type: object
-            required:
-            - "category"
-            properties:
-              category:
-                type: array  
-                items:
-                  type: object
-                  required:
-                  - "name"
-                  - "subcategory"
-                  properties:
-                    name:
-                      description: "A valid product Category."
-                      type: string
-                      $ref: "#/definitions/enumProductCategory"
-                    subcategory:
-                      type: array  
-                      items:
-                        type: object
-                        required:
-                        - "name"
-                        - "type"
-                        properties:
-                          name:
-                            description: "A valid Subcategory for the product Category."
-                            type: string
-                            $ref: "#/definitions/enumProductSubcategory"
-                          type:
-                            type: array
-                            items:
-                              type: object
-                              required:
-                              - "name"
-                              properties:
-                                name:
-                                  description: "A valid product Type for the product Category and Subcategory."
-                                  type: string
-                                  $ref: "#/definitions/enumProductType"
+            $ref: '#/definitions/productCatalogueItem'
+          type: array
 responses:
   200-ok:
     description: "Data retrieved."
@@ -300,43 +264,49 @@ responses:
     description: "The server encountered an unexpected condition."
     schema:
       $ref: "#/definitions/genericMessage"
-  energy-data:
+  200-energy-data:
     description: "Energy data items collection."
     schema:
       type: object
       properties:
         collection:
-          type: object
-          required:
-          - "version"
-          - "href"
-          - "links"
-          - "items"
-          properties:
-            version:
-              type: string
-            href:
-              type: string
-            links:
-              $ref: "#/definitions/collectionLinks"
-            items:
-              type: array
-              items:
-                type: object
-                required:
-                - "href"
-                - "links"
-                - "data"
-                properties:
-                  href:
-                    type: string
-                  links:
-                    $ref: "#/definitions/collectionLinks"
-                  data:
-                    $ref: "#/definitions/collectionData"    
+          $ref: "#/definitions/collection"
 definitions:
+  collection:
+    description: "A Collection+JSON message consisting of Items and Data."
+    type: object
+    required:
+    - "version"
+    - "href"
+    - "links"
+    - "items"
+    properties:
+      version:
+        type: string
+      href:
+        type: string
+      links:
+        $ref: "#/definitions/collectionLinks"
+      items:
+        $ref: "#/definitions/collectionItems"
+  collectionItems:
+    description: "Items container for Links and Data in a Collection+JSON message."
+    type: array
+    items:
+      type: object
+      required:
+      - "href"
+      - "links"
+      - "data"
+      properties:
+        href:
+          type: string
+        links:
+          $ref: "#/definitions/collectionLinks"
+        data:
+          $ref: "#/definitions/collectionData"    
   collectionData:
-    description: "Two-tier data array for hierarchical Collection+JSON data."
+    description: "Top level Data in a Collection+JSON message."
     type: array
     items:
       type: object
@@ -352,7 +322,7 @@ definitions:
         data:
           $ref: "#/definitions/collectionDataDetail"
   collectionDataDetail:
-    description: "Generic data elements array for Collection+JSON data."
+    description: "Second level Data in a Collection+JSON message."
     type: array
     items:
       type: object
@@ -365,7 +335,7 @@ definitions:
         value:
           type: string
   collectionLinks:
-    description: "Generic array of links for Collection+JSON documents."
+    description: "Links in a Collection+JSON message."
     type: array
     items:
       type: object
@@ -406,6 +376,7 @@ definitions:
         items:
           $ref: "#/definitions/genericMesssageDetail"
   genericMesssageDetail:
+    description: "Message details provide additional information about a message target."
     type: object
     properties:
       message:
@@ -416,29 +387,42 @@ definitions:
         description: "The target of the message."
         type: string
         example: "period parameter"
-  enumProductCategory:
-    enum:
-    - Components
-    - Solutions
-    - Solutions & Components
-  enumProductType:
-    enum:
-    - Electricity Meter
-    - LED Lighting
-    - Air Conditioning
-    - Industrial PV
-    - Residential PV
-    - Home Battery
-    - Ulitium
-    - JouleBox
-    - PV Solar Panel
-  enumProductSubcategory:  
-    enum:
-    - Harvest
-    - Counting
-    - Replacing
-    - Solar Home Kits
-    - Saving & Enjoy    
+  productCatalogueItem:
+    description: "A product catalogue item definition."
+    type: object
+    properties:
+      product-category:
+        description: "A valid product Category."
+        type: string
+        example: "Solutions"
+        enum:
+        - "Components"
+        - "Solutions"
+        - "Solutions & Components"
+      product-subcategory:
+        description: "A valid Subcategory for the provided product Category."
+        type: string
+        example: "Solar Home Kits"
+        enum:
+        - "Harvest"
+        - "Counting"
+        - "Replacing"
+        - "Solar Home Kits"
+        - "Saving & Enjoy"   
+      product-type:
+        description: "A valid product Type for the product Category and Subcategory."
+        type: string
+        example: "JouleBox"
+        enum:
+        - "Electricity Meter"
+        - "LED Lighting"
+        - "Air Conditioning"
+        - "Industrial PV"
+        - "Residential PV"
+        - "Home Battery"
+        - "Ulitium"
+        - "JouleBox"
+        - "PV Solar Panel"
 # This section requires all requests to any path to require an API key.
 security:
 - api_key: []
