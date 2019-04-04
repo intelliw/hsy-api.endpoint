@@ -202,29 +202,24 @@ parameters:
     name: "device-dataset-data"
     in: body
     required: true
-    description: "Data to be logged."
+    description: "Data to be logged for a device and its dataset schema."
     schema:
-      description: "Device data items collection."
+      description: "A list of device data items to be logged."
       type: object
       properties:
         href:
           type: string
-        items:
+        data:
           type: array
           items:
-            type: object
-            required:
-            - "data"
-            properties:
-              data:
-                $ref: "#/definitions/collectionDataDetail"
+            $ref: "#/definitions/collectionDataDetail"
   product-catalogue-items:
     name: "product-catalogue-items"
     in: body
     required: false
     description: "An optional product filter to restrict data to specific categories, subcategories and product types."
     schema:
-      description: "Product categories."
+      description: "A list of product catalogue items to filter the energy data query."
       type: object
       properties:
         product-catalogue-items:
