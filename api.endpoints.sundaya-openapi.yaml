@@ -38,7 +38,7 @@ schemes:
 paths:
   "/api/versions":
     get:
-      description: "Returns a list of versions which are still supported. Older versions can be requested through the `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://endpointsportal.sundaya.cloud.goog/docs/api.endpoints.sundaya.cloud.goog/0/c/Getting%20Started/Standards%20&%20Conventions))."
+      description: "Returns a list of versions which are still supported. Older versions can be requested through the `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://endpointsportal.sundaya.cloud.goog/docs/api.endpoints.sundaya.cloud.goog/0/c/Getting%20Started/Standards%20&%20Conventionshttps://endpointsportal.sundaya.cloud.goog/docs/api.endpoints.sundaya.cloud.goog/0/c/Getting%20Started/Standards%20&%20Conventions/Overview))."
       operationId: "diagnostics.api.versions.get"
       consumes:
       - ""
