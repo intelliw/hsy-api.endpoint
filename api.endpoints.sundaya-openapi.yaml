@@ -232,7 +232,7 @@ responses:
         description: "A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource."
         type: string
   400-bad-request:
-    description: "The client specified an invalid argument"
+    description: "The client specified an invalid argument."
     schema:
       $ref: "#/definitions/genericMessage"
   401-unauthorized:
@@ -350,12 +350,12 @@ definitions:
     description: "Code and status with message details."
     type: object
     properties:
-      code:
-        description: "The response or error code."
-        type: string
-        example: "200"
       status:
-        description: "The status of the response or error."
+        description: "The response or error status code."
+        type: string
+        example: "400"
+      message:
+        description: "The summary description of the response or error."
         type: string
         example: "Illegal input for operation."
       details:
@@ -367,11 +367,11 @@ definitions:
     type: object
     properties:
       message:
-        description: "The message text."
+        description: "The message text describing an error or response condition for the target."
         type: string
         example: "NullValue"
       target:
-        description: "The target of the message."
+        description: "The target of the detail message."
         type: string
         example: "period parameter"
   productCatalogueItem:
