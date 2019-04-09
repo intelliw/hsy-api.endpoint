@@ -204,7 +204,7 @@ parameters:
     required: true
     description: "Data to be logged for a device and its dataset schema."
     schema:
-      $ref: "#/definitions/deviceDatasetData"
+      $ref: "#/definitions/deviceDataset"
   product-catalogue-items:
     name: "product-catalogue-items"
     in: body
@@ -410,21 +410,27 @@ definitions:
         - "Ulitium"
         - "JouleBox"
         - "PV Solar Panel"
-  deviceDatasetData:
-    description: "A list of device data items to be logged."
+  deviceDataset:
+    description: "A Collection+JSON message consisting of Items and Data."
     type: object
+    required:
+    - "items"
     properties:
-      href:
-        type: string
-      data:
-        type: array
-        items:
-          type: object
-          required:
-          - "data"
-          properties:
-            data:
-              $ref: "#/definitions/collectionDataDetail"
+      items:
+        $ref: "#/definitions/deviceDatasetItems"
+  deviceDatasetItems:
+    description: "Items container for Devices and Datasets."
+    type: array
+    items:
+      type: object
+      required:
+      - "href"
+      - "data"
+      properties:
+        href:
+          type: string
+        data:
+          $ref: "#/definitions/collectionData"    
 # This section requires all requests to any path to require an API key.
 security:
 - api_key: []
