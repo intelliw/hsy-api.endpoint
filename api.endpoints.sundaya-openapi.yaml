@@ -7,7 +7,7 @@ x-google-endpoints:
 basePath: "/"
 info:
   title: "Energy Management"
-  version: "0.0.07"
+  version: "0.0.08"
   description: |
     The Energy Management API is based on four energy **Types**:
 
@@ -53,10 +53,10 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "Diagnostics"
-  "/energy/{energy}/periods/{period}/{epoch}/{duration}":
+  "/energy/{energy}/period/{period}/{epoch}/{duration}":
     get:
-      description: "Retrieves energy monitoring data for a period. [Try this API](http://api.endpoints.sundaya.cloud.goog/energy/hse/periods/week/20150204/1?site=999)"
-      operationId: "energy.type.period.epoch.get"
+      description: "Retrieves energy monitoring data for a period. [Try this API](http://api.endpoints.sundaya.cloud.goog/energy/hse/period/week/20150204/1?site=999)"
+      operationId: "energy.period.epoch.duration.get"
       consumes:
       - "application/json"
       produces:
@@ -109,10 +109,10 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "Devices"
-  "/device/{device-id}/dataset/{dataset}/periods/{period}/{epoch}/{duration}":
+  "/device/{device-id}/dataset/{dataset}/period/{period}/{epoch}/{duration}":
     get:
-      description: "Returns device data for a period. [Try this API](http://api.endpoints.sundaya.cloud.goog/device/BBC-PR1202-999/dataset/MPPT-SNMP/periods)"
-      operationId: "device.dataset.periods.get"
+      description: "Returns device data for a period. [Try this API](http://api.endpoints.sundaya.cloud.goog/device/BBC-PR1202-999/dataset/MPPT-SNMP/period)"
+      operationId: "device.dataset.period.epoch.duration.get"
       consumes:
       - ""
       produces:
@@ -138,10 +138,10 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "Devices"
-  "/device/{device-id}/configs/periods/{period}/{epoch}/{duration}":
+  "/device/{device-id}/configs/period/{period}/{epoch}/{duration}":
     get:
-      description: "Returns historical configuration data for a period, including identifiers of subitems such as battery assembly, MCU board, and Mosfet board. . [Try this API](http://api.endpoints.sundaya.cloud.goog/device/BBC-PR1202-999/configs/periods)"
-      operationId: "device.configs.periods.get"
+      description: "Returns historical configuration data for a period, including identifiers of subitems such as battery assembly, MCU board, and Mosfet board. . [Try this API](http://api.endpoints.sundaya.cloud.goog/device/BBC-PR1202-999/configs/period)"
+      operationId: "device.configs.period.get"
       consumes:
       - ""
       produces:
