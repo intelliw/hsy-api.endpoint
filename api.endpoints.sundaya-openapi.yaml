@@ -86,7 +86,32 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "Energy" 
-  "/devices/{device}/config/{epoch}":
+  "/devices/{device-id}/datasets/{device-dataset}":
+    post:
+      description: "Logs monitoring data for a device."
+      operationId: "devices.device.dataset.post"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/parameters/device-id"
+      - $ref: "#/parameters/device-dataset"
+      - $ref: "#/parameters/device-dataset-data"
+      responses:
+        "201":
+          $ref: "#/responses/201-created"
+        "400":
+          $ref: "#/responses/400-bad-request"
+        "401":
+          $ref: "#/responses/401-unauthorized"
+        "415":
+          $ref: "#/responses/415-unsupported-media-type"
+        "500":
+          $ref: "#/responses/500-internal-server-error"
+      tags:
+        - "Devices"
+  "/devices/{device-id}/config/{epoch}":
     get:
       description: "Returns historical configuration data including identifiers of subitems such as battery assembly, MCU board, and Mosfet board. . [Try this API](http://api.endpoints.sundaya.cloud.goog/devices/999)"
       operationId: "devices.device.config.epoch.get"
@@ -95,7 +120,7 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - $ref: "#/parameters/device"
+      - $ref: "#/parameters/device-id"
       - $ref: "#/parameters/epoch"
       responses:
         "200":
@@ -108,29 +133,6 @@ paths:
           $ref: "#/responses/404-not-found"
         "415":
           $ref: "#/responses/415-unsupported-media-type"
-        "500":
-          $ref: "#/responses/500-internal-server-error"
-      tags:
-        - "Devices"
-  "/devices/{device}/datasets/{device-dataset}":
-    post:
-      description: "Logs monitoring data for a device."
-      operationId: "devices.device.dataset.post"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - $ref: "#/parameters/device"
-      - $ref: "#/parameters/device-dataset"
-      - $ref: "#/parameters/device-dataset-data"
-      responses:
-        "201":
-          $ref: "#/responses/201-created"
-        "400":
-          $ref: "#/responses/400-bad-request"
-        "401":
-          $ref: "#/responses/401-unauthorized"
         "500":
           $ref: "#/responses/500-internal-server-error"
       tags:
@@ -185,8 +187,8 @@ parameters:
     required: true
     description: "The customer site where energy assets are installed."
     type: string
-  device:
-    name: "device"
+  device-id:
+    name: "device-id"
     in: path
     description: "The device identifier."
     type: string
@@ -204,7 +206,7 @@ parameters:
     required: true
     description: "Data to be logged for a device and its dataset schema."
     schema:
-      $ref: "#/definitions/deviceDataset"
+      $ref: "#/definitions/dataset"
   product-catalogue-items:
     name: "product-catalogue-items"
     in: body
@@ -410,24 +412,27 @@ definitions:
         - "Ulitium"
         - "JouleBox"
         - "PV Solar Panel"
-  deviceDataset:
-    description: "A Collection+JSON message consisting of Items and Data."
+  dataset:
+    description: "A container for dataset Items."
     type: object
     required:
     - "items"
     properties:
       items:
-        $ref: "#/definitions/deviceDatasetItems"
-  deviceDatasetItems:
-    description: "Items container for Devices and Datasets."
+        $ref: "#/definitions/datasetItems"
+  datasetItems:
+    description: "a Container for Devices and Datasets."
     type: array
     items:
       type: object
       required:
-      - "href"
+      - "device"
+      - "dataset"
       - "data"
       properties:
-        href:
+        device:
+          type: string
+        dataset:
           type: string
         data:
           $ref: "#/definitions/collectionData"    
