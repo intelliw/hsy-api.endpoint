@@ -86,18 +86,16 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "Energy" 
-  "/devices/{device-id}/datasets/{device-dataset}":
+  "/devices/datasets":
     post:
-      description: "Logs monitoring data for a device."
-      operationId: "devices.device.dataset.post"
+      description: "Logs monitoring data for one or more devices and datasets."
+      operationId: "devices.datasets.post"
       consumes:
       - "application/json"
       produces:
       - "application/json"
       parameters:
-      - $ref: "#/parameters/device-id"
-      - $ref: "#/parameters/device-dataset"
-      - $ref: "#/parameters/device-dataset-data"
+      - $ref: "#/parameters/device-dataset-items"
       responses:
         "201":
           $ref: "#/responses/201-created"
@@ -111,17 +109,48 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "Devices"
-  "/devices/{device-id}/config/{epoch}":
+  "/device/{device-id}/dataset/{dataset}/periods/{period}/{epoch}/{duration}":
     get:
-      description: "Returns historical configuration data including identifiers of subitems such as battery assembly, MCU board, and Mosfet board. . [Try this API](http://api.endpoints.sundaya.cloud.goog/devices/999)"
-      operationId: "devices.device.config.epoch.get"
+      description: "Returns device data for a period. [Try this API](http://api.endpoints.sundaya.cloud.goog/device/BBC-PR1202-999/dataset/MPPT-SNMP/periods)"
+      operationId: "device.dataset.periods.get"
       consumes:
       - ""
       produces:
       - "application/json"
       parameters:
       - $ref: "#/parameters/device-id"
+      - $ref: "#/parameters/dataset"
+      - $ref: "#/parameters/period"
       - $ref: "#/parameters/epoch"
+      - $ref: "#/parameters/duration"
+      responses:
+        "200":
+          $ref: "#/responses/200-ok"
+        "400":
+          $ref: "#/responses/400-bad-request"
+        "401":
+          $ref: "#/responses/401-unauthorized"
+        "404":
+          $ref: "#/responses/404-not-found"
+        "415":
+          $ref: "#/responses/415-unsupported-media-type"
+        "500":
+          $ref: "#/responses/500-internal-server-error"
+      tags:
+        - "Devices"
+  "/device/{device-id}/configs/periods/{period}/{epoch}/{duration}":
+    get:
+      description: "Returns historical configuration data for a period, including identifiers of subitems such as battery assembly, MCU board, and Mosfet board. . [Try this API](http://api.endpoints.sundaya.cloud.goog/device/BBC-PR1202-999/configs/periods)"
+      operationId: "device.configs.periods.get"
+      consumes:
+      - ""
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/parameters/device-id"
+      - $ref: "#/parameters/period"
+      - $ref: "#/parameters/epoch"
+      - $ref: "#/parameters/duration"
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -171,7 +200,7 @@ parameters:
   epoch:
     name: "epoch"
     in: path
-    description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm) and based on the period."
+    description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm) and formatted according to the period."
     type: string
     format: date-time
     default: "20190325"
@@ -192,21 +221,27 @@ parameters:
     in: path
     description: "The device identifier."
     type: string
-  device-dataset:  
-    name: "device-dataset"
+  dataset:  
+    name: "dataset"
     in: path
     description: "The type of dataset."
     type: string
     enum:
       - "MPPT-SNMP"
       - "PMS-EPACK"
-  device-dataset-data:
-    name: "device-dataset-data"
+  device-dataset-items:
+    name: "device-dataset-items"
     in: body
     required: true
     description: "Data to be logged for a device and its dataset schema."
     schema:
-      $ref: "#/definitions/dataset"
+      description: "A list of device dataset data items."
+      type: object
+      properties:
+        device-dataset-items:
+          items:
+            $ref: "#/definitions/deviceDatasetItem"
+          type: array
   product-catalogue-items:
     name: "product-catalogue-items"
     in: body
@@ -351,6 +386,10 @@ definitions:
   genericMessage:
     description: "Code and status with message details."
     type: object
+    required:
+    - "status"
+    - "message"
+    - "details"
     properties:
       status:
         description: "The response or error status code."
@@ -367,6 +406,9 @@ definitions:
   genericMesssageDetail:
     description: "Message details provide additional information about a message target."
     type: object
+    required:
+    - "message"
+    - "target"
     properties:
       message:
         description: "The message text describing an error or response condition for the target."
@@ -379,6 +421,10 @@ definitions:
   productCatalogueItem:
     description: "A product catalogue item definition."
     type: object
+    required:
+    - "product-category"
+    - "product-subcategory"
+    - "product-type"
     properties:
       product-category:
         description: "A valid product Category."
@@ -412,30 +458,23 @@ definitions:
         - "Ulitium"
         - "JouleBox"
         - "PV Solar Panel"
-  dataset:
-    description: "A container for dataset Items."
+  deviceDatasetItem:
+    description: "A container for device dataset data."
     type: object
     required:
-    - "items"
+    - "device"
+    - "dataset"
+    - "data"
     properties:
-      items:
-        $ref: "#/definitions/datasetItems"
-  datasetItems:
-    description: "a Container for Devices and Datasets."
-    type: array
-    items:
-      type: object
-      required:
-      - "device"
-      - "dataset"
-      - "data"
-      properties:
-        device:
-          type: string
-        dataset:
-          type: string
-        data:
-          $ref: "#/definitions/collectionData"    
+      device:
+        type: string
+      dataset:
+        type: string
+        enum:
+        - "MPPT-SNMP"
+        - "PMS-EPACK"
+      data:
+        $ref: "#/definitions/collectionData"    
 # This section requires all requests to any path to require an API key.
 security:
 - api_key: []
