@@ -38,12 +38,14 @@ schemes:
 paths:
   "/api/versions":
     get:
-      description: "Returns a list of versions which are still supported. Older versions can be requested through the `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://endpointsportal.sundaya.cloud.goog/docs/api.endpoints.sundaya.cloud.goog/0/c/Getting%20Started/Standards%20&%20Conventions/Overview))."
+      description: "Returns a list of versions which are still supported. Older versions may be requested through an `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://endpointsportal.sundaya.cloud.goog/docs/api.endpoints.sundaya.cloud.goog/0/c/Getting%20Started/Standards%20&%20Conventions/Overview))."
       operationId: "diagnostics.api.versions.get"
       consumes:
       - ""
       produces:
       - "application/json"
+      parameters:
+      - $ref: '#/parameters/api_key'
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -71,6 +73,7 @@ paths:
       - $ref: "#/parameters/duration"
       - $ref: "#/parameters/site"
       - $ref: "#/parameters/product-catalogue-items"
+      - $ref: '#/parameters/api_key'
       responses:
         "200":
           $ref: "#/responses/200-energy-data"
@@ -96,6 +99,7 @@ paths:
       - "application/json"
       parameters:
       - $ref: "#/parameters/device-dataset-items"
+      - $ref: '#/parameters/api_key'
       responses:
         "201":
           $ref: "#/responses/201-created"
@@ -123,6 +127,7 @@ paths:
       - $ref: "#/parameters/period"
       - $ref: "#/parameters/epoch"
       - $ref: "#/parameters/duration"
+      - $ref: '#/parameters/api_key'
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -151,6 +156,7 @@ paths:
       - $ref: "#/parameters/period"
       - $ref: "#/parameters/epoch"
       - $ref: "#/parameters/duration"
+      - $ref: '#/parameters/api_key'
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -167,10 +173,50 @@ paths:
       tags:
         - "Devices"
 parameters:
-  energy:
-    name: "energy"
+  api_key:
+    description: The API key.
+    in: header
+    name: api_key
+    required: true
+    type: string
+  dataset:  
+    description: "The type of dataset."
     in: path
+    name: "dataset"
+    required: true
+    type: string
+    enum:
+      - "MPPT-SNMP"
+      - "PMS-EPACK"
+  device-dataset-items:
+    description: "Data to be logged for a device and its dataset schema."
+    in: body
+    name: "device-dataset-items"
+    required: true
+    schema:
+      description: "A list of device dataset data items."
+      type: object
+      properties:
+        device-dataset-items:
+          items:
+            $ref: "#/definitions/deviceDatasetItem"
+          type: array
+  device-id:
+    description: "The device identifier."
+    in: path
+    name: "device-id"
+    required: true
+    type: string
+  duration:
+    description: "The number of periods to return starting at epoch. This defaults to 1."
+    in: path
+    name: "duration"
+    type: integer
+    format: int64
+  energy:
     description: "The type of energy flow."
+    in: path
+    name: "energy"
     type: string
     default: "hse"
     enum:
@@ -179,10 +225,17 @@ parameters:
       - "store"
       - "enjoy"
       - "grid"
-  period:
-    name: "period"
+  epoch:
+    description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm) and formatted according to the period."
     in: path
+    name: "epoch"
+    type: string
+    format: date-time
+    default: "20190325"
+  period:
     description: "The time window for which total energy is aggregated. The only exception is 'instant' which measures energy at a single point in time, without aggregation."
+    in: path
+    name: "period"
     type: string
     default: "week"
     enum:
@@ -197,56 +250,11 @@ parameters:
       - "quarter"
       - "year"
       - "fiveyear"
-  epoch:
-    name: "epoch"
-    in: path
-    description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm) and formatted according to the period."
-    type: string
-    format: date-time
-    default: "20190325"
-  duration:
-    name: "duration"
-    in: path
-    description: "The number of periods to return starting at epoch. This defaults to 1."
-    type: integer
-    format: int64
-  site:  
-    name: "site"
-    in: query
-    required: true
-    description: "The customer site where energy assets are installed."
-    type: string
-  device-id:
-    name: "device-id"
-    in: path
-    description: "The device identifier."
-    type: string
-  dataset:  
-    name: "dataset"
-    in: path
-    description: "The type of dataset."
-    type: string
-    enum:
-      - "MPPT-SNMP"
-      - "PMS-EPACK"
-  device-dataset-items:
-    name: "device-dataset-items"
-    in: body
-    required: true
-    description: "Data to be logged for a device and its dataset schema."
-    schema:
-      description: "A list of device dataset data items."
-      type: object
-      properties:
-        device-dataset-items:
-          items:
-            $ref: "#/definitions/deviceDatasetItem"
-          type: array
   product-catalogue-items:
-    name: "product-catalogue-items"
-    in: body
-    required: false
     description: "An optional product filter to restrict data to specific categories, subcategories and product types."
+    in: body
+    name: "product-catalogue-items"
+    required: false
     schema:
       description: "A list of product catalogue items to filter the energy data query."
       type: object
@@ -255,18 +263,31 @@ parameters:
           items:
             $ref: '#/definitions/productCatalogueItem'
           type: array
+  site:  
+    description: "The customer site where energy assets are installed."
+    in: query
+    name: "site"
+    required: true
+    type: string
 responses:
   200-ok:
     description: "Data retrieved."
     schema:
       $ref: "#/definitions/genericMessage"
+  200-energy-data:
+    description: "Energy data items collection."
+    schema:
+      type: object
+      properties:
+        collection:
+          $ref: "#/definitions/collection"
   201-created:
     description: "Resource created."
     schema:
       $ref: "#/definitions/genericMessage"
     headers:
       Location:
-        description: "A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource."
+        description: "One or more [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) headers provide links back to the created resource."
         type: string
   400-bad-request:
     description: "The client specified an invalid argument."
@@ -288,13 +309,6 @@ responses:
     description: "The server encountered an unexpected condition."
     schema:
       $ref: "#/definitions/genericMessage"
-  200-energy-data:
-    description: "Energy data items collection."
-    schema:
-      type: object
-      properties:
-        collection:
-          $ref: "#/definitions/collection"
 definitions:
   collection:
     description: "A Collection+JSON message consisting of Items and Data."
@@ -476,6 +490,7 @@ definitions:
       data:
         $ref: "#/definitions/collectionData"    
 # This section requires all requests to any path to require an API key.
+# [START securityDef]
 security:
 - api_key: []
 securityDefinitions:
@@ -483,7 +498,8 @@ securityDefinitions:
   api_key:
     type: "apiKey"
     name: "key"
-    in: query
+    in: "query"
+# [END securityDef]
   # This section configures authentication using Google API Service Accounts
   # to sign a json web token. This is mostly used for server-to-server
   # communication.
@@ -495,8 +511,33 @@ securityDefinitions:
     x-google-issuer: "jwt-client.endpoints.sample.google.com"
     # Update this with your service account's email address.
     x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/jwk/YOUR-SERVICE-ACCOUNT-EMAIL"
-    # This must match the "aud" field in the JWT. You can add multiple
-    # audiences to accept JWTs from multiple clients.
+    # This must match the "aud" field in the JWT. You can add multiple audiences to accept JWTs from multiple clients.
+    x-google-audiences: "echo.endpoints.sample.google.com"
+  # This section configures authentication using Google App Engine default
+  # service account to sign a json web token. This is mostly used for
+  # server-to-server communication.
+  gae_default_service_account:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    # Replace YOUR-CLIENT-PROJECT-ID with your client project ID.
+    x-google-issuer: "YOUR-CLIENT-PROJECT-ID@appspot.gserviceaccount.com"
+    # Replace YOUR-CLIENT-PROJECT-ID with your client project ID.
+    x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/YOUR-CLIENT-PROJECT-ID@appspot.gserviceaccount.com"
+    # This must match the "aud" field in the JWT. You can add multiple audiences to accept JWTs from multiple clients.
+    x-google-audiences: "echo.endpoints.sample.google.com"
+  # This section configures authentication using a service account
+  # to sign a json web token. This is mostly used for server-to-server
+  # communication.
+  google_service_account:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    # Replace YOUR-SERVICE-ACCOUNT-EMAIL with your service account email.
+    x-google-issuer: "YOUR-SERVICE-ACCOUNT-EMAIL"
+    # Replace YOUR-SERVICE-ACCOUNT-EMAIL with your service account email.
+    x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/YOUR-SERVICE-ACCOUNT-EMAIL"
+    # This must match the "aud" field in the JWT. You can add multiple audiences to accept JWTs from multiple clients.
     x-google-audiences: "echo.endpoints.sample.google.com"
   # This section configures authentication using Google OAuth2 ID Tokens.
   # ID Tokens can be obtained using OAuth2 clients, and can be used to access
@@ -507,7 +548,15 @@ securityDefinitions:
     type: "oauth2"
     x-google-issuer: "https://accounts.google.com"
     x-google-jwks_uri: "https://www.googleapis.com/oauth2/v3/certs"
-    # Your OAuth2 client's Client ID must be added here. You can add
-    # multiple client IDs to accept tokens from multiple clients.
+    # Your OAuth2 client's Client ID must be added here. You can add multiple client IDs to accept tokens form multiple clients.
     x-google-audiences: "YOUR-CLIENT-ID"
-
+  # This section configures authentication using Firebase Auth.
+  # [START firebaseAuth]
+  firebase:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    x-google-issuer: "https://securetoken.google.com/YOUR-PROJECT-ID"
+    x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/metadata/x509/securetoken@system.gserviceaccount.com"
+    x-google-audiences: "YOUR-PROJECT-ID"
+  # [END firebaseAuth]
