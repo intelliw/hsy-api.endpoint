@@ -176,7 +176,7 @@ parameters:
   api-key:
     description: The API key.
     in: header
-    name: apiKey
+    name: api_key
     required: true
     type: string
   dataset:  
@@ -496,7 +496,7 @@ security:
 securityDefinitions:
   # This section configures basic authentication with an API key.
   api_key:
-    type: "apiKey"
+    type: "api_key"
     name: "key"
     in: "query"
 # [END securityDef]
