@@ -7,7 +7,7 @@ x-google-endpoints:
 basePath: "/"
 info:
   title: "Energy Management"
-  version: "0.0.08"
+  version: "0.0.09"
   description: |
     The Energy Management API is based on four energy **Types**:
 
@@ -45,7 +45,7 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - $ref: '#/parameters/api_key'
+      - $ref: '#/parameters/api-key'
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -73,7 +73,7 @@ paths:
       - $ref: "#/parameters/duration"
       - $ref: "#/parameters/site"
       - $ref: "#/parameters/product-catalogue-items"
-      - $ref: '#/parameters/api_key'
+      - $ref: '#/parameters/api-key'
       responses:
         "200":
           $ref: "#/responses/200-energy-data"
@@ -99,7 +99,7 @@ paths:
       - "application/json"
       parameters:
       - $ref: "#/parameters/device-dataset-items"
-      - $ref: '#/parameters/api_key'
+      - $ref: '#/parameters/api-key'
       responses:
         "201":
           $ref: "#/responses/201-created"
@@ -127,7 +127,7 @@ paths:
       - $ref: "#/parameters/period"
       - $ref: "#/parameters/epoch"
       - $ref: "#/parameters/duration"
-      - $ref: '#/parameters/api_key'
+      - $ref: '#/parameters/api-key'
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -156,7 +156,7 @@ paths:
       - $ref: "#/parameters/period"
       - $ref: "#/parameters/epoch"
       - $ref: "#/parameters/duration"
-      - $ref: '#/parameters/api_key'
+      - $ref: '#/parameters/api-key'
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -173,10 +173,10 @@ paths:
       tags:
         - "Devices"
 parameters:
-  api_key:
+  api-key:
     description: The API key.
     in: header
-    name: api_key
+    name: apiKey
     required: true
     type: string
   dataset:  
@@ -191,13 +191,13 @@ parameters:
   device-dataset-items:
     description: "Data to be logged for a device and its dataset schema."
     in: body
-    name: "device-dataset-items"
+    name: "deviceDatasetItems"
     required: true
     schema:
       description: "A list of device dataset data items."
       type: object
       properties:
-        device-dataset-items:
+        deviceDatasetItems:
           items:
             $ref: "#/definitions/deviceDatasetItem"
           type: array
@@ -253,13 +253,13 @@ parameters:
   product-catalogue-items:
     description: "An optional product filter to restrict data to specific categories, subcategories and product types."
     in: body
-    name: "product-catalogue-items"
+    name: "productCatalogueItems"
     required: false
     schema:
       description: "A list of product catalogue items to filter the energy data query."
       type: object
       properties:
-        product-catalogue-items:
+        productCatalogueItems:
           items:
             $ref: '#/definitions/productCatalogueItem'
           type: array
@@ -436,11 +436,11 @@ definitions:
     description: "A product catalogue item definition."
     type: object
     required:
-    - "product-category"
-    - "product-subcategory"
-    - "product-type"
+    - "productCategory"
+    - "productSubcategory"
+    - "productType"
     properties:
-      product-category:
+      productCategory:
         description: "A valid product Category."
         type: string
         example: "Solutions"
@@ -448,7 +448,7 @@ definitions:
         - "Components"
         - "Solutions"
         - "Solutions & Components"
-      product-subcategory:
+      productSubcategory:
         description: "A valid Subcategory for the provided product Category."
         type: string
         example: "Solar Home Kits"
@@ -458,7 +458,7 @@ definitions:
         - "Replacing"
         - "Solar Home Kits"
         - "Saving & Enjoy"   
-      product-type:
+      productType:
         description: "A valid product Type for the product Category and Subcategory."
         type: string
         example: "JouleBox"
