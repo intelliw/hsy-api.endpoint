@@ -191,15 +191,15 @@ parameters:
   device-dataset-items:
     description: "Data to be logged for a device and its dataset schema."
     in: body
-    name: "deviceDatasetItems"
+    name: "deviceDatasets"
     required: true
     schema:
       description: "A list of device dataset data items."
       type: object
       properties:
-        deviceDatasetItems:
+        deviceDatasets:
           items:
-            $ref: "#/definitions/deviceDatasetItem"
+            $ref: "#/definitions/deviceDataset"
           type: array
   device-id:
     description: "The device identifier."
@@ -472,23 +472,39 @@ definitions:
         - "Ulitium"
         - "JouleBox"
         - "PV Solar Panel"
-  deviceDatasetItem:
+  deviceDataset:
     description: "A container for device dataset data."
     type: object
     required:
     - "device"
+    - "eventTime"
     - "dataset"
     - "data"
     properties:
       device:
         type: string
-      dataset:
+      topic:
         type: string
         enum:
-        - "MPPT-SNMP"
-        - "PMS-EPACK"
-      data:
-        $ref: "#/definitions/collectionData"    
+        - "MPPTSNMP"
+        - "PMSEPACK"
+      dataset:
+        $ref: "#/definitions/deviceData"    
+  deviceData:
+    description: "Container for collection of device data items"
+    type: array
+    items:
+      type: object
+      required:
+      - "eventTime"
+      - "data"
+      properties:
+        eventTime:
+          description: "The time of the event which produced this dataset, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm)."
+          type: string
+          format: date-time
+        data:
+          $ref: "#/definitions/collectionDataDetail"
 # This section requires all requests to any path to require an API key.
 # [START securityDef]
 security:
