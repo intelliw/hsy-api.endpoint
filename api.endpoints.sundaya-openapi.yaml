@@ -482,8 +482,10 @@ definitions:
     - "data"
     properties:
       device:
+        description: "The device identifier, is used for topic partioning in the api host's message producer."
         type: string
       topic:
+        description: "A topic identifier, which the api host uses to lookup the actual topic name for the message producer."
         type: string
         enum:
         - "MPPTSNMP"
