@@ -9,7 +9,7 @@ info:
   title: "Energy Management"
   version: "0.0.09"
   description: |
-    The Energy Management API is based on four energy **Types**:
+    The Energy Management API provides energy accounting for four energy **Types**:
 
     `harvest`, `store`, `enjoy`, `grid`
     
@@ -180,21 +180,21 @@ parameters:
     required: true
     type: string
   dataset:  
-    description: "The type of dataset."
     in: path
     name: "dataset"
     required: true
+    description: "The type of dataset."
     type: string
     enum:
-      - "MPPT-SNMP"
-      - "PMS-EPACK"
+    - "MPPT-SNMP"
+    - "PMS-EPACK"
   device-dataset-items:
-    description: "Data to be logged for a device and its dataset schema."
+    description: "Data to be logged for a device based on its dataset schema."
     in: body
     name: "deviceDatasets"
     required: true
     schema:
-      description: "A list of device dataset data items."
+      description: "A list of device datasets and data items."
       type: object
       properties:
         deviceDatasets:
@@ -473,26 +473,27 @@ definitions:
         - "JouleBox"
         - "PV Solar Panel"
   deviceDataset:
-    description: "A container for device dataset data."
+    description: "The device dataset contains a set of data items sampled from the device at a specific eventTime."
     type: object
     required:
     - "device"
-    - "eventTime"
     - "dataset"
-    - "data"
+    - "items"
     properties:
       device:
-        description: "The device identifier, is used for topic partioning in the api host's message producer."
+        description: "The device identifier."
         type: string
-      topic:
-        description: "A topic identifier, which the api host uses to lookup the actual topic name for the message producer."
-        type: string
-        enum:
-        - "MPPTSNMP"
-        - "PMSEPACK"
       dataset:
-        $ref: "#/definitions/deviceData"    
-  deviceData:
+        $ref: "#/definitions/datasetType"
+      items:
+        $ref: "#/definitions/datasetItems"
+  datasetType:
+    description: "The type of dataset."
+    type: string
+    enum:
+    - "MPPT-SNMP"
+    - "PMS-EPACK"
+  datasetItems:
     description: "Container for collection of device data items"
     type: array
     items:

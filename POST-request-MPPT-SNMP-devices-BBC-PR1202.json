@@ -1,8 +1,8 @@
 {
   "deviceDatasets": [
     { "device": "BBC-PR1202-999",
-      "topic": "MPPTSNMP",
-      "dataset": [
+      "dataset": "MPPT-SNMP",
+      "items": [
         { "eventTime": "20190209T150006.022-0700",
           "data": [            
             { "name": "pv1", "value": "99" },
