@@ -494,7 +494,7 @@ definitions:
     - "MPPT-SNMP"
     - "PMS-EPACK"
   datasetItems:
-    description: "Container for collection of device data items"
+    description: "A time-series set of data records."
     type: array
     items:
       type: object
