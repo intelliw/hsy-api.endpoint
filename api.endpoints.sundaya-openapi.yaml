@@ -21,7 +21,7 @@ info:
     
     Type | Assets | Devices
     --- | --- | ---
-    `harvest` | Renewables | PV Modules, Maximum Power Point Trackers (MPPT)
+    `harvest` | Renewables | PV Modules, Maximum Power Point Trackers (MPPT), Charge Controllers
     `store` | Storage | Busbar Controllers (BBC), Pack Management Systems (PMS)
     `enjoy` | Appliances | Multicore-Cable Current Sensors, Switchboard Clamp Sensors
     `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters
@@ -89,16 +89,16 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "Energy" 
-  "/devices/datasets":
+  "/devices/dataset/epack":
     post:
-      description: "Logs monitoring data for one or more devices and datasets."
-      operationId: "devices.datasets.post"
+      description: "Logs monitoring data for the pack management system (PMS) including data for each cabinet and its battery packs."
+      operationId: "devices.dataset.pms-epack.post"
       consumes:
       - "application/json"
       produces:
       - "application/json"
       parameters:
-      - $ref: "#/parameters/device-dataset-items"
+      - $ref: "#/parameters/device-dataset-epack"
       - $ref: '#/parameters/api-key'
       responses:
         "201":
@@ -115,7 +115,7 @@ paths:
         - "Devices"
   "/device/{device-id}/dataset/{dataset}/period/{period}/{epoch}/{duration}":
     get:
-      description: "Returns device data for a period. [Try this API](http://api.endpoints.sundaya.cloud.goog/device/BBC-PR1202-999/dataset/MPPT-SNMP/period)"
+      description: "Returns device data for a period. [Try this API](http://api.endpoints.sundaya.cloud.goog/device/CAB-01-001/dataset/pms-epack)"
       operationId: "device.dataset.period.epoch.duration.get"
       consumes:
       - ""
@@ -186,20 +186,21 @@ parameters:
     description: "The type of dataset."
     type: string
     enum:
-    - "MPPT-SNMP"
-    - "PMS-EPACK"
-  device-dataset-items:
-    description: "Data to be logged for a device based on its dataset schema."
+    - "epack"
+    - "mppt"
+    - "inverter"
+  device-dataset-epack:
+    description: "Data logged by the PMS for epacks in a cabinet."
     in: body
-    name: "deviceDatasets"
+    name: "datasets"
     required: true
     schema:
-      description: "A list of device datasets and data items."
+      description: "An array of devices and event data items."
       type: object
       properties:
-        deviceDatasets:
+        datasets:
           items:
-            $ref: "#/definitions/deviceDataset"
+            $ref: "#/definitions/epackCabinet"
           type: array
   device-id:
     description: "The device identifier."
@@ -472,42 +473,135 @@ definitions:
         - "Ulitium"
         - "JouleBox"
         - "PV Solar Panel"
-  deviceDataset:
-    description: "The device dataset contains a set of data items sampled from the device at a specific eventTime."
-    type: object
-    required:
-    - "device"
-    - "dataset"
-    - "items"
-    properties:
-      device:
-        description: "The device identifier."
-        type: string
-      dataset:
-        $ref: "#/definitions/datasetType"
-      items:
-        $ref: "#/definitions/datasetItems"
   datasetType:
     description: "The type of dataset."
     type: string
     enum:
-    - "MPPT-SNMP"
-    - "PMS-EPACK"
-  datasetItems:
-    description: "A time-series set of data records."
+    - "epack"
+    - "mppt"
+    - "inverter"
+  epackCabinet:
+    description: "The device dataset contains a set of data items sampled from the device at a specified eventTime."
+    type: object
+    required:
+    - "eventTime"
+    - "cabinet"
+    - "data"      
+    properties:
+      eventTime:
+        $ref: "#/definitions/eventTime"
+      cabinet:
+        description: "The identifier of the cabinet which contains the packs in this dataset."
+        type: string
+      data:
+        $ref: "#/definitions/epackData"
+  epackData:
+    description: "A set of data sampled from all packs in the cabinet, at the same eventTime."
     type: array
     items:
       type: object
       required:
-      - "eventTime"
-      - "data"
+      - "pack"
+      - "cell"
+      - "fet"
       properties:
-        eventTime:
-          description: "The time of the event which produced this dataset, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm)."
-          type: string
-          format: date-time
-        data:
-          $ref: "#/definitions/collectionDataDetail"
+        pack:
+          description: "The datapoints for the pack as a whole."
+          type: object
+          required:
+          - "id"
+          - "slot"
+          - "amps"
+          - "soc"
+          - "temp"
+          properties:
+            id:
+              description: "The pack identifier."
+              type: string
+              example: "NullValue"
+            slot:
+              description: "The cabinet slot number (1 - 12) in which this pack is installed."
+              type: string
+              example: "12"
+            amps:
+              description: "The current draw from this pack."
+              type: string
+              format: float
+              example: "1.05"
+            soc:
+              description: "The % state of charge of this pack."
+              type: string
+              format: float
+              example: "94.3"
+            temp:
+              description: "The temperature of the cell-pack top, middle, and bottom."
+              type: object
+              required:
+              - "top"
+              - "middle"
+              - "bottom"
+              properties:
+                top:
+                  $ref: "#/definitions/temperature"
+                middle:
+                  $ref: "#/definitions/temperature"
+                bottom:
+                  $ref: "#/definitions/temperature"
+        cell:
+          description: "A set of data sampled cellblocks inside this pack."
+          type: object
+          required:
+          - "volts"
+          properties:
+            volts:
+              description: "Voltage readings for 14 cellblocks in this pack."
+              type: array
+              items:
+                type: string
+                format: float
+                example: "12"
+        fet:
+          description: "The data readings for input (CMOS) and output (DMOS) MOSFETS."
+          type: object
+          required:
+          - "temp"
+          - "status"
+          properties:
+            temp:
+              description: "The temperature of the input (CMOS) and output (DMOS) MOSFETS."
+              type: object
+              required:
+              - "in"
+              - "out"
+              properties:
+                in:
+                  $ref: "#/definitions/temperature"
+                out:
+                  $ref: "#/definitions/temperature"
+            status:
+              description: "The status of the input (CMOS) and output (DMOS) MOSFETS."
+              type: object
+              required:
+              - "in"
+              - "out"
+              properties:
+                in:
+                  description: "CMOS status (1=open/0=closed)."
+                  type: boolean
+                  example: "0"
+                out:
+                  description: "DMOS status (1=open/0=closed)."
+                  type: boolean
+                  example: "1"
+  temperature:
+    description: "Temperature in degrees Centigrade."
+    type: string
+    format: float
+    example: "34.0"
+  eventTime:
+    description: "The time of the event which produced this dataset, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm)."
+    type: string
+    format: date-time
 # This section requires all requests to any path to require an API key.
 # [START securityDef]
 security:
