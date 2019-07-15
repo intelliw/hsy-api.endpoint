@@ -113,6 +113,54 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "Devices"
+  "/devices/dataset/mppt":
+    post:
+      description: "Logs monitoring data for maximum power point tracking (MPPT) charge controllers, including data for connected pv strings, batteries, and DC loads."
+      operationId: "devices.dataset.mppt-controller.post"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/parameters/device-dataset-charge-controller"
+      - $ref: '#/parameters/api-key'
+      responses:
+        "201":
+          $ref: "#/responses/201-created"
+        "400":
+          $ref: "#/responses/400-bad-request"
+        "401":
+          $ref: "#/responses/401-unauthorized"
+        "415":
+          $ref: "#/responses/415-unsupported-media-type"
+        "500":
+          $ref: "#/responses/500-internal-server-error"
+      tags:
+        - "Devices"
+  "/devices/dataset/inverter":
+    post:
+      description: "Logs monitoring data for Inverter charge controllers, including data for connected pv strings, batteries, and AC loads."
+      operationId: "devices.dataset.inverter-controller.post"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/parameters/device-dataset-charge-controller"
+      - $ref: '#/parameters/api-key'
+      responses:
+        "201":
+          $ref: "#/responses/201-created"
+        "400":
+          $ref: "#/responses/400-bad-request"
+        "401":
+          $ref: "#/responses/401-unauthorized"
+        "415":
+          $ref: "#/responses/415-unsupported-media-type"
+        "500":
+          $ref: "#/responses/500-internal-server-error"
+      tags:
+        - "Devices"
   "/device/{device-id}/dataset/{dataset}/period/{period}/{epoch}/{duration}":
     get:
       description: "Returns device data for a period. [Try this API](http://api.endpoints.sundaya.cloud.goog/device/CAB-01-001/dataset/pms-epack)"
@@ -195,12 +243,25 @@ parameters:
     name: "datasets"
     required: true
     schema:
-      description: "An array of devices and event data items."
+      description: "An array of cabinet datasets."
       type: object
       properties:
         datasets:
           items:
-            $ref: "#/definitions/epackCabinet"
+            $ref: "#/definitions/epackCabinetDataset"
+          type: array
+  device-dataset-charge-controller:
+    description: "Data logged by a charge controller in a MPPT (DC) or Inverter (AC)."
+    in: body
+    name: "datasets"
+    required: true
+    schema:
+      description: "An array of charge controller datasets."
+      type: object
+      properties:
+        datasets:
+          items:
+            $ref: "#/definitions/chargeControllerDataset"
           type: array
   device-id:
     description: "The device identifier."
@@ -433,78 +494,106 @@ definitions:
         description: "The target of the detail message."
         type: string
         example: "period parameter"
-  productCatalogueItem:
-    description: "A product catalogue item definition."
+  chargeControllerDataset:
+    description: "Contains data for a charge controller and its connected devices."
     type: object
     required:
-    - "productCategory"
-    - "productSubcategory"
-    - "productType"
+    - "controller"
+    - "data"      
     properties:
-      productCategory:
-        description: "A valid product Category."
+      controlller:
+        description: "The identifier of the MPPT or inverter which aquires data from pv, batteries, and loads."
         type: string
-        example: "Solutions"
-        enum:
-        - "Components"
-        - "Solutions"
-        - "Solutions & Components"
-      productSubcategory:
-        description: "A valid Subcategory for the provided product Category."
-        type: string
-        example: "Solar Home Kits"
-        enum:
-        - "Harvest"
-        - "Counting"
-        - "Replacing"
-        - "Solar Home Kits"
-        - "Saving & Enjoy"   
-      productType:
-        description: "A valid product Type for the product Category and Subcategory."
-        type: string
-        example: "JouleBox"
-        enum:
-        - "Electricity Meter"
-        - "LED Lighting"
-        - "Air Conditioning"
-        - "Industrial PV"
-        - "Residential PV"
-        - "Home Battery"
-        - "Ulitium"
-        - "JouleBox"
-        - "PV Solar Panel"
-  datasetType:
-    description: "The type of dataset."
-    type: string
-    enum:
-    - "epack"
-    - "mppt"
-    - "inverter"
-  epackCabinet:
-    description: "The device dataset contains a set of data items sampled from the device at a specified eventTime."
+      data:
+        $ref: "#/definitions/chargeControllerDeviceData"
+  chargeControllerDeviceData:
+    description: "Data from devices connected to a charge controller, at the same event time."
+    type: array
+    items:
+      type: object
+      required:
+      - "time"
+      - "pv"
+      - "battery"
+      - "load"
+      properties:
+        time:
+          $ref: "#/definitions/eventTime"
+        pv:
+          type: object
+          required:
+          - "volts"
+          - "amps"
+          properties:
+            volts:
+              description: "Voltage readings for each connected PV string."
+              type: array
+              items:
+                type: string
+                format: float
+                example: "48.000"
+            amps:
+              description: "Current readings for each connected PV string."
+              type: array
+              items:
+                type: string
+                format: float
+                example: "6.0"
+        battery:
+          type: object
+          required:
+          - "volts"
+          properties:
+            volts:
+              description: "Voltage reading for the connected battery."
+              type: string
+              format: float
+              example: "55.1"
+        load:
+          type: object
+          required:
+          - "volts"
+          - "amps"
+          properties:
+            volts:
+              description: "Voltage readings for each connected load."
+              type: array
+              items:
+                type: string
+                format: float
+                example: "48.000"
+            amps:
+              description: "Current readings for each connected load."
+              type: array
+              items:
+                type: string
+                format: float
+                example: "1.2"
+  epackCabinetDataset:
+    description: "Contains a data for a cabinet and its contents."
     type: object
     required:
-    - "eventTime"
     - "cabinet"
     - "data"      
     properties:
-      eventTime:
-        $ref: "#/definitions/eventTime"
       cabinet:
         description: "The identifier of the cabinet which contains the packs in this dataset."
         type: string
       data:
         $ref: "#/definitions/epackData"
   epackData:
-    description: "A set of data sampled from all packs in the cabinet, at the same eventTime."
+    description: "Data from epacks installed in a cabinet."
     type: array
     items:
       type: object
       required:
+      - "time"
       - "pack"
       - "cell"
       - "fet"
       properties:
+        time:
+          $ref: "#/definitions/eventTime"
         pack:
           description: "The datapoints for the pack as a whole."
           type: object
@@ -534,7 +623,7 @@ definitions:
               format: float
               example: "94.3"
             temp:
-              description: "The temperature of the cell-pack top, middle, and bottom."
+              description: "The temperature of the cell-pack at its top, middle, and bottom."
               type: object
               required:
               - "top"
@@ -593,15 +682,55 @@ definitions:
                   description: "DMOS status (1=open/0=closed)."
                   type: boolean
                   example: "1"
+  eventTime:
+    description: "The time of the event which produced this data sample, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm)."
+    type: string
+    format: date-time                  
+  productCatalogueItem:
+    description: "A product catalogue item definition."
+    type: object
+    required:
+    - "productCategory"
+    - "productSubcategory"
+    - "productType"
+    properties:
+      productCategory:
+        description: "A valid product Category."
+        type: string
+        example: "Solutions"
+        enum:
+        - "Components"
+        - "Solutions"
+        - "Solutions & Components"
+      productSubcategory:
+        description: "A valid Subcategory for the provided product Category."
+        type: string
+        example: "Solar Home Kits"
+        enum:
+        - "Harvest"
+        - "Counting"
+        - "Replacing"
+        - "Solar Home Kits"
+        - "Saving & Enjoy"   
+      productType:
+        description: "A valid product Type for the product Category and Subcategory."
+        type: string
+        example: "JouleBox"
+        enum:
+        - "Electricity Meter"
+        - "LED Lighting"
+        - "Air Conditioning"
+        - "Industrial PV"
+        - "Residential PV"
+        - "Home Battery"
+        - "Ulitium"
+        - "JouleBox"
+        - "PV Solar Panel"                  
   temperature:
     description: "Temperature in degrees Centigrade."
     type: string
     format: float
     example: "34.0"
-  eventTime:
-    description: "The time of the event which produced this dataset, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm)."
-    type: string
-    format: date-time
 # This section requires all requests to any path to require an API key.
 # [START securityDef]
 security:
