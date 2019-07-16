@@ -98,7 +98,7 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - $ref: "#/parameters/device-dataset-epack"
+      - $ref: "#/parameters/dataset-epack"
       - $ref: '#/parameters/api-key'
       responses:
         "201":
@@ -115,14 +115,14 @@ paths:
         - "Devices"
   "/devices/dataset/mppt":
     post:
-      description: "Logs monitoring data for maximum power point tracking (MPPT) charge controllers, including data for connected pv strings, batteries, and DC loads."
+      description: "Logs monitoring data for Maximum Power Point Tracking (MPPT) charge controllers, including data for connected pv strings, batteries, and DC loads."
       operationId: "devices.dataset.mppt-controller.post"
       consumes:
       - "application/json"
       produces:
       - "application/json"
       parameters:
-      - $ref: "#/parameters/device-dataset-charge-controller"
+      - $ref: "#/parameters/dataset-mppt"
       - $ref: '#/parameters/api-key'
       responses:
         "201":
@@ -146,7 +146,7 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - $ref: "#/parameters/device-dataset-charge-controller"
+      - $ref: "#/parameters/dataset-inverter"
       - $ref: '#/parameters/api-key'
       responses:
         "201":
@@ -237,7 +237,7 @@ parameters:
     - "epack"
     - "mppt"
     - "inverter"
-  device-dataset-epack:
+  dataset-epack:
     description: "Data logged by the PMS for epacks in a cabinet."
     in: body
     name: "datasets"
@@ -248,10 +248,10 @@ parameters:
       properties:
         datasets:
           items:
-            $ref: "#/definitions/epackCabinetDataset"
+            $ref: "#/definitions/epackDataset"
           type: array
-  device-dataset-charge-controller:
-    description: "Data logged by a charge controller in a MPPT (DC) or Inverter (AC)."
+  dataset-mppt:
+    description: "Data logged by a MPPT (DC) charge controller."
     in: body
     name: "datasets"
     required: true
@@ -261,7 +261,20 @@ parameters:
       properties:
         datasets:
           items:
-            $ref: "#/definitions/chargeControllerDataset"
+            $ref: "#/definitions/mpptDataset"
+          type: array
+  dataset-inverter:
+    description: "Data logged by an Inverter (AC) charge controller."
+    in: body
+    name: "datasets"
+    required: true
+    schema:
+      description: "An array of charge controller datasets."
+      type: object
+      properties:
+        datasets:
+          items:
+            $ref: "#/definitions/inverterDataset"
           type: array
   device-id:
     description: "The device identifier."
@@ -372,6 +385,13 @@ responses:
     schema:
       $ref: "#/definitions/genericMessage"
 definitions:
+  amperageData:  
+    description: "An ordered set of Current readings for connected devices."
+    type: array
+    items:
+      type: string
+      format: float
+      example: "6.0"
   collection:
     description: "A Collection+JSON message consisting of Items and Data."
     type: object
@@ -494,19 +514,31 @@ definitions:
         description: "The target of the detail message."
         type: string
         example: "period parameter"
-  chargeControllerDataset:
+  inverterDataset:
+    description: "Contains data for an inverter and its connected devices."
+    type: object
+    required:
+    - "inverter"
+    - "data"      
+    properties:
+      inverter:
+        description: "Identifier of the inverter controller, which gathers data from its connected pv, batteries, and loads."
+        type: string
+      data:
+        $ref: "#/definitions/chargeControllerData"
+  mpptDataset:
     description: "Contains data for a charge controller and its connected devices."
     type: object
     required:
-    - "controller"
+    - "mppt"
     - "data"      
     properties:
-      controlller:
-        description: "The identifier of the MPPT or inverter which aquires data from pv, batteries, and loads."
+      mppt:
+        description: "Identifier of the MPPT controller, which gathers data from its connected pv, batteries, and loads."
         type: string
       data:
-        $ref: "#/definitions/chargeControllerDeviceData"
-  chargeControllerDeviceData:
+        $ref: "#/definitions/chargeControllerData"
+  chargeControllerData:
     description: "Data from devices connected to a charge controller, at the same event time."
     type: array
     items:
@@ -526,19 +558,9 @@ definitions:
           - "amps"
           properties:
             volts:
-              description: "Voltage readings for each connected PV string."
-              type: array
-              items:
-                type: string
-                format: float
-                example: "48.000"
+              $ref: "#/definitions/voltageData"
             amps:
-              description: "Current readings for each connected PV string."
-              type: array
-              items:
-                type: string
-                format: float
-                example: "6.0"
+              $ref: "#/definitions/amperageData"
         battery:
           type: object
           required:
@@ -556,20 +578,10 @@ definitions:
           - "amps"
           properties:
             volts:
-              description: "Voltage readings for each connected load."
-              type: array
-              items:
-                type: string
-                format: float
-                example: "48.000"
+              $ref: "#/definitions/voltageData"
             amps:
-              description: "Current readings for each connected load."
-              type: array
-              items:
-                type: string
-                format: float
-                example: "1.2"
-  epackCabinetDataset:
+              $ref: "#/definitions/amperageData"
+  epackDataset:
     description: "Contains a data for a cabinet and its contents."
     type: object
     required:
@@ -577,7 +589,7 @@ definitions:
     - "data"      
     properties:
       cabinet:
-        description: "The identifier of the cabinet which contains the packs in this dataset."
+        description: "Identifier of the epack Cabinet, which contains monitored epacks, cells, and mosfets."
         type: string
       data:
         $ref: "#/definitions/epackData"
@@ -637,18 +649,13 @@ definitions:
                 bottom:
                   $ref: "#/definitions/temperature"
         cell:
-          description: "A set of data sampled cellblocks inside this pack."
+          description: "Data for 14 cellblocks inside this pack."
           type: object
           required:
           - "volts"
           properties:
             volts:
-              description: "Voltage readings for 14 cellblocks in this pack."
-              type: array
-              items:
-                type: string
-                format: float
-                example: "12"
+              $ref: "#/definitions/voltageData"
         fet:
           description: "The data readings for input (CMOS) and output (DMOS) MOSFETS."
           type: object
@@ -683,7 +690,7 @@ definitions:
                   type: boolean
                   example: "1"
   eventTime:
-    description: "The time of the event which produced this data sample, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm)."
+    description: "The time of the event which produced a data sample, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm)."
     type: string
     format: date-time                  
   productCatalogueItem:
@@ -731,6 +738,13 @@ definitions:
     type: string
     format: float
     example: "34.0"
+  voltageData:
+    description: "An ordered set of Voltage readings for connected devices."
+    type: array
+    items:
+      type: string
+      format: float
+      example: "48.000"
 # This section requires all requests to any path to require an API key.
 # [START securityDef]
 security:
