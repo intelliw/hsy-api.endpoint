@@ -479,6 +479,15 @@ definitions:
           type: string
         render:
           type: string
+  genericDevice:
+    description: "Generic attributes for a monitored device."
+    type: object
+    required:
+    - "id"
+    properties:
+      id:
+        description: "The device identifier."
+        type: string
   genericMessage:
     description: "Code and status with message details."
     type: object
@@ -515,27 +524,25 @@ definitions:
         type: string
         example: "period parameter"
   inverterDataset:
-    description: "Contains data for an inverter and its connected devices."
+    description: "Contains data for an Inverter controller and its connected pv strings, batteries, and AC loads."
     type: object
     required:
     - "inverter"
     - "data"      
     properties:
       inverter:
-        description: "Identifier of the inverter controller, which gathers data from its connected pv, batteries, and loads."
-        type: string
+        $ref: "#/definitions/genericDevice"
       data:
         $ref: "#/definitions/chargeControllerData"
   mpptDataset:
-    description: "Contains data for a charge controller and its connected devices."
+    description: "Contains data for a MPPT charge controller and its connected pv strings, batteries, and DC loads."
     type: object
     required:
     - "mppt"
     - "data"      
     properties:
       mppt:
-        description: "Identifier of the MPPT controller, which gathers data from its connected pv, batteries, and loads."
-        type: string
+        $ref: "#/definitions/genericDevice"
       data:
         $ref: "#/definitions/chargeControllerData"
   chargeControllerData:
@@ -582,15 +589,14 @@ definitions:
             amps:
               $ref: "#/definitions/amperageData"
   epackDataset:
-    description: "Contains a data for a cabinet and its contents."
+    description: "Data for an epack Cabinet, which contains monitored epacks, cells, and mosfets."
     type: object
     required:
     - "cabinet"
     - "data"      
     properties:
       cabinet:
-        description: "Identifier of the epack Cabinet, which contains monitored epacks, cells, and mosfets."
-        type: string
+        $ref: "#/definitions/genericDevice"
       data:
         $ref: "#/definitions/epackData"
   epackData:
@@ -621,7 +627,7 @@ definitions:
               type: string
               example: "NullValue"
             slot:
-              description: "The cabinet slot number (1 - 12) in which this pack is installed."
+              description: "The cabinet slot (1 - 12) in which this pack is installed."
               type: string
               example: "12"
             amps:
@@ -657,7 +663,7 @@ definitions:
             volts:
               $ref: "#/definitions/voltageData"
         fet:
-          description: "The data readings for input (CMOS) and output (DMOS) MOSFETS."
+          description: "Data readings for input (CMOS) and output (DMOS) MOSFETS."
           type: object
           required:
           - "temp"
@@ -675,7 +681,7 @@ definitions:
                 out:
                   $ref: "#/definitions/temperature"
             status:
-              description: "The status of the input (CMOS) and output (DMOS) MOSFETS."
+              description: "The status of the input (CMOS) and output (DMOS) MOSFETS. (1=open/0=closed)"
               type: object
               required:
               - "in"
