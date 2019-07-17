@@ -392,6 +392,49 @@ definitions:
       type: string
       format: float
       example: "6.0"
+  chargeControllerData:
+    description: "Data from devices connected to a charge controller, at the same event time."
+    type: array
+    items:
+      type: object
+      required:
+      - "time"
+      - "pv"
+      - "battery"
+      - "load"
+      properties:
+        time:
+          $ref: "#/definitions/eventTime"
+        pv:
+          type: object
+          required:
+          - "volts"
+          - "amps"
+          properties:
+            volts:
+              $ref: "#/definitions/voltageData"
+            amps:
+              $ref: "#/definitions/amperageData"
+        battery:
+          type: object
+          required:
+          - "volts"
+          properties:
+            volts:
+              description: "Voltage reading for the connected battery."
+              type: string
+              format: float
+              example: "55.1"
+        load:
+          type: object
+          required:
+          - "volts"
+          - "amps"
+          properties:
+            volts:
+              $ref: "#/definitions/voltageData"
+            amps:
+              $ref: "#/definitions/amperageData"      
   collection:
     description: "A Collection+JSON message consisting of Items and Data."
     type: object
@@ -479,115 +522,6 @@ definitions:
           type: string
         render:
           type: string
-  genericDevice:
-    description: "Generic attributes for a monitored device."
-    type: object
-    required:
-    - "id"
-    properties:
-      id:
-        description: "The device identifier."
-        type: string
-  genericMessage:
-    description: "Code and status with message details."
-    type: object
-    required:
-    - "status"
-    - "message"
-    - "details"
-    properties:
-      status:
-        description: "The response or error status code."
-        type: string
-        example: "400"
-      message:
-        description: "The summary description of the response or error."
-        type: string
-        example: "Illegal input for operation."
-      details:
-        type: array
-        items:
-          $ref: "#/definitions/genericMesssageDetail"
-  genericMesssageDetail:
-    description: "Message details provide additional information about a message target."
-    type: object
-    required:
-    - "message"
-    - "target"
-    properties:
-      message:
-        description: "The message text describing an error or response condition for the target."
-        type: string
-        example: "NullValue"
-      target:
-        description: "The target of the detail message."
-        type: string
-        example: "period parameter"
-  inverterDataset:
-    description: "Contains data for an Inverter controller and its connected pv strings, batteries, and AC loads."
-    type: object
-    required:
-    - "inverter"
-    - "data"      
-    properties:
-      inverter:
-        $ref: "#/definitions/genericDevice"
-      data:
-        $ref: "#/definitions/chargeControllerData"
-  mpptDataset:
-    description: "Contains data for a MPPT charge controller and its connected pv strings, batteries, and DC loads."
-    type: object
-    required:
-    - "mppt"
-    - "data"      
-    properties:
-      mppt:
-        $ref: "#/definitions/genericDevice"
-      data:
-        $ref: "#/definitions/chargeControllerData"
-  chargeControllerData:
-    description: "Data from devices connected to a charge controller, at the same event time."
-    type: array
-    items:
-      type: object
-      required:
-      - "time"
-      - "pv"
-      - "battery"
-      - "load"
-      properties:
-        time:
-          $ref: "#/definitions/eventTime"
-        pv:
-          type: object
-          required:
-          - "volts"
-          - "amps"
-          properties:
-            volts:
-              $ref: "#/definitions/voltageData"
-            amps:
-              $ref: "#/definitions/amperageData"
-        battery:
-          type: object
-          required:
-          - "volts"
-          properties:
-            volts:
-              description: "Voltage reading for the connected battery."
-              type: string
-              format: float
-              example: "55.1"
-        load:
-          type: object
-          required:
-          - "volts"
-          - "amps"
-          properties:
-            volts:
-              $ref: "#/definitions/voltageData"
-            amps:
-              $ref: "#/definitions/amperageData"
   epackDataset:
     description: "Data for an epack Cabinet, which contains monitored epacks, cells, and mosfets."
     type: object
@@ -618,6 +552,7 @@ definitions:
           required:
           - "id"
           - "slot"
+          - "volts"
           - "amps"
           - "soc"
           - "temp"
@@ -630,6 +565,11 @@ definitions:
               description: "The cabinet slot (1 - 12) in which this pack is installed."
               type: string
               example: "12"
+            voltage:
+              description: "The voltage of this pack."
+              type: string
+              format: float
+              example: "55.10"
             amps:
               description: "The current draw from this pack."
               type: string
@@ -698,7 +638,73 @@ definitions:
   eventTime:
     description: "The time of the event which produced a data sample, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm)."
     type: string
-    format: date-time                  
+    format: date-time                      
+  genericDevice:
+    description: "Generic attributes for a monitored device."
+    type: object
+    required:
+    - "id"
+    properties:
+      id:
+        description: "The device identifier."
+        type: string
+  genericMessage:
+    description: "Code and status with message details."
+    type: object
+    required:
+    - "status"
+    - "message"
+    - "details"
+    properties:
+      status:
+        description: "The response or error status code."
+        type: string
+        example: "400"
+      message:
+        description: "The summary description of the response or error."
+        type: string
+        example: "Illegal input for operation."
+      details:
+        type: array
+        items:
+          $ref: "#/definitions/genericMesssageDetail"
+  genericMesssageDetail:
+    description: "Message details provide additional information about a message target."
+    type: object
+    required:
+    - "message"
+    - "target"
+    properties:
+      message:
+        description: "The message text describing an error or response condition for the target."
+        type: string
+        example: "NullValue"
+      target:
+        description: "The target of the detail message."
+        type: string
+        example: "period parameter"
+  inverterDataset:
+    description: "Contains data for an Inverter controller and its connected pv strings, batteries, and AC loads."
+    type: object
+    required:
+    - "inverter"
+    - "data"      
+    properties:
+      inverter:
+        $ref: "#/definitions/genericDevice"
+      data:
+        $ref: "#/definitions/chargeControllerData"
+  mpptDataset:
+    description: "Contains data for a MPPT charge controller and its connected pv strings, batteries, and DC loads."
+    type: object
+    required:
+    - "mppt"
+    - "data"      
+    properties:
+      mppt:
+        $ref: "#/definitions/genericDevice"
+      data:
+        $ref: "#/definitions/chargeControllerData"
   productCatalogueItem:
     description: "A product catalogue item definition."
     type: object
