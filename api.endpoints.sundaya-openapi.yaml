@@ -92,7 +92,7 @@ paths:
         - "Energy" 
   "/devices/dataset/epack":
     post:
-      description: "Logs monitoring data for the pack management system (PMS) including data for each cabinet and its battery packs."
+      description: "Logs monitoring data for the pack management system (PMS) including data for each case and its battery packs."
       operationId: "devices.dataset.pms-epack.post"
       consumes:
       - "application/json"
@@ -239,12 +239,12 @@ parameters:
     - "mppt"
     - "inverter"
   dataset-epack:
-    description: "Data logged by the PMS for epacks in a cabinet."
+    description: "Data logged by the PMS for epacks in a case."
     in: body
     name: "datasets"
     required: true
     schema:
-      description: "An array of cabinet datasets."
+      description: "An array of case datasets."
       type: object
       properties:
         datasets:
@@ -530,18 +530,18 @@ definitions:
         render:
           type: string
   epackDataset:
-    description: "Data for an epack Cabinet, which contains monitored epacks, cells, and mosfets."
+    description: "Data for an epack case, which contains monitored epacks, cells, and mosfets."
     type: object
     required:
-    - "cabinet"
+    - "case"
     - "data"      
     properties:
-      cabinet:
+      case:
         $ref: "#/definitions/genericDevice"
       data:
         $ref: "#/definitions/epackData"
   epackData:
-    description: "Data from epacks installed in a cabinet."
+    description: "Data from epacks installed in a case."
     type: array
     items:
       type: object
@@ -568,7 +568,7 @@ definitions:
               type: string
               example: "NullValue"
             dock:
-              description: "The cabinet dock number (1 - 12) in which this pack is installed."
+              description: "The case dock number (1 - 12) in which this pack is installed."
               type: integer
               example: "12"
             volts:
