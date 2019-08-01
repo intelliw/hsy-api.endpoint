@@ -4,11 +4,11 @@
   "details": [
     {
       "message": "New data events created",
-      "target": "device:CAB-01-001 | dataset:epack | events:8"
+      "target": "device:PMS-01-001 | dataset:pms | events:8"
     },
     {
       "message": "New data events created",
-      "target": "device:CAB-01-002 | dataset:epack | events:8"
+      "target": "device:PMS-01-002 | dataset:pms | events:8"
     }
   ]
 }
@@ -20,7 +20,7 @@
   "details": [
     {
       "message": "Data queued for processing.",
-      "target": "dataset:epack"
+      "target": "dataset:pms"
     }
   ]
 }
