@@ -576,8 +576,6 @@ definitions:
       required:
       - "time"
       - "pack"
-      - "cell"
-      - "fet"
       properties:
         time:
           $ref: "#/definitions/eventTime"
@@ -590,6 +588,8 @@ definitions:
           - "volts"
           - "amps"
           - "temp"
+          - "cell"
+          - "fet"
           properties:
             id:
               description: "The pack identifier. The value is provided by the pack’s acquisition board."
@@ -620,60 +620,60 @@ definitions:
                 type: string
                 format: float
                 example: "35.0"
-        cell:
-          description: "Data for 14 cellblocks inside this pack."
-          type: object
-          required:
-          - "volts"
-          - "open"
-          properties:
-            volts:
-              description: "An ordered set of 14 Voltage readings for 14 cellblocks in the pack."
-              type: array
-              minItems: 14
-              maxItems: 14
-              items:
-                type: string
-                format: float
-                example: "3.92"
-            open:
-              description: "An unordered set of ordinals for cells which are ‘open’ due to cell balancing. Must contain numbers from 1-14 as there are only 14 cells in a pack."
-              type: array
-              minimum: 1
-              maximum: 14
-              minItems: 0
-              maxItems: 14
-              uniqueItems: true
-              items:
-                type: integer
-                example: "[1,6]"
-        fet:
-          description: "Data readings for input (CMOS) and output (DMOS) MOSFETS."
-          type: object
-          required:
-          - "temp"
-          - "open"
-          properties:
-            temp:
-              description: "An ordered set of temperature readings for the two MOSFETS in this pack. The first is the input (CMOS) and the 2nd is the output (DMOS) MOSFET."
-              type: array
-              minItems: 2
-              maxItems: 2
-              items:
-                type: string
-                format: float
-                example: "34.1"
-            open:
-              description: "An unordered set ordinal values for FET numbers which are ‘open’ due to pack balancing. The data values must be a number from 1-2 as there are only 2 FETS in each pack."
-              type: array
-              minimum: 1
-              maximum: 2
-              minItems: 0
-              maxItems: 2
-              uniqueItems: true
-              items:
-                type: integer
-                example: "[1,2]"
+            cell:
+              description: "Data for 14 cellblocks inside this pack."
+              type: object
+              required:
+              - "volts"
+              - "open"
+              properties:
+                volts:
+                  description: "An ordered set of 14 Voltage readings for 14 cellblocks in the pack."
+                  type: array
+                  minItems: 14
+                  maxItems: 14
+                  items:
+                    type: string
+                    format: float
+                    example: "3.92"
+                open:
+                  description: "An unordered set of ordinals for cells which are ‘open’ due to cell balancing. Must contain numbers from 1-14 as there are only 14 cells in a pack."
+                  type: array
+                  minimum: 1
+                  maximum: 14
+                  minItems: 0
+                  maxItems: 14
+                  uniqueItems: true
+                  items:
+                    type: integer
+                    example: "[1,6]"
+            fet:
+              description: "Data readings for input (CMOS) and output (DMOS) MOSFETS."
+              type: object
+              required:
+              - "temp"
+              - "open"
+              properties:
+                temp:
+                  description: "An ordered set of temperature readings for the two MOSFETS in this pack. The first is the input (CMOS) and the 2nd is the output (DMOS) MOSFET."
+                  type: array
+                  minItems: 2
+                  maxItems: 2
+                  items:
+                    type: string
+                    format: float
+                    example: "34.1"
+                open:
+                  description: "An unordered set ordinal values for FET numbers which are ‘open’ due to pack balancing. The data values must be a number from 1-2 as there are only 2 FETS in each pack."
+                  type: array
+                  minimum: 1
+                  maximum: 2
+                  minItems: 0
+                  maxItems: 2
+                  uniqueItems: true
+                  items:
+                    type: integer
+                    example: "[1,2]"
   eventTime:
     description: "The time of the event which produced a data sample, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm)."
     type: string
