@@ -399,12 +399,12 @@ definitions:
     items:
       type: object
       required:
-      - "time"
+      - "time_local"
       - "pv"
       - "battery"
       - "load"
       properties:
-        time:
+        time_local:
           $ref: "#/definitions/eventTime"
         pv:
           type: object
@@ -574,10 +574,10 @@ definitions:
     items:
       type: object
       required:
-      - "time"
+      - "time_local"
       - "pack"
       properties:
-        time:
+        time_local:
           $ref: "#/definitions/eventTime"
         pack:
           description: "The datapoints for a pack."
@@ -675,7 +675,7 @@ definitions:
                     type: integer
                     example: "[1,2]"
   eventTime:
-    description: "The time of the event which produced a data sample, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm)."
+    description: "The local time of the event which produced this data sample, represented with a mandatory '+/-' offset from UTC for the device's location, in compressed 'ISO 8601/RFC3339' (YYYYMMDDThhmmss±hhmm)."
     type: string
     format: date-time                      
   genericDevice:
