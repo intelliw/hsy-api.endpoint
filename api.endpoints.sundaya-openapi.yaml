@@ -589,7 +589,6 @@ definitions:
           required:
           - "id"
           - "dock"
-          - "volts"
           - "amps"
           - "temp"
           - "cell"
@@ -605,11 +604,6 @@ definitions:
               minimum: 1
               maximum: 48
               example: 12
-            volts:
-              description: "The voltage of this pack."
-              type: string
-              format: float
-              example: "55.10"
             amps:
               description: "The current draw from this pack. The value is positive for charge current and negative when discharging."
               type: string
@@ -632,7 +626,7 @@ definitions:
               - "open"
               properties:
                 volts:
-                  description: "An ordered set of 14 Voltage readings for 14 cellblocks in the pack."
+                  description: "An ordered set of 14 Voltage readings for 14 cellblocks in the pack. The cellblocks are connected in series and the pack voltage is the sum of all 14 cell voltages."
                   type: array
                   minItems: 14
                   maxItems: 14
