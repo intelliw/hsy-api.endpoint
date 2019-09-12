@@ -96,6 +96,7 @@ paths:
       operationId: "devices.dataset.pms.post"
       consumes:
       - "application/json"
+      - "text/csv"
       produces:
       - "application/json"
       parameters:
