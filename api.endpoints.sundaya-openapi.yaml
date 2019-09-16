@@ -607,7 +607,7 @@ definitions:
               example: 12
             amps:
               description: "The current draw from this pack. The value is positive for charge current and negative when discharging."
-              type: string
+              type: number
               format: float
               example: "-1.05"
             temp:
@@ -616,7 +616,7 @@ definitions:
               minItems: 3
               maxItems: 3
               items:
-                type: string
+                type: number
                 format: float
                 example: "35.0"
             cell:
@@ -632,7 +632,7 @@ definitions:
                   minItems: 14
                   maxItems: 14
                   items:
-                    type: string
+                    type: number
                     format: float
                     example: "3.92"
                 open:
@@ -659,7 +659,7 @@ definitions:
                   minItems: 2
                   maxItems: 2
                   items:
-                    type: string
+                    type: number
                     format: float
                     example: "34.1"
                 open:
@@ -745,7 +745,7 @@ definitions:
         - "PV Solar Panel"                  
   temperature:
     description: "Temperature in degrees Centigrade."
-    type: string
+    type: number
     format: float
     example: "34.0"
   battery:
@@ -757,12 +757,12 @@ definitions:
     properties:
       volts:
         description: "Voltage reading for the connected battery."
-        type: string
+        type: number
         format: float
         example: "55.1"
       amps:
         description: "The current for the connected Battery. The value is positive for charge current and negative when discharging."
-        type: string
+        type: number
         format: float
         example: "-1.601"
   load:
@@ -778,7 +778,7 @@ definitions:
         minItems: 1
         maxItems: 2
         items:
-          type: string
+          type: number
           format: float
           example: "48.000"
       amps:
@@ -787,7 +787,7 @@ definitions:
         minItems: 1
         maxItems: 2
         items:
-          type: string
+          type: number
           format: float
           example: "1.02"
   grid:
@@ -804,7 +804,7 @@ definitions:
         minItems: 1
         maxItems: 3
         items:
-          type: string
+          type: number
           format: float
           example: "48.000"
       amps:
@@ -813,7 +813,7 @@ definitions:
         minItems: 1
         maxItems: 3
         items:
-          type: string
+          type: number
           format: float
           example: "1.02"
       pf:
@@ -823,7 +823,7 @@ definitions:
         maxItems: 3
         maximum: 1
         items:
-          type: string
+          type: number
           format: float
           example: "0.92"          
   pv:
@@ -839,7 +839,7 @@ definitions:
         minItems: 1
         maxItems: 4
         items:
-          type: string
+          type: number
           format: float
           example: "48.000"
       amps:
@@ -848,7 +848,7 @@ definitions:
         minItems: 1
         maxItems: 4
         items:
-          type: string
+          type: number
           format: float
           example: "6.01"
 # This section requires all requests to any path to require an API key.
