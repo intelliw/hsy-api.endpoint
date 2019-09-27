@@ -1,13 +1,13 @@
 # [START swagger]
 swagger: "2.0"
-host: "test.api.endpoints.sundaya.cloud.goog"
+host: "test-api.endpoints.sundaya.cloud.goog"
 x-google-endpoints:
-- name: "test.api.endpoints.sundaya.cloud.goog"
+- name: "test-api.endpoints.sundaya.cloud.goog"
   target: "104.199.250.237"
   # 104.199.250.237
 basePath: "/"
 info:
-  title: "Energy Management (Deprecated)"
+  title: "Energy Management (Test)"
   version: "0.0.09"
   description: |
     The Energy Management API provides energy accounting for four energy **Types**:
