@@ -5,6 +5,7 @@ x-google-endpoints:
 - name: "test-api.endpoints.sundaya.cloud.goog"
   target: "104.199.250.237"
   # 104.199.250.237
+x-google-allow: all
 basePath: "/"
 info:
   title: "Energy Management (Test)"
