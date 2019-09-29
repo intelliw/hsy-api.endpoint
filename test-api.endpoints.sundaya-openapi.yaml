@@ -853,6 +853,8 @@ definitions:
           format: float
           example: "6.01"
 # This section requires all requests to any path to require an API key.
+# AXC: if api_key parameter is 'query' its name is 'api_key' (esp ignores name changes in api docs)
+# if api_key parameter is 'header' its name is 'x-api-key' (not declared anywhere in api docs)
 # [START securityDef]
 security:
 - api_key: []
@@ -861,7 +863,7 @@ securityDefinitions:
   api_key:
     type: "apiKey"
     name: "key"
-    in: "query"
+    in: "header"
 # [END securityDef]
   # This section configures authentication using Google API Service Accounts
   # to sign a json web token. This is mostly used for server-to-server
