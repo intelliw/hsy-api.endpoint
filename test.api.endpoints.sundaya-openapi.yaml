@@ -48,6 +48,8 @@ paths:
       - "application/json"
       parameters:
       - $ref: '#/parameters/api-key'
+      security:
+      - APIKeyQueryParam: []      
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -76,6 +78,8 @@ paths:
       - $ref: "#/parameters/site"
       - $ref: "#/parameters/product-catalogue-items"
       - $ref: '#/parameters/api-key'
+      security:
+      - APIKeyQueryParam: []
       responses:
         "200":
           $ref: "#/responses/200-energy-data"
@@ -103,6 +107,8 @@ paths:
       parameters:
       - $ref: "#/parameters/dataset-pms"
       - $ref: '#/parameters/api-key'
+      security:
+      - APIKeyQueryParam: []      
       responses:
         "200":
           $ref: "#/responses/200-ok"        
@@ -129,6 +135,8 @@ paths:
       parameters:
       - $ref: "#/parameters/dataset-mppt"
       - $ref: '#/parameters/api-key'
+      security:
+      - APIKeyQueryParam: []      
       responses:
         "200":
           $ref: "#/responses/200-ok"        
@@ -155,6 +163,8 @@ paths:
       parameters:
       - $ref: "#/parameters/dataset-inverter"
       - $ref: '#/parameters/api-key'
+      security:
+      - APIKeyQueryParam: []      
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -185,6 +195,8 @@ paths:
       - $ref: "#/parameters/epoch"
       - $ref: "#/parameters/duration"
       - $ref: '#/parameters/api-key'
+      security:
+      - APIKeyQueryParam: []      
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -214,6 +226,8 @@ paths:
       - $ref: "#/parameters/epoch"
       - $ref: "#/parameters/duration"
       - $ref: '#/parameters/api-key'
+      security:
+      - APIKeyQueryParam: []      
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -233,7 +247,7 @@ parameters:
   api-key:
     description: The API key.
     in: header
-    name: api_key
+    name: APIKeyQueryParam
     required: true
     type: string
     format: password
@@ -852,16 +866,20 @@ definitions:
           type: number
           format: float
           example: "6.01"
-# This section requires all requests to any path to require an API key.
+# This section requires all requests to any path to require an API key UNLESS there is a security declaration in a specific operation
 # [START securityDef]
-security:
-- api_key: []
+# security:
+# - APIKeyQueryParam: []
 securityDefinitions:
   # This section configures basic authentication with an API key.
-  api_key:
+  APIKeyQueryParam:
     type: "apiKey"
-    name: "key"
-    in: "header"
+    name: "api_key"
+    in: "query"
+  APIKeyHeader:
+    type: "apiKey"
+    name: "x-api-Key"
+    in: "header"    
 # [END securityDef]
   # This section configures authentication using Google API Service Accounts
   # to sign a json web token. This is mostly used for server-to-server
