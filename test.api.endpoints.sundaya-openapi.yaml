@@ -1,8 +1,8 @@
 # [START swagger]
 swagger: "2.0"
-host: "test-api.endpoints.sundaya.cloud.goog"
+host: "test.api.endpoints.sundaya.cloud.goog"
 x-google-endpoints:
-- name: "test-api.endpoints.sundaya.cloud.goog"
+- name: "test.api.endpoints.sundaya.cloud.goog"
   target: "104.199.250.237"
   # 104.199.250.237
 x-google-allow: all
@@ -853,8 +853,6 @@ definitions:
           format: float
           example: "6.01"
 # This section requires all requests to any path to require an API key.
-# AXC: if api_key parameter is 'query' its name is 'api_key' (esp ignores name changes in api docs)
-# if api_key parameter is 'header' its name is 'x-api-key' (not declared anywhere in api docs)
 # [START securityDef]
 security:
 - api_key: []
