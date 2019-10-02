@@ -34,7 +34,7 @@ info:
   termsOfService: "https://sundaya.com/terms-of-service/"
 # [END swagger]
 schemes:
-# Uncomment after configuring SSL.
+# Comment out if not configuring SSL.
 - "https"
 - "http"
 paths:
@@ -42,14 +42,11 @@ paths:
     get:
       description: "Returns a list of versions which are still supported. Older versions may be requested through an `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://endpointsportal.sundaya.cloud.goog/docs/api.endpoints.sundaya.cloud.goog/0/c/Getting%20Started/Standards%20&%20Conventions/Overview))."
       operationId: "diagnostics.api.versions.get"
+      security: []    # this path does not require an api key
       consumes:
       - ""
       produces:
       - "application/json"
-      parameters:
-      - $ref: '#/parameters/api-key'
-      security:
-      - APIKeyQueryParam: []      
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -63,6 +60,7 @@ paths:
     get:
       description: "Retrieves energy monitoring data for a period. [Try this API](http://api.endpoints.sundaya.cloud.goog/energy/hse/period/week/20150204/1?site=999)"
       operationId: "energy.period.epoch.duration.get"
+      security: []    # this path does not require an api key
       consumes:
       - "application/json"
       produces:
@@ -77,9 +75,6 @@ paths:
       - $ref: "#/parameters/duration"
       - $ref: "#/parameters/site"
       - $ref: "#/parameters/product-catalogue-items"
-      - $ref: '#/parameters/api-key'
-      security:
-      - APIKeyQueryParam: []
       responses:
         "200":
           $ref: "#/responses/200-energy-data"
@@ -106,9 +101,6 @@ paths:
       - "application/json"
       parameters:
       - $ref: "#/parameters/dataset-pms"
-      - $ref: '#/parameters/api-key'
-      security:
-      - APIKeyQueryParam: []      
       responses:
         "200":
           $ref: "#/responses/200-ok"        
@@ -134,9 +126,6 @@ paths:
       - "application/json"
       parameters:
       - $ref: "#/parameters/dataset-mppt"
-      - $ref: '#/parameters/api-key'
-      security:
-      - APIKeyQueryParam: []      
       responses:
         "200":
           $ref: "#/responses/200-ok"        
@@ -162,9 +151,6 @@ paths:
       - "application/json"
       parameters:
       - $ref: "#/parameters/dataset-inverter"
-      - $ref: '#/parameters/api-key'
-      security:
-      - APIKeyQueryParam: []      
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -194,9 +180,6 @@ paths:
       - $ref: "#/parameters/period"
       - $ref: "#/parameters/epoch"
       - $ref: "#/parameters/duration"
-      - $ref: '#/parameters/api-key'
-      security:
-      - APIKeyQueryParam: []      
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -225,9 +208,6 @@ paths:
       - $ref: "#/parameters/period"
       - $ref: "#/parameters/epoch"
       - $ref: "#/parameters/duration"
-      - $ref: '#/parameters/api-key'
-      security:
-      - APIKeyQueryParam: []      
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -244,13 +224,6 @@ paths:
       tags:
         - "Devices"
 parameters:
-  api-key:
-    description: The API key.
-    in: header
-    name: APIKeyQueryParam
-    required: true
-    type: string
-    format: password
   dataset:  
     in: path
     name: "dataset"
@@ -866,19 +839,24 @@ definitions:
           type: number
           format: float
           example: "6.01"
-# This section requires all requests to any path to require an API key UNLESS there is a security declaration in a specific operation
+# This section requires all requests to any path to require an API key UNLESS there is a declaration in the path operation
+# cloud endpoints: security definition must reference at least one SecurityDefinition of type : 'apiKey'
+# regardless of api key definitions here, ESP requires the following: 
+#     query parameter must be sent in 'api_key', if header is used it must be x-api-key 
+# security: [] removes key restriction for an operation or globally
 # [START securityDef]
-# security:
-# - APIKeyQueryParam: []
+security: 
+- api_key: []  
 securityDefinitions:
-  # This section configures basic authentication with an API key.
-  APIKeyQueryParam:
+  # cloud endpoints: types must be apiKey. Only apiKey with 'name' as 'key' and 'in' as 'query' are supported
+  api_key:
     type: "apiKey"
-    name: "api_key"
-    in: "query"
-  APIKeyHeader:
+    name: "key"
+    in: "header"
+  # this does nothing - not needed see note above
+  x-api-key:
     type: "apiKey"
-    name: "x-api-Key"
+    name: "key"
     in: "header"    
 # [END securityDef]
   # This section configures authentication using Google API Service Accounts
