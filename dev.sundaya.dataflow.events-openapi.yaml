@@ -9,7 +9,7 @@ x-google-allow: all
 basePath: "/"
 info:
   title: "Energy Management (Development)"
-  version: "0.0.09"
+  version: "0.2.12"
   description: |
     The Energy Management API provides energy accounting for four energy **Types**:
 
