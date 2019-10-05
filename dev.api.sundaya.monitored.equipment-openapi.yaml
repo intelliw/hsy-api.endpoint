@@ -1,10 +1,10 @@
 # [START swagger]
 swagger: "2.0"
-host: "dev.sundaya.dataflow.events"
+host: "dev.api.sundaya.monitored.equipment"
 x-google-endpoints:
-- name: "dev.sundaya.dataflow.events"
-  target: "104.199.250.237"
-  # 104.199.250.237
+- name: "dev.api.sundaya.monitored.equipment"
+  target: "35.194.155.207"  # host-dev-static
+  # 35.194.155.207
 x-google-allow: all
 basePath: "/"
 info:
@@ -40,7 +40,7 @@ schemes:
 paths:
   "/api/versions":
     get:
-      description: "Returns a list of versions which are still supported. Older versions may be requested through an `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://endpointsportal.sundaya.cloud.goog/docs/api.endpoints.sundaya.cloud.goog/0/c/Getting%20Started/Standards%20&%20Conventions/Overview))."
+      description: "Returns a list of versions which are still supported. Older versions may be requested through an `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://docs.sundaya.monitored.equipment/docs/api.sundaya.monitored.equipment/0/c/Getting%20Started/Standards%20&%20Conventions/Overview))."
       operationId: "diagnostics.api.versions.get"
       security: []    # this path does not require an api key
       consumes:
@@ -58,7 +58,7 @@ paths:
         - "Diagnostics"
   "/energy/{energy}/period/{period}/{epoch}/{duration}":
     get:
-      description: "Retrieves energy monitoring data for a period. [Try this API](http://api.endpoints.sundaya.cloud.goog/energy/hse/period/week/20150204/1?site=999)"
+      description: "Retrieves energy monitoring data for a period. [Try this API](http://api.sundaya.monitored.equipment/energy/hse/period/week/20150204/1?site=999)"
       operationId: "energy.period.epoch.duration.get"
       security: []    # this path does not require an api key
       consumes:
@@ -168,7 +168,7 @@ paths:
         - "Devices"
   "/device/{device-id}/dataset/{dataset}/period/{period}/{epoch}/{duration}":
     get:
-      description: "Returns device data for a period. [Try this API](http://api.endpoints.sundaya.cloud.goog/device/CAB-01-001/dataset/pms)"
+      description: "Returns device data for a period. [Try this API](http://api.sundaya.monitored.equipment/device/CAB-01-001/dataset/pms)"
       operationId: "device.dataset.period.epoch.duration.get"
       consumes:
       - ""
@@ -197,7 +197,7 @@ paths:
         - "Devices"
   "/device/{device-id}/configs/period/{period}/{epoch}/{duration}":
     get:
-      description: "Returns historical configuration data for a period, including identifiers of subitems such as battery assembly, MCU board, and Mosfet board. . [Try this API](http://api.endpoints.sundaya.cloud.goog/device/BBC-PR1202-999/configs/period)"
+      description: "Returns historical configuration data for a period, including identifiers of subitems such as battery assembly, MCU board, and Mosfet board. . [Try this API](http://api.sundaya.monitored.equipment/device/BBC-PR1202-999/configs/period)"
       operationId: "device.configs.period.get"
       consumes:
       - ""
