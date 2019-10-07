@@ -4,7 +4,7 @@ host: "dev.api.sundaya.monitored.equipment"
 x-google-endpoints:
 - name: "dev.api.sundaya.monitored.equipment"
   target: "35.194.155.207"  # host-dev-static
-  # 35.194.155.207
+  # 34.80.69.65  # cos2-ip-addr (test)  35.194.155.207 # host-dev-stati  104.199.146.74  # host-api-static
 x-google-allow: all
 basePath: "/"
 info:

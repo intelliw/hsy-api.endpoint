@@ -3,8 +3,8 @@ swagger: "2.0"
 host: "api.endpoints.sundaya.cloud.goog"
 x-google-endpoints:
 - name: "api.endpoints.sundaya.cloud.goog"
-  target: "34.80.69.65"
-  # 34.80.69.65   35.201.231.204
+  target: "34.80.69.65" # cos2-ip-addr (test)
+  # 34.80.69.65  # cos2-ip-addr (test)  35.194.155.207 # host-dev-stati  104.199.146.74  # host-api-static
 basePath: "/"
 info:
   title: "Energy Management"
@@ -14,11 +14,11 @@ info:
 
     `harvest`, `store`, `enjoy`, `grid`
     
-    The `/energy` path provides periodic consolidation of data from energy monitoring devices (*week*, *month* etc.) 
+    The `/energy` path provides periodic consolidations of energy data from monitored equipment (*week*, *month* etc.) 
     
-    API clients can manage energy **Assets** through graphical views and by scheduling energy use at preferred times. 
+    API clients can produce graphical views from energy data to manage their energy **Assets**, and through the API schedule energy use at preferred times. 
     
-    The `/devices` path is for vendors and field engineers to monitor and control the operation of energy management **Devices**.
+    The `/devices` path is for vendors and field engineers to monitor and control energy management **Devices**.
     
     Type | Assets | Devices
     --- | --- | ---

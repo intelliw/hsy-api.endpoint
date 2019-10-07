@@ -4,6 +4,7 @@ host: "api.sundaya.monitored.equipment"
 x-google-endpoints:
 - name: "api.sundaya.monitored.equipment"
   target: "104.199.146.74"  # host-api-static
+# 34.80.69.65  # cos2-ip-addr (test)  35.194.155.207 # host-dev-stati  104.199.146.74  # host-api-static
 x-google-allow: all
 basePath: "/"
 info:
@@ -14,11 +15,11 @@ info:
 
     `harvest`, `store`, `enjoy`, `grid`
     
-    The `/energy` path provides periodic consolidation of data from energy monitoring devices (*week*, *month* etc.) 
+    The `/energy` path provides periodic consolidations of energy data from monitored equipment (*week*, *month* etc.) 
     
-    API clients can manage energy **Assets** through graphical views and by scheduling energy use at preferred times. 
+    API clients can produce graphical views from energy data to manage their energy **Assets**, and through the API schedule energy use at preferred times. 
     
-    The `/devices` path is for vendors and field engineers to monitor and control the operation of energy management **Devices**.
+    The `/devices` path is for vendors and field engineers to monitor and control energy management **Devices**.
     
     Type | Assets | Devices
     --- | --- | ---
@@ -39,7 +40,7 @@ schemes:
 paths:
   "/api/versions":
     get:
-      description: "Returns a list of versions which are still supported. Older versions may be requested through an `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://docs.sundaya.monitored.equipment/docs/api.sundaya.monitored.equipment/0/c/Getting%20Started/Standards%20&%20Conventions/Overview))."
+      description: "Returns a list of versions which are still supported. Older versions may be requested through an `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://docs.sundaya.monitored.equipment/docs/api.sundaya.monitored.equipment/0/c/Getting%20Started/Start%20Here/Standards%20&%20Conventions))."
       operationId: "diagnostics.api.versions.get"
       security: []    # this path does not require an api key
       consumes:
@@ -252,7 +253,7 @@ parameters:
     name: "datasets"
     required: true
     schema:
-      description: "An array of charge controller datasets."
+      description: "An array of MPPT charge controller datasets."
       type: object
       properties:
         datasets:
@@ -265,7 +266,7 @@ parameters:
     name: "datasets"
     required: true
     schema:
-      description: "An array of charge controller datasets."
+      description: "An array of Inverter charge controller datasets."
       type: object
       properties:
         datasets:
@@ -468,6 +469,11 @@ definitions:
           type: string
         render:
           type: string
+  equipmentStatus:
+    description: "A 4-character, hex-encoded string value corresponding to a bitmap of equipment status fields."
+    type: string
+    minLength: 4
+    maxLength: 4
   eventTime:
     description: "The local time of the event which produced this data sample, represented with a mandatory '+/-' offset from UTC for the device's location, in compressed 'ISO 8601/RFC3339' (YYYYMMDDThhmmss±hhmm)."
     type: string
@@ -538,6 +544,7 @@ definitions:
       - "battery"
       - "load"
       - "grid"
+      - "status"
       properties:
         time_local:
           $ref: "#/definitions/eventTime"
@@ -548,7 +555,9 @@ definitions:
         load:
           $ref: "#/definitions/load"
         grid:
-          $ref: "#/definitions/load"
+          $ref: "#/definitions/grid"
+        status:
+          $ref: "#/definitions/equipmentStatus"
   pmsDataset:
     description: "Data for a 1-4 cabinets, containing packs, cell blocks, and mosfets."
     type: object
@@ -581,6 +590,7 @@ definitions:
           - "temp"
           - "cell"
           - "fet"
+          - "status"
           properties:
             id:
               description: "The pack identifier. The value is provided by the pack’s acquisition board."
@@ -660,6 +670,8 @@ definitions:
                   items:
                     type: integer
                     example: "[1,2]"
+            status:
+              $ref: "#/definitions/equipmentStatus"
   mpptDataset:
     description: "Contains data for a MPPT charge controller and its connected pv strings, batteries, and DC loads."
     type: object
@@ -681,6 +693,7 @@ definitions:
       - "pv"
       - "battery"
       - "load"
+      - "status"
       properties:
         time_local:
           $ref: "#/definitions/eventTime"
@@ -690,6 +703,8 @@ definitions:
           $ref: "#/definitions/battery"
         load:
           $ref: "#/definitions/load"
+        status:
+          $ref: "#/definitions/equipmentStatus"
   productCatalogueItem:
     description: "A product catalogue item definition."
     type: object
