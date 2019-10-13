@@ -60,6 +60,24 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "Diagnostics"
+  "/api/logger":
+    get:
+      description: "Returns the current verbosity of the logger. 'info' is the minumimum level which provides a minimal log of all events, 'debug' provides a log of the payloads in each messaging topic."
+      operationId: "diagnostics.api.logger.get"
+      security: []    # this path does not require an api key
+      consumes:
+      - ""
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          $ref: "#/responses/200-ok"
+        "401":
+          $ref: "#/responses/401-unauthorized"
+        "500":
+          $ref: "#/responses/500-internal-server-error"
+      tags:
+        - "Diagnostics"        
   "/energy/{energy}/period/{period}/{epoch}/{duration}":
     get:
       description: "Retrieves energy monitoring data for a period. [Try this API](http://api.sundaya.monitored.equipment/energy/hse/period/week/20150204/1?site=999)"
