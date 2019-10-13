@@ -12,7 +12,7 @@ x-google-allow: all
 
 basePath: "/"
 info:
-  title: "Endpoints Example (API)"
+  title: "Energy Management (API)"
   version: "0.2.12"
   description: |
     The Energy Management API provides energy accounting for four energy **Types**:
@@ -62,7 +62,7 @@ paths:
         - "Diagnostics"
   "/api/logger":
     get:
-      description: "Returns the current verbosity of the logger. 'info' is the minumimum level which provides a minimal log of all events, 'debug' provides a log of the payloads in each messaging topic."
+      description: "Returns the current verbosity of the logger. The minmum level is 'info' which provides a concise log of each event; 'debug' logs the full payload of POST requests and can be made active for short troubleshooting periods."
       operationId: "diagnostics.api.logger.get"
       security: []    # this path does not require an api key
       consumes:
