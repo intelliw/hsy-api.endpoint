@@ -71,7 +71,7 @@ paths:
       - "application/json"
       parameters:
       - $ref: "#/parameters/verbosity"  
-      - $ref: "#/parameters/appender"
+      - $ref: "#/parameters/appenders"
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -330,10 +330,10 @@ parameters:
     type: string
     format: date-time
     default: "20190325"
-  appender:  
+  appenders:  
     description: "A comma separated list of ouput appenders for error reporting and logged events. If a value is not specified the default ('console') is used."
     in: query
-    name: "appender"
+    name: "appenders"
     type: string
     default: "console"
     enum:
