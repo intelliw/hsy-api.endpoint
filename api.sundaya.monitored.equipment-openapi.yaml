@@ -62,13 +62,16 @@ paths:
         - "Diagnostics"
   "/api/logger":
     get:
-      description: "Returns the current verbosity of the logger. The minmum level is 'info' which provides a concise log of each event; 'debug' logs the full payload of POST requests and can be made active for short troubleshooting periods."
+      description: "Returns the current verbosity and appender of the logger. The minmum verbosity level is 'info' which provides a concise log of each event; 'debug' logs the full payload of POST requests and can be made active for short troubleshooting periods. 'appender' specifies the output destination for error reporting and logged events. If a value is not specified the default ('console') is used. Each environment can be pre-configured (through enums.environments) to preset verbosity and appender for the environment. For example developers will prefer to output logs to 'console' in the dev environment, while the test and prod environments will be configured to use 'stackdriver' at startup."
       operationId: "diagnostics.api.logger.get"
       security: []    # this path does not require an api key
       consumes:
       - ""
       produces:
       - "application/json"
+      parameters:
+      - $ref: "#/parameters/verbosity"  
+      - $ref: "#/parameters/appender"
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -327,6 +330,17 @@ parameters:
     type: string
     format: date-time
     default: "20190325"
+  appender:  
+    description: "A comma separated list of ouput appenders for error reporting and logged events. If a value is not specified the default ('console') is used."
+    in: query
+    name: "appender"
+    required: false
+    type: string
+    default: "console"
+    enum:
+      - "none"
+      - "stackdriver"
+      - "console"
   period:
     description: "The time window for which total energy is aggregated. The only exception is 'instant' which measures energy at a single point in time, without aggregation."
     in: path
@@ -364,6 +378,17 @@ parameters:
     name: "site"
     required: true
     type: string
+  verbosity:  
+    description: "A comma separated list of log levels, for error reporting and logged events. If a value is not specified the default ('info') is used."
+    in: query
+    name: "verbosity"
+    required: false
+    type: string
+    default: "info"
+    enum:
+      - "none"
+      - "info"
+      - "debug"
 responses:
   200-ok:
     description: "Data retrieved, or queued for processing."
