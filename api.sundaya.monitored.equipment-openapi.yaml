@@ -60,10 +60,10 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "Diagnostics"
-  "/api/logger":
+  "/api/logging":
     get:
       description: "Returns the current verbosity and appender of the logger. The minmum verbosity level is 'info' which provides a concise log of each event; 'debug' logs the full payload of POST requests and can be made active for short troubleshooting periods. 'appender' specifies the output destination for error reporting and logged events. If a value is not specified the default ('console') is used. Each environment can be pre-configured (through enums.environments) to preset verbosity and appender for the environment. For example developers will prefer to output logs to 'console' in the dev environment, while the test and prod environments will be configured to use 'stackdriver' at startup."
-      operationId: "diagnostics.api.logger.get"
+      operationId: "diagnostics.api.logging.get"
       security: []    # this path does not require an api key
       consumes:
       - ""
@@ -334,7 +334,6 @@ parameters:
     description: "A comma separated list of ouput appenders for error reporting and logged events. If a value is not specified the default ('console') is used."
     in: query
     name: "appender"
-    required: false
     type: string
     default: "console"
     enum:
@@ -363,7 +362,6 @@ parameters:
     description: "An optional product filter to restrict data to specific categories, subcategories and product types."
     in: body
     name: "productCatalogueItems"
-    required: false
     schema:
       description: "A list of product catalogue items to filter the energy data query."
       type: object
@@ -382,7 +380,6 @@ parameters:
     description: "A comma separated list of log levels, for error reporting and logged events. If a value is not specified the default ('info') is used."
     in: query
     name: "verbosity"
-    required: false
     type: string
     default: "info"
     enum:
