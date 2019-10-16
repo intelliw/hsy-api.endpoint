@@ -308,13 +308,14 @@ parameters:
     description: "The number of periods to return starting at epoch. This defaults to 1."
     in: path
     name: "duration"
+    required: true                # should be false but service deploy validation needs it to be true
     type: integer
     minimum: 1
-    format: int64
   energy:
     description: "The type of energy flow."
     in: path
     name: "energy"
+    required: true                # should be false but service deploy validation needs it to be true
     type: string
     default: "hse"
     enum:
@@ -327,6 +328,7 @@ parameters:
     description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm) and formatted according to the period."
     in: path
     name: "epoch"
+    required: true                # should be false but service deploy validation needs it to be true
     type: string
     format: date-time
     default: "20190325"
@@ -337,13 +339,13 @@ parameters:
     type: string
     default: "console"
     enum:
-      - "none"
       - "stackdriver"
       - "console"
   period:
     description: "The time window for which total energy is aggregated. The only exception is 'instant' which measures energy at a single point in time, without aggregation."
     in: path
     name: "period"
+    required: true                # should be false but service deploy validation needs it to be true  
     type: string
     default: "week"
     enum:
