@@ -45,7 +45,7 @@ paths:
   "/api/versions":
     get:
       description: "Returns a list of versions which are still supported. Older versions may be requested through an `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://docs.sundaya.monitored.equipment/docs/api.sundaya.monitored.equipment/0/c/Getting%20Started/Start%20Here/Standards%20&%20Conventions))."
-      operationId: "diagnostics.api.versions.get"
+      operationId: "devops.api.versions.get"
       security: []    # this path does not require an api key
       consumes:
       - ""
@@ -59,10 +59,10 @@ paths:
         "500":
           $ref: "#/responses/500-internal-server-error"
       tags:
-        - "Diagnostics"
+        - "DevOps"
   "/api/logging":
     get:
-      description: "Returns the current verbosity and appender of the logger. The minmum verbosity level is 'info' which provides a concise log of each event; 'debug' logs the full payload of POST requests and can be made active for short troubleshooting periods. 'appender' specifies the output destination for error reporting and logged events. If a value is not specified the default ('console') is used. Each environment can be pre-configured (through enums.environments) to preset verbosity and appender for the environment. For example developers will prefer to output logs to 'console' in the dev environment, while the test and prod environments will be configured to use 'stackdriver' at startup."
+      description: "Returns the current configuration for logging: including appenders, statements, and verbosity. Each environment is pre-configured (through enums.environments) but these configurations can be changed at runtime through this api path by specifying new options for 'appenders', 'statements' and 'verbosity'. For example developers will prefer to output logs to 'console' in the dev environment, while the test and prod environments will be configured to use 'stackdriver' with 'info' verbosity at startup but can be configured for 'debug' verbosity at runtime."
       operationId: "diagnostics.api.logging.get"
       security: []    # this path does not require an api key
       consumes:
@@ -72,6 +72,7 @@ paths:
       parameters:
       - $ref: "#/parameters/verbosity"  
       - $ref: "#/parameters/appenders"
+      - $ref: "#/parameters/statements"
       responses:
         "200":
           $ref: "#/responses/200-ok"
@@ -80,7 +81,7 @@ paths:
         "500":
           $ref: "#/responses/500-internal-server-error"
       tags:
-        - "Diagnostics"        
+        - "DevOps"        
   "/energy/{energy}/period/{period}/{epoch}/{duration}":
     get:
       description: "Retrieves energy monitoring data for a period. [Try this API](http://api.sundaya.monitored.equipment/energy/hse/period/week/20150204/1?site=999)"
@@ -249,6 +250,15 @@ paths:
       tags:
         - "Devices"
 parameters:
+  appenders:  
+    description: "A comma separated list of ouput appenders for error reporting and logged events. If a value is not specified the default ('stackdriver') is used."
+    in: query
+    name: "appenders"
+    type: string
+    default: "stackdriver"
+    enum:
+      - "stackdriver"
+      - "console"
   dataset:  
     in: path
     name: "dataset"
@@ -332,15 +342,6 @@ parameters:
     type: string
     format: date-time
     default: "20190325"
-  appenders:  
-    description: "A comma separated list of ouput appenders for error reporting and logged events. If a value is not specified the default ('console') is used."
-    in: query
-    name: "appenders"
-    type: string
-    default: "console"
-    enum:
-      - "stackdriver"
-      - "console"
   period:
     description: "The time window for which total energy is aggregated. The only exception is 'instant' which measures energy at a single point in time, without aggregation."
     in: path
@@ -372,6 +373,18 @@ parameters:
           items:
             $ref: '#/definitions/productCatalogueItem'
           type: array
+  statements:  
+    description: "A comma separated list of logging statements which are to be included in logs. For example if this list contains 'messaging' all statements in the code for log.messaging will be written to logs, otherwise they will be silent. The 'messaging' predicate refers to log statements for message broker functions; 'data' refers to data access functions; 'trace' provides a mechanism for diagnosing code paths and execution sequences through critical sections."
+    in: query
+    name: "statements"
+    type: string
+    default: "messaging,exception"
+    enum:
+      - "data"
+      - "error"
+      - "exception"
+      - "messaging"
+      - "trace"
   site:  
     description: "The customer site where energy assets are installed."
     in: query
@@ -379,7 +392,7 @@ parameters:
     required: true
     type: string
   verbosity:  
-    description: "A comma separated list of log levels, for error reporting and logged events. If a value is not specified the default ('info') is used."
+    description: "A comma separated list of log levels, for error reporting and logged events. If a value is not specified the minmum verbosity of ('info') is used as the default. 'debug' logs the full payload of POST requests and can be made active for short troubleshooting periods."
     in: query
     name: "verbosity"
     type: string
