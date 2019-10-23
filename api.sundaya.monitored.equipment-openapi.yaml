@@ -84,7 +84,7 @@ paths:
         - "DevOps"        
   "/energy/{energy}/period/{period}/{epoch}/{duration}":
     get:
-      description: "Retrieves energy monitoring data for a period. [Try this API](http://api.sundaya.monitored.equipment/energy/hse/period/week/20150204/1?site=999)"
+      description: "Retrieves energy monitoring data for a period. [Try this API](https://api.sundaya.monitored.equipment/energy/hse/period/week/20150204/1?site=999)"
       operationId: "energy.period.epoch.duration.get"
       security: []    # this path does not require an api key
       consumes:
@@ -194,7 +194,7 @@ paths:
         - "Devices"
   "/device/{device-id}/dataset/{dataset}/period/{period}/{epoch}/{duration}":
     get:
-      description: "Returns device data for a period. [Try this API](http://api.sundaya.monitored.equipment/device/CAB-01-001/dataset/pms)"
+      description: "Returns device data for a period. [Try this API](https://api.sundaya.monitored.equipment/device/CAB-01-001/dataset/pms)"
       operationId: "device.dataset.period.epoch.duration.get"
       consumes:
       - ""
@@ -223,7 +223,7 @@ paths:
         - "Devices"
   "/device/{device-id}/configs/period/{period}/{epoch}/{duration}":
     get:
-      description: "Returns historical configuration data for a period, including identifiers of subitems such as battery assembly, MCU board, and Mosfet board. . [Try this API](http://api.sundaya.monitored.equipment/device/BBC-PR1202-999/configs/period)"
+      description: "Returns historical configuration data for a period, including identifiers of subitems such as battery assembly, MCU board, and Mosfet board. . [Try this API](https://api.sundaya.monitored.equipment/device/BBC-PR1202-999/configs/period)"
       operationId: "device.configs.period.get"
       consumes:
       - ""
