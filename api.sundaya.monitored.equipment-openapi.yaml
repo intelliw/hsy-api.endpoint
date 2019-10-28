@@ -92,7 +92,7 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - $ref: "#/parameters/operational-features"  
+      - $ref: "#/parameters/features-operational"  
       responses:
         "200":
           $ref: "#/responses/200-ok"
