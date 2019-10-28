@@ -82,6 +82,26 @@ paths:
           $ref: "#/responses/500-internal-server-error"
       tags:
         - "DevOps"        
+  "/api/features":
+    get:
+      description: "Returns the current configuration of features which can be toggled on and off."
+      operationId: "diagnostics.api.features.get"
+      security: []    # this path does not require an api key
+      consumes:
+      - ""
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/parameters/operational-features"  
+      responses:
+        "200":
+          $ref: "#/responses/200-ok"
+        "401":
+          $ref: "#/responses/401-unauthorized"
+        "500":
+          $ref: "#/responses/500-internal-server-error"
+      tags:
+        - "DevOps"        
   "/energy/{energy}/period/{period}/{epoch}/{duration}":
     get:
       description: "Retrieves energy monitoring data for a period. [Try this API](https://api.sundaya.monitored.equipment/energy/hse/period/week/20150204/1?site=999)"
@@ -342,6 +362,16 @@ parameters:
     type: string
     format: date-time
     default: "20190325"
+  features-operational:  
+    description: "A comma separated list of operational features which can be toggled. A feature is 'on' if it is present in the list. The 'validation' feature determines whether or not to to perform in-depth input validation for POST requests"
+    in: query
+    name: "operational"
+    type: string
+    default: "logging"
+    enum:
+      - "none"
+      - "logging"
+      - "validation"
   period:
     description: "The time window for which total energy is aggregated. The only exception is 'instant' which measures energy at a single point in time, without aggregation."
     in: path
