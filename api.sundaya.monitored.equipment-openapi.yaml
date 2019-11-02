@@ -355,7 +355,7 @@ parameters:
       - "enjoy"
       - "grid"
   epoch:
-    description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm) and formatted according to the period."
+    description: "The start date and time of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm) and formatted according to the period."
     in: path
     name: "epoch"
     required: true                # should be false but service deploy validation needs it to be true
