@@ -1,25 +1,29 @@
 # [START swagger]
 swagger: "2.0"
-host: "dev.api.sundaya.monitored.equipment"
-x-google-endpoints:
-- name: "dev.api.sundaya.monitored.equipment"
-  target: "35.194.155.207"  # host-dev-static
-  # 34.80.69.65  # cos2-ip-addr (test)  35.194.155.207 # host-dev-stati  104.199.146.74  # host-api-static
+host: "test.sundaya.monitored.equipment"
+
+# this section applies only if service is on the cloud.goog domain
+# x-google-endpoints:
+# - name: "echo-api.endpoints.sundaya.cloud.goog"
+#   target: "104.199.146.74"  # host-api-static
+# 34.80.69.65  # cos2-ip-addr (test)  35.194.155.207 # host-dev-stati  104.199.146.74  # host-api-static
+
 x-google-allow: all
+
 basePath: "/"
 info:
-  title: "Energy Management (Development)"
+  title: "Energy Management (API)"
   version: "0.2.12"
   description: |
     The Energy Management API provides energy accounting for four energy **Types**:
 
     `harvest`, `store`, `enjoy`, `grid`
     
-    The `/energy` path provides periodic consolidation of data from energy monitoring devices (*week*, *month* etc.) 
+    The `/energy` path provides periodic consolidations of energy data from monitored equipment (*week*, *month* etc.) 
     
-    API clients can manage energy **Assets** through graphical views and by scheduling energy use at preferred times. 
+    API clients can produce graphical views from energy data to manage their energy **Assets**, and through the API schedule energy use at preferred times. 
     
-    The `/devices` path is for vendors and field engineers to monitor and control the operation of energy management **Devices**.
+    The `/devices` path is for vendors and field engineers to monitor and control energy management **Devices**.
     
     Type | Assets | Devices
     --- | --- | ---
@@ -34,14 +38,14 @@ info:
   termsOfService: "https://sundaya.com/terms-of-service/"
 # [END swagger]
 schemes:
-# Comment out if not configuring SSL.
-- "https"
-- "http"
+# Comment out if not supported
+  - "https"
+# - "http"
 paths:
   "/api/versions":
     get:
-      description: "Returns a list of versions which are still supported. Older versions may be requested through an `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://docs.sundaya.monitored.equipment/docs/api.sundaya.monitored.equipment/0/c/Getting%20Started/Standards%20&%20Conventions/Overview))."
-      operationId: "diagnostics.api.versions.get"
+      description: "Returns a list of versions which are still supported. Older versions may be requested through an `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://docs.sundaya.monitored.equipment/docs/api.sundaya.monitored.equipment/0/c/Getting%20Started/Start%20Here/Standards%20&%20Conventions))."
+      operationId: "devops.api.versions.get"
       security: []    # this path does not require an api key
       consumes:
       - ""
@@ -55,10 +59,52 @@ paths:
         "500":
           $ref: "#/responses/500-internal-server-error"
       tags:
-        - "Diagnostics"
+        - "DevOps"
+  "/api/logging":
+    get:
+      description: "Returns the current configuration for logging: including appenders, statements, and verbosity. Each environment is pre-configured (through enums.environments) but these configurations can be changed at runtime through this api path by specifying new options for 'appenders', 'statements' and 'verbosity'. For example developers will prefer to output logs to 'console' in the dev environment, while the test and prod environments will be configured to use 'stackdriver' with 'info' verbosity at startup but can be configured for 'debug' verbosity at runtime."
+      operationId: "diagnostics.api.logging.get"
+      security: []    # this path does not require an api key
+      consumes:
+      - ""
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/parameters/verbosity"  
+      - $ref: "#/parameters/appenders"
+      - $ref: "#/parameters/statements"
+      responses:
+        "200":
+          $ref: "#/responses/200-ok"
+        "401":
+          $ref: "#/responses/401-unauthorized"
+        "500":
+          $ref: "#/responses/500-internal-server-error"
+      tags:
+        - "DevOps"        
+  "/api/features":
+    get:
+      description: "Returns the current configuration of features which can be toggled on and off."
+      operationId: "diagnostics.api.features.get"
+      security: []    # this path does not require an api key
+      consumes:
+      - ""
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/parameters/features-operational"  
+      responses:
+        "200":
+          $ref: "#/responses/200-ok"
+        "401":
+          $ref: "#/responses/401-unauthorized"
+        "500":
+          $ref: "#/responses/500-internal-server-error"
+      tags:
+        - "DevOps"        
   "/energy/{energy}/period/{period}/{epoch}/{duration}":
     get:
-      description: "Retrieves energy monitoring data for a period. [Try this API](http://api.sundaya.monitored.equipment/energy/hse/period/week/20150204/1?site=999)"
+      description: "Retrieves energy monitoring data for a period. [Try this API](https://api.sundaya.monitored.equipment/energy/hse/period/week/20150204/1?site=999)"
       operationId: "energy.period.epoch.duration.get"
       security: []    # this path does not require an api key
       consumes:
@@ -168,7 +214,7 @@ paths:
         - "Devices"
   "/device/{device-id}/dataset/{dataset}/period/{period}/{epoch}/{duration}":
     get:
-      description: "Returns device data for a period. [Try this API](http://api.sundaya.monitored.equipment/device/CAB-01-001/dataset/pms)"
+      description: "Returns device data for a period. [Try this API](https://api.sundaya.monitored.equipment/device/CAB-01-001/dataset/pms)"
       operationId: "device.dataset.period.epoch.duration.get"
       consumes:
       - ""
@@ -197,7 +243,7 @@ paths:
         - "Devices"
   "/device/{device-id}/configs/period/{period}/{epoch}/{duration}":
     get:
-      description: "Returns historical configuration data for a period, including identifiers of subitems such as battery assembly, MCU board, and Mosfet board. . [Try this API](http://api.sundaya.monitored.equipment/device/BBC-PR1202-999/configs/period)"
+      description: "Returns historical configuration data for a period, including identifiers of subitems such as battery assembly, MCU board, and Mosfet board. . [Try this API](https://api.sundaya.monitored.equipment/device/BBC-PR1202-999/configs/period)"
       operationId: "device.configs.period.get"
       consumes:
       - ""
@@ -224,6 +270,15 @@ paths:
       tags:
         - "Devices"
 parameters:
+  appenders:  
+    description: "A comma separated list of ouput appenders for error reporting and logged events. If a value is not specified the default ('stackdriver') is used."
+    in: query
+    name: "appenders"
+    type: string
+    default: "stackdriver"
+    enum:
+      - "stackdriver"
+      - "console"
   dataset:  
     in: path
     name: "dataset"
@@ -253,7 +308,7 @@ parameters:
     name: "datasets"
     required: true
     schema:
-      description: "An array of charge controller datasets."
+      description: "An array of MPPT charge controller datasets."
       type: object
       properties:
         datasets:
@@ -266,7 +321,7 @@ parameters:
     name: "datasets"
     required: true
     schema:
-      description: "An array of charge controller datasets."
+      description: "An array of Inverter charge controller datasets."
       type: object
       properties:
         datasets:
@@ -283,12 +338,14 @@ parameters:
     description: "The number of periods to return starting at epoch. This defaults to 1."
     in: path
     name: "duration"
+    required: true                # should be false but service deploy validation needs it to be true
     type: integer
-    format: int64
+    minimum: 1
   energy:
     description: "The type of energy flow."
     in: path
     name: "energy"
+    required: true                # should be false but service deploy validation needs it to be true
     type: string
     default: "hse"
     enum:
@@ -298,16 +355,28 @@ parameters:
       - "enjoy"
       - "grid"
   epoch:
-    description: "The start date (and time) of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm) and formatted according to the period."
+    description: "The start date and time of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm) and formatted according to the period."
     in: path
     name: "epoch"
+    required: true                # should be false but service deploy validation needs it to be true
     type: string
     format: date-time
     default: "20190325"
+  features-operational:  
+    description: "A comma separated list of operational features which can be toggled. A feature is 'on' if it is present in the list. The 'validation' feature determines whether or not to to perform in-depth input validation for POST requests"
+    in: query
+    name: "operational"
+    type: string
+    default: "logging"
+    enum:
+      - "none"
+      - "logging"
+      - "validation"
   period:
     description: "The time window for which total energy is aggregated. The only exception is 'instant' which measures energy at a single point in time, without aggregation."
     in: path
     name: "period"
+    required: true                # should be false but service deploy validation needs it to be true  
     type: string
     default: "week"
     enum:
@@ -326,7 +395,6 @@ parameters:
     description: "An optional product filter to restrict data to specific categories, subcategories and product types."
     in: body
     name: "productCatalogueItems"
-    required: false
     schema:
       description: "A list of product catalogue items to filter the energy data query."
       type: object
@@ -335,12 +403,34 @@ parameters:
           items:
             $ref: '#/definitions/productCatalogueItem'
           type: array
+  statements:  
+    description: "A comma separated list of logging statements which are to be included in logs. For example if this list contains 'messaging' all statements in the code for log.messaging will be written to logs, otherwise they will be silent. The 'messaging' predicate refers to log statements for message broker functions; 'data' refers to data access functions; 'trace' provides a mechanism for diagnosing code paths and execution sequences through critical sections."
+    in: query
+    name: "statements"
+    type: string
+    default: "messaging,exception"
+    enum:
+      - "data"
+      - "error"
+      - "exception"
+      - "messaging"
+      - "trace"
   site:  
     description: "The customer site where energy assets are installed."
     in: query
     name: "site"
     required: true
     type: string
+  verbosity:  
+    description: "A comma separated list of log levels, for error reporting and logged events. If a value is not specified the minmum verbosity of ('info') is used as the default. 'debug' logs the full payload of POST requests and can be made active for short troubleshooting periods."
+    in: query
+    name: "verbosity"
+    type: string
+    default: "info"
+    enum:
+      - "none"
+      - "info"
+      - "debug"
 responses:
   200-ok:
     description: "Data retrieved, or queued for processing."
@@ -469,6 +559,11 @@ definitions:
           type: string
         render:
           type: string
+  equipmentStatus:
+    description: "A 4-character, hex-encoded string value corresponding to a bitmap of equipment status fields."
+    type: string
+    minLength: 4
+    maxLength: 4
   eventTime:
     description: "The local time of the event which produced this data sample, represented with a mandatory '+/-' offset from UTC for the device's location, in compressed 'ISO 8601/RFC3339' (YYYYMMDDThhmmss±hhmm)."
     type: string
@@ -539,6 +634,7 @@ definitions:
       - "battery"
       - "load"
       - "grid"
+      - "status"
       properties:
         time_local:
           $ref: "#/definitions/eventTime"
@@ -549,7 +645,9 @@ definitions:
         load:
           $ref: "#/definitions/load"
         grid:
-          $ref: "#/definitions/load"
+          $ref: "#/definitions/grid"
+        status:
+          $ref: "#/definitions/equipmentStatus"
   pmsDataset:
     description: "Data for a 1-4 cabinets, containing packs, cell blocks, and mosfets."
     type: object
@@ -558,7 +656,21 @@ definitions:
     - "data"      
     properties:
       pms:
-        $ref: "#/definitions/genericDevice"
+        description: "Attributes in the `pms` element provide a secondary dataset, as opposed to the `data` element which which provides the primary dataset for the actual equipment being monitored (`pack` data)."
+        type: object
+        required:
+        - "id"
+        - "temp"
+        properties:
+          id:
+            description: "The device identifier."
+            type: string
+          temp:
+            description: "The Ehub's self-monitored temperature."
+            type: number
+            format: float
+            minimum: 0
+            example: "48.3"            
       data:
         $ref: "#/definitions/pmsData"
   pmsData:
@@ -582,6 +694,7 @@ definitions:
           - "temp"
           - "cell"
           - "fet"
+          - "status"
           properties:
             id:
               description: "The pack identifier. The value is provided by the pack’s acquisition board."
@@ -606,6 +719,7 @@ definitions:
               items:
                 type: number
                 format: float
+                minimum: 0
                 example: "35.0"
             cell:
               description: "Data for 14 cellblocks inside this pack."
@@ -622,17 +736,18 @@ definitions:
                   items:
                     type: number
                     format: float
+                    minimum: 0
                     example: "3.92"
                 open:
                   description: "An unordered set of ordinals for cells which are ‘open’ due to cell balancing. Must contain numbers from 1-14 as there are only 14 cells in a pack."
                   type: array
-                  minimum: 1
-                  maximum: 14
                   minItems: 0
                   maxItems: 14
                   uniqueItems: true
                   items:
                     type: integer
+                    minimum: 1
+                    maximum: 14
                     example: "[1,6]"
             fet:
               description: "Data readings for input (CMOS) and output (DMOS) MOSFETS."
@@ -649,18 +764,21 @@ definitions:
                   items:
                     type: number
                     format: float
+                    minimum: 0
                     example: "34.1"
                 open:
                   description: "An unordered set ordinal values for FET numbers which are ‘open’ due to pack balancing. The data values must be a number from 1-2 as there are only 2 FETS in each pack."
                   type: array
-                  minimum: 1
-                  maximum: 2
                   minItems: 0
                   maxItems: 2
                   uniqueItems: true
                   items:
                     type: integer
+                    minimum: 1
+                    maximum: 2
                     example: "[1,2]"
+            status:
+              $ref: "#/definitions/equipmentStatus"
   mpptDataset:
     description: "Contains data for a MPPT charge controller and its connected pv strings, batteries, and DC loads."
     type: object
@@ -682,6 +800,7 @@ definitions:
       - "pv"
       - "battery"
       - "load"
+      - "status"
       properties:
         time_local:
           $ref: "#/definitions/eventTime"
@@ -691,6 +810,8 @@ definitions:
           $ref: "#/definitions/battery"
         load:
           $ref: "#/definitions/load"
+        status:
+          $ref: "#/definitions/equipmentStatus"
   productCatalogueItem:
     description: "A product catalogue item definition."
     type: object
@@ -735,6 +856,7 @@ definitions:
     description: "Temperature in degrees Centigrade."
     type: number
     format: float
+    minimum: 0
     example: "34.0"
   battery:
     description: "A data subset for a connected battery system."
@@ -747,6 +869,7 @@ definitions:
         description: "Voltage reading for the connected battery."
         type: number
         format: float
+        minimum: 0        
         example: "55.1"
       amps:
         description: "The current for the connected Battery. The value is positive for charge current and negative when discharging."
@@ -768,6 +891,7 @@ definitions:
         items:
           type: number
           format: float
+          minimum: 0
           example: "48.000"
       amps:
         description: "An ordered set of Current readings for Loads (corresponding to voltage readings in 'load.volts'."
@@ -794,6 +918,7 @@ definitions:
         items:
           type: number
           format: float
+          minimum: 0
           example: "48.000"
       amps:
         description: "An ordered set of Current readings for for each phase of the connected grid supply (corresponding to values in grid.volts and grid.pf)."
@@ -805,14 +930,15 @@ definitions:
           format: float
           example: "1.02"
       pf:
-        description: "An ordered set of Poswer Factor readings for for each phase of the connected grid supply (corresponding to values in grid.volts and grid.amps)."
+        description: "An ordered set of Power Factor readings for each phase of the connected grid supply (corresponding to values in grid.volts and grid.amps)."
         type: array
         minItems: 1
         maxItems: 3
-        maximum: 1
         items:
           type: number
           format: float
+          minimum: -1
+          maximum: 1
           example: "0.92"          
   pv:
     description: "A data subset for a PV string."
@@ -829,6 +955,7 @@ definitions:
         items:
           type: number
           format: float
+          minimum: 0
           example: "48.000"
       amps:
         description: "An ordered set of Current readings for PV strings (corresponding to voltage readings in 'pv.volts'."
