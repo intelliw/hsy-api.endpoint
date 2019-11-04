@@ -1,6 +1,6 @@
 # [START swagger]
 swagger: "2.0"
-host: "test.sundaya.monitored.equipment"
+host: "api.test.sundaya.monitored.equipment"
 
 # this section applies only if service is on the cloud.goog domain
 # x-google-endpoints:
