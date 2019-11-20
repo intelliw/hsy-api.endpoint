@@ -1,6 +1,6 @@
 # [START swagger]
 swagger: "2.0"
-host: "api.sundaya.monitored.equipment"
+host: "hse-gateway-s36x6mwuja-an.a.run.app"
 
 # this section applies only if service is on the cloud.goog domain
 # x-google-endpoints:
@@ -9,7 +9,8 @@ host: "api.sundaya.monitored.equipment"
 # 34.80.69.65  # cos2-ip-addr (test)  35.194.155.207 # host-dev-static  104.199.146.74  # host-api-static
 
 x-google-allow: all
-
+x-google-backend: 
+  address: "https://api.dev.sundaya.monitored.equipment"
 basePath: "/"
 info:
   title: "Energy Management (API)"
