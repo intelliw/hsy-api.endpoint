@@ -1,6 +1,6 @@
 # [START swagger]
 swagger: "2.0"
-host: "api.sundaya.monitored.equipment"
+host: "api.stage.sundaya.monitored.equipment"
 
 # this section applies only if service is on the cloud.goog domain
 # x-google-endpoints:
@@ -15,7 +15,7 @@ x-google-allow: all
 
 basePath: "/"
 info:
-  title: "Energy Management (API)"
+  title: "Energy Management (STAGE)"
   version: "0.2.12"
   description: |
     The Energy Management API provides energy accounting for four energy **Types**:
