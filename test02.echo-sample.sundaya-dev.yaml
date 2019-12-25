@@ -2,7 +2,7 @@
 swagger: "2.0"
 info:
   description: "A simple Google Cloud Endpoints API example."
-  title: "Endpoints Example HSE Backend"
+  title: "Endpoints Example HSY Backend"
   version: "1.0.0"
 host: "echo-api.endpoints.sundaya-dev.cloud.goog"
 # [END swagger]

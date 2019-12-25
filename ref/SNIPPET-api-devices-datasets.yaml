@@ -28,7 +28,7 @@ tags:
       Devices monitor device health and energy flows and provide metrics for applicaitons.
 
         For example, vendor integrations use the data to control and manage the device. 
-        Client applications use the data to analyse energy Flows across :harvest, store, enjoy, grid.
+        Client applications use the data to analyse energy Flows across :harvest, store, yield, grid.
     name: Device Monitoring Data
 paths:
   '/devices/{deviceId}/monitoring-data':    
@@ -156,7 +156,7 @@ definitions:
             type: string
             title: The Href Schema
             examples:
-            - http:/api.endpoints.sundaya.cloud.goog/hse/week/20190210
+            - http:/api.endpoints.sundaya.cloud.goog/hsy/week/20190210
           links:
             type: array
             title: The Links Schema
@@ -209,7 +209,7 @@ definitions:
                   type: string
                   title: The Href Schema
                   examples:
-                  - http:/api.endpoints.sundaya.cloud.goog/hse/day/20190204
+                  - http:/api.endpoints.sundaya.cloud.goog/hsy/day/20190204
                 links:
                   type: array
                   title: The Links Schema
@@ -249,7 +249,7 @@ definitions:
                         type: string
                         title: The Href Schema
                         examples:
-                        - http:/api.endpoints.sundaya.cloud.goog/hse/day/20190204
+                        - http:/api.endpoints.sundaya.cloud.goog/hsy/day/20190204
                       render:
                         type: string
                         title: The Render Schema

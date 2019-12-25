@@ -1,11 +1,11 @@
 # [START swagger]
 swagger: "2.0"
 info:
-  description: "A simple Endpoint for testing draft HSE Energy API."
+  description: "A simple Endpoint for testing draft HSY Energy API."
   title: "Sundaya Energy Monitoring API"
   version: "1.7.4"
 host: "api.exploresive.com"
-basePath: "/hse"
+basePath: "/hsy"
 # [END swagger]
 consumes:
 - "application/json"

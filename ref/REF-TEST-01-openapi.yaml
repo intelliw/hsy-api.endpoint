@@ -1,15 +1,15 @@
 # [START swagger]
 swagger: "2.0"
-host: "test.endpoints.hse-api-02.cloud.goog"
+host: "test.endpoints.hsy-api-02.cloud.goog"
 basePath: /
 x-google-endpoints:
-- name: "test.endpoints.hse-api-02.cloud.goog"
+- name: "test.endpoints.hsy-api-02.cloud.goog"
   target: "cos3-ip-addr"
 info:
   title: "Test Management"
   version: "1.0.06"
   description: |
-    Energy Management is based on four energy types:`harvest`, `store`, `enjoy`, `grid`. 
+    Energy Management is based on four energy types:`harvest`, `store`, `yield`, `grid`. 
     The API provides metrics for a given period (week, month etc.) and allows client applications to manage **Energy Assets** by navigating graphical views and by scheduling energy use at preferred times. 
     Vendor device integrations use the API to monitor and control **Energy Management Devices**.
     
@@ -17,7 +17,7 @@ info:
     --- | --- | ---
     `harvest` | Renewable Sources | PV Modules, PV Grid-interactive Inverter
     `store` | Batteries | Busbar Controler (BBC), Pack Management System (PMS)
-    `enjoy` | Appliances | Multicore-Cable Current Sensors, Clamp-on Current Sensors
+    `yield` | Appliances | Multicore-Cable Current Sensors, Clamp-on Current Sensors
     `grid` | Mains Electricity | Smart Meters
   license:
     name: "Creative Commons Attribution 4.0 International"

@@ -16,11 +16,11 @@ x-google-allow: all
 basePath: "/"
 info:
   title: "Energy Management (DEV)"
-  version: "0.2.12"
+  version: "0.2.20"
   description: |
     The Energy Management API provides energy accounting for four energy **Types**:
 
-    `harvest`, `store`, `enjoy`, `grid`
+    `harvest`, `store`, `yield`, `grid`
     
     The `/energy` path provides periodic consolidations of energy data from monitored equipment (*week*, *month* etc.) 
     
@@ -32,7 +32,7 @@ info:
     --- | --- | ---
     `harvest` | Renewables | PV Modules, Maximum Power Point Trackers (MPPT), Charge Controllers
     `store` | Storage | Busbar Controllers (BBC), Pack Management Systems (PMS)
-    `enjoy` | Appliances | Multicore-Cable Current Sensors, Switchboard Clamp Sensors
+    `yield` | Appliances | Multicore-Cable Current Sensors, Switchboard Clamp Sensors
     `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters
     
   license:
@@ -107,7 +107,7 @@ paths:
         - "DevOps"        
   "/energy/{energy}/period/{period}/{epoch}/{duration}":
     get:
-      description: "Retrieves energy monitoring data for a period. [Try this API](https://api.sundaya.monitored.equipment/energy/hse/period/week/20150204/1?site=999)"
+      description: "Retrieves energy monitoring data for a period. [Try this API](https://api.sundaya.monitored.equipment/energy/hsy/period/week/20150204/1?site=999)"
       operationId: "energy.period.epoch.duration.get"
       security: []    # this path does not require an api key
       consumes:
@@ -350,12 +350,12 @@ parameters:
     name: "energy"
     required: true                # should be false but service deploy validation needs it to be true
     type: string
-    default: "hse"
+    default: "hsy"
     enum:
-      - "hse"
+      - "hsy"
       - "harvest"
       - "store"
-      - "enjoy"
+      - "yield"
       - "grid"
   epoch:
     description: "The start date and time of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm) and formatted according to the period."
@@ -840,7 +840,7 @@ definitions:
         - "Counting"
         - "Replacing"
         - "Solar Home Kits"
-        - "Saving & Enjoy"   
+        - "Saving & Yield"   
       productType:
         description: "A valid product Type for the product Category and Subcategory."
         type: string

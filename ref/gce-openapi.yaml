@@ -4,9 +4,9 @@ info:
   description: "Endpoint API skleleton."
   title: "Endpoints Strawman"
   version: "1.0.01"
-host: "echo-api.endpoints.hse-api-02.cloud.goog"
+host: "echo-api.endpoints.hsy-api-02.cloud.goog"
 x-google-endpoints:
-- name: "echo-api.endpoints.hse-api-02.cloud.goog"
+- name: "echo-api.endpoints.hsy-api-02.cloud.goog"
   target: "34.80.99.163"
 # [END swagger]
 consumes:

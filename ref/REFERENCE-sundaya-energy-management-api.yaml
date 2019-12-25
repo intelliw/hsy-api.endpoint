@@ -10,7 +10,7 @@ info:
   version: "1.0.02"
   description: |
     Energy Management is based on four energy types:    
-    `harvest`, `store`, `enjoy`, `grid`. 
+    `harvest`, `store`, `yield`, `grid`. 
     
     The API provides energy metrics for a given period (week, month etc.) and allows client applications to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times. 
     Vendor device integrations can use the API to monitor and control their **Energy Management Devices**.
@@ -19,7 +19,7 @@ info:
     --- | --- | ---
     `harvest` | Renewables | PV Modules, PV Grid-interactive Inverter
     `store` | Storage | Busbar Controler (BBC), Pack Management System (PMS)
-    `enjoy` | Appliances | Multicore-Cable Current Sensors, Clamp-on Current Sensors
+    `yield` | Appliances | Multicore-Cable Current Sensors, Clamp-on Current Sensors
     `grid` | Mains Electricity | Smart Meters
 
   license:
@@ -39,12 +39,12 @@ tags:
       Devices monitor device health and energy flows and provide metrics for applicaitons.
 
         For example, vendor integrations use the data to control and manage the device. 
-        Client applications use the data to analyse energy Flows across :harvest, store, enjoy, grid.
+        Client applications use the data to analyse energy Flows across :harvest, store, yield, grid.
     name: Device Monitoring Data
 paths:
   "/energy/{energyEnum}/periods/{periodEnum}/{epoch}":
     get:
-      description: Retrieves HSE monitoring data for the requested periods
+      description: Retrieves HSY monitoring data for the requested periods
       operationId: "EnergyPeriodsGet"
       produces:
       - "application/vnd.collection+json"
@@ -67,10 +67,10 @@ paths:
         required: true
         description: "The energy type."
         enum:
-          - hse
+          - hsy
           - harvest
           - store
-          - enjoy
+          - yield
           - grid
         type: string
       - name: periodEnum
@@ -259,7 +259,7 @@ definitions:
             type: string
             title: The Href Schema
             example:
-            - http:/api.endpoints.sundaya.cloud.goog/hse/week/20190210
+            - http:/api.endpoints.sundaya.cloud.goog/hsy/week/20190210
           links:
             type: array
             title: The Links Schema
@@ -297,7 +297,7 @@ definitions:
                   type: string
                   title: The Href Schema
                   example:
-                  - http:/api.endpoints.sundaya.cloud.goog/energy/hse/period/month/201902
+                  - http:/api.endpoints.sundaya.cloud.goog/energy/hsy/period/month/201902
           items:
             type: array
             title: The Items Schema
@@ -312,7 +312,7 @@ definitions:
                   type: string
                   title: The Href Schema
                   example:
-                  - http:/api.endpoints.sundaya.cloud.goog/hse/day/20190204
+                  - http:/api.endpoints.sundaya.cloud.goog/hsy/day/20190204
                 links:
                   type: array
                   title: The Links Schema
@@ -352,7 +352,7 @@ definitions:
                         type: string
                         title: The Href Schema
                         example:
-                        - http:/api.endpoints.sundaya.cloud.goog/hse/day/20190204
+                        - http:/api.endpoints.sundaya.cloud.goog/hsy/day/20190204
                       render:
                         type: string
                         title: The Render Schema
