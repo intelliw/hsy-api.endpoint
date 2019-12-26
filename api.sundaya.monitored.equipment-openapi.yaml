@@ -22,18 +22,19 @@ info:
 
     `harvest`, `store`, `yield`, `buy`
     
-    The `/energy` path provides periodic consolidations of energy data from monitored equipment (*week*, *month* etc.) 
+    The `/energy` path provides energy data from monitored equipment for each period (*week*, *month* etc.) 
     
-    API clients can produce graphical views from energy data to manage their energy **Assets**, and through the API schedule energy use at preferred times. 
+    API clients can use energy data to help users manage their energy **Assets**, and schedule energy use at preferred times. 
     
-    The `/devices` path is for vendors and field engineers to monitor and control energy management **Devices**.
+    The `/devices` path is for data collection from monitored equipment.
     
-    Type | Assets | Devices
+    Energy | Assets | Devices
     --- | --- | ---
-    `harvest` | Renewables | PV Modules, Maximum Power Point Trackers (MPPT), Charge Controllers
+    `harvest` | Renewables | PV Modules, Maximum Power Point Trackers (MPPT)
     `store` | Storage | Busbar Controllers (BBC), Pack Management Systems (PMS)
     `yield` | Appliances | Multicore-Cable Current Sensors, Switchboard Clamp Sensors
-    `buy` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters
+    `buy` | Grid | Smart Meters, PV Grid-interactive Inverters
+
     
   license:
     name: "Creative Commons Attribution 4.0 International"
