@@ -10,7 +10,7 @@ info:
   version: "1.0.02"
   description: |
     Energy Management is based on four energy types:    
-    `harvest`, `store`, `yield`, `grid`. 
+    `harvest`, `store`, `yield`, `buy`. 
     
     The API provides energy metrics for a given period (week, month etc.) and allows client applications to manage **Energy Assets** through graphical views and by scheduling energy use at preferred times. 
     Vendor device integrations can use the API to monitor and control their **Energy Management Devices**.
@@ -20,7 +20,7 @@ info:
     `harvest` | Renewables | PV Modules, PV Grid-interactive Inverter
     `store` | Storage | Busbar Controler (BBC), Pack Management System (PMS)
     `yield` | Appliances | Multicore-Cable Current Sensors, Clamp-on Current Sensors
-    `grid` | Mains Electricity | Smart Meters
+    `buy` | Mains Electricity | Smart Meters
 
   license:
     name: "Creative Commons Attribution 4.0 International"
@@ -39,7 +39,7 @@ tags:
       Devices monitor device health and energy flows and provide metrics for applicaitons.
 
         For example, vendor integrations use the data to control and manage the device. 
-        Client applications use the data to analyse energy Flows across :harvest, store, yield, grid.
+        Client applications use the data to analyse energy Flows across :harvest, store, yield, buy.
     name: Device Monitoring Data
 paths:
   "/energy/{energyEnum}/periods/{periodEnum}/{epoch}":
@@ -71,7 +71,7 @@ paths:
           - harvest
           - store
           - yield
-          - grid
+          - buy
         type: string
       - name: periodEnum
         in: path

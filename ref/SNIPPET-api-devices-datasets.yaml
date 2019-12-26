@@ -28,7 +28,7 @@ tags:
       Devices monitor device health and energy flows and provide metrics for applicaitons.
 
         For example, vendor integrations use the data to control and manage the device. 
-        Client applications use the data to analyse energy Flows across :harvest, store, yield, grid.
+        Client applications use the data to analyse energy Flows across :harvest, store, yield, buy.
     name: Device Monitoring Data
 paths:
   '/devices/{deviceId}/monitoring-data':    

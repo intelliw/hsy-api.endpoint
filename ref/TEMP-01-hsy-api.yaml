@@ -18,7 +18,7 @@ info:
     `harvest` | Renewable Sources | PV Modules, PV Grid-interactive Inverter
     `store` | Batteries | Busbar Controler (BBC), Pack Management System (PMS)
     `yield` | Appliances | Multicore-Cable Current Sensors, Clamp-on Current Sensors
-    `grid` | Mains Electricity | Smart Meters
+    `buy` | Mains Electricity | Smart Meters
   license:
     name: "Creative Commons Attribution 4.0 International"
     url: "http://creativecommons.org/licenses/by/4.0/"
@@ -70,7 +70,7 @@ paths:
         - harvest
         - store
         - yield
-        - grid
+        - buy
       type: string
   "/auth/info/googlejwt":
     get:

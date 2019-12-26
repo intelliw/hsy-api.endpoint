@@ -1,7 +1,7 @@
 # Introduction
 The HSY Energy Management API is based on REST / Hypermedia and specified in [OpenAPI v2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md). 
 
-The API provides energy metrics for four **Flow** types:`harvest`, `store`, `yield`, `grid`. 
+The API provides energy metrics for four **Flow** types:`harvest`, `store`, `yield`, `buy`. 
 
 The API response consolidates all four energy flows in each request and reponse, based on a time period.
 
@@ -14,7 +14,7 @@ Flow | Energy Asset | Energy Management Device
 `harvest` | Renewables | PV Modules, PV Grid-interactive Inverter
 `store` | Storage | Battery Management System (BMS), Energy Storage System (ESS)
 `yield` | Appliances | Multicore Cable Sensors, Switchboard Clamp Sensors, Socket Sensors
-`grid` | Mains Electricity | Smart Meters
+`buy` | Mains Electricity | Smart Meters
 
 The API and documentation is available through the *Sundaya Developer Portal* at https://developer.sundaya.com. 
 
@@ -26,7 +26,7 @@ The following provides names of all data elements used in the API, in the contex
 
 - `store.in` and `store.out` indicate *charge* and *discharge* flows for batteries.
 
-- `grid.out` and `grid.in` indicate mains use, and feed-in flows into the public grid.
+- `buy.out` and `buy.in` indicate mains use, and feed-in flows into the public grid.
 
 - `harvest` indicates renewable generation and always implies `.out`. 
 
@@ -40,9 +40,9 @@ These equal and opposite flows are summarised in the following table:
 
 Flow | From / To   
     --- |--- 
-`harvest` |`store.in` `yield` `grid.in`
+`harvest` |`store.in` `yield` `buy.in`
 `store.out` | `yield`
-`yield`  |  `harvest` `store.out` `grid.out`
+`yield`  |  `harvest` `store.out` `buy.out`
     
 To query specific assets, clients can filter requests by `category`, `subcategory`, and `product-type` (in the request *Body*).
 

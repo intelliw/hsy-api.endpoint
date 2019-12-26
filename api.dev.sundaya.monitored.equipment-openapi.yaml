@@ -15,12 +15,12 @@ x-google-allow: all
 
 basePath: "/"
 info:
-  title: "Energy Management (DEV)"
+  title: "Energy Management (API)"
   version: "0.2.20"
   description: |
     The Energy Management API provides energy accounting for four energy **Types**:
 
-    `harvest`, `store`, `yield`, `grid`
+    `harvest`, `store`, `yield`, `buy`
     
     The `/energy` path provides periodic consolidations of energy data from monitored equipment (*week*, *month* etc.) 
     
@@ -33,7 +33,7 @@ info:
     `harvest` | Renewables | PV Modules, Maximum Power Point Trackers (MPPT), Charge Controllers
     `store` | Storage | Busbar Controllers (BBC), Pack Management Systems (PMS)
     `yield` | Appliances | Multicore-Cable Current Sensors, Switchboard Clamp Sensors
-    `grid` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters
+    `buy` | Mains Electricity | Smart Meters, PV Grid-interactive Inverters
     
   license:
     name: "Creative Commons Attribution 4.0 International"
@@ -356,7 +356,7 @@ parameters:
       - "harvest"
       - "store"
       - "yield"
-      - "grid"
+      - "buy"
   epoch:
     description: "The start date and time of the period, in compressed `ISO 8601/RFC3339` (YYYYMMDDThhmmss±hhmm) and formatted according to the period."
     in: path
