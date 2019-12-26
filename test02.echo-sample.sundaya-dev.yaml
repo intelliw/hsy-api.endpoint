@@ -18,7 +18,7 @@ paths:
   "/api/versions":
     get:
       description: "Returns a list of versions which are still supported. Older versions may be requested through an `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://docs.sundaya.monitored.equipment/docs/api.sundaya.monitored.equipment/0/c/Getting%20Started/Start%20Here/Standards%20&%20Conventions))."
-      operationId: "devops.api.versions.get"
+      operationId: "admin.api.versions.get"
       security: []    # this path does not require an api key
       consumes:
       - ""
@@ -32,7 +32,7 @@ paths:
         "500":
           $ref: "#/responses/500-internal-server-error"
       tags:
-        - "DevOps"
+        - "Admin"
   "/echo":
     post:
       description: "Echo back a given message."

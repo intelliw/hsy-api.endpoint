@@ -45,7 +45,7 @@ paths:
   "/api/versions":
     get:
       description: "Returns a list of versions which are still supported. Older versions may be requested through an `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://docs.sundaya.monitored.equipment/docs/api.sundaya.monitored.equipment/0/c/Getting%20Started/Start%20Here/Standards%20&%20Conventions))."
-      operationId: "devops.api.versions.get"
+      operationId: "admin.api.versions.get"
       security: []    # this path does not require an api key
       consumes:
       - ""
@@ -59,7 +59,7 @@ paths:
         "500":
           $ref: "#/responses/500-internal-server-error"
       tags:
-        - "DevOps"
+        - "Admin"
   "/api/logging":
     get:
       description: "Returns the current configuration for logging: including appenders, statements, and verbosity. Each environment is pre-configured (through enums.environments) but these configurations can be changed at runtime through this api path by specifying new options for 'appenders', 'statements' and 'verbosity'. For example developers will prefer to output logs to 'console' in the dev environment, while the test and prod environments will be configured to use 'stackdriver' with 'info' verbosity at startup but can be configured for 'debug' verbosity at runtime."
@@ -81,7 +81,7 @@ paths:
         "500":
           $ref: "#/responses/500-internal-server-error"
       tags:
-        - "DevOps"        
+        - "Admin"        
   "/api/features":
     get:
       description: "Returns the current configuration of features which can be toggled on and off."
@@ -101,7 +101,7 @@ paths:
         "500":
           $ref: "#/responses/500-internal-server-error"
       tags:
-        - "DevOps"        
+        - "Admin"        
   "/energy/{energy}/period/{period}/{epoch}/{duration}":
     get:
       description: "Retrieves energy monitoring data for a period. [Try this API](https://api.sundaya.monitored.equipment/energy/hsy/period/week/20150204/1?site=999)"
