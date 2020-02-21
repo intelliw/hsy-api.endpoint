@@ -48,7 +48,7 @@ schemes:
 paths:
   "/api/versions":
     get:
-      description: "Returns a list of versions which are still supported. Older versions may be requested through an `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://docs.sundaya.monitored.equipment/docs/api.sundaya.monitored.equipment/0/c/Getting%20Started/Start%20Here/Standards%20&%20Conventions))."
+      description: "Returns a list of versions which are still supported. Older versions may be requested through an `Accept` request header (see _Versions_ in [`Standards & Conventions`](https://docs.sundaya.monitored.equipment/docs/api.stage.sundaya.monitored.equipment/0/c/Getting%20Started/Start%20Here/Standards%20&%20Conventions))."
       operationId: "admin.api.versions.get"
       security: []    # this path does not require an api key
       consumes:
@@ -108,7 +108,7 @@ paths:
         - "Admin"        
   "/energy/{energy}/period/{period}/{epoch}/{duration}":
     get:
-      description: "Retrieves energy monitoring data for a period. [Try this API](https://api.sundaya.monitored.equipment/energy/hsy/period/week/20150204/1?site=999)"
+      description: "Retrieves energy monitoring data for a period. [Try this API](https://api.stage.sundaya.monitored.equipment/energy/hsy/period/week/20150204/1?site=999)"
       operationId: "energy.period.epoch.duration.get"
       security: []    # this path does not require an api key
       consumes:
@@ -218,7 +218,7 @@ paths:
         - "Devices"
   "/device/{device-id}/dataset/{dataset}/period/{period}/{epoch}/{duration}":
     get:
-      description: "Returns device data for a period. [Try this API](https://api.sundaya.monitored.equipment/device/CAB-01-001/dataset/pms)"
+      description: "Returns device data for a period. [Try this API](https://api.stage.sundaya.monitored.equipment/device/CAB-01-001/dataset/pms)"
       operationId: "device.dataset.period.epoch.duration.get"
       consumes:
       - ""
@@ -247,7 +247,7 @@ paths:
         - "Devices"
   "/device/{device-id}/configs/period/{period}/{epoch}/{duration}":
     get:
-      description: "Returns historical configuration data for a period, including identifiers of subitems such as battery assembly, MCU board, and Mosfet board. . [Try this API](https://api.sundaya.monitored.equipment/device/BBC-PR1202-999/configs/period)"
+      description: "Returns historical configuration data for a period, including identifiers of subitems such as battery assembly, MCU board, and Mosfet board. . [Try this API](https://api.stage.sundaya.monitored.equipment/device/BBC-PR1202-999/configs/period)"
       operationId: "device.configs.period.get"
       consumes:
       - ""
@@ -572,15 +572,6 @@ definitions:
     description: "The local time of the event which produced this data sample, represented with a mandatory '+/-' offset from UTC for the device's location, in compressed 'ISO 8601/RFC3339' (YYYYMMDDThhmmss±hhmm)."
     type: string
     format: date-time                      
-  genericDevice:
-    description: "Generic attributes for a monitored device."
-    type: object
-    required:
-    - "id"
-    properties:
-      id:
-        description: "The device identifier."
-        type: string
   genericMessage:
     description: "Code and status with message details."
     type: object
@@ -620,11 +611,21 @@ definitions:
     description: "Contains data for an Inverter controller and its connected pv strings, batteries, and AC loads."
     type: object
     required:
-    - "inverter"
+    - "inverter_id"
+    - "status"
     - "data"      
     properties:
-      inverter:
-        $ref: "#/definitions/genericDevice"
+      inverter_id:
+        description: "The device identifier."
+        type: string
+      status:
+        description: "Attributes in the `status` element provide a secondary dataset, as opposed to the `data` element which which provides the primary dataset for the actual equipment being monitored."
+        type: object
+        required:
+        - "code"
+        properties:
+          code:
+            $ref: "#/definitions/equipmentStatus"
       data:
         $ref: "#/definitions/inverterData"
   inverterData:
@@ -638,7 +639,6 @@ definitions:
       - "battery"
       - "load"
       - "grid"
-      - "status"
       properties:
         time_local:
           $ref: "#/definitions/eventTime"
@@ -650,25 +650,26 @@ definitions:
           $ref: "#/definitions/load"
         grid:
           $ref: "#/definitions/grid"
-        status:
-          $ref: "#/definitions/equipmentStatus"
   pmsDataset:
     description: "Data for a 1-4 cabinets, containing packs, cell blocks, and mosfets."
     type: object
     required:
-    - "pms"
+    - "pms_id"
+    - "status"
     - "data"      
     properties:
-      pms:
-        description: "Attributes in the `pms` element provide a secondary dataset, as opposed to the `data` element which which provides the primary dataset for the actual equipment being monitored (`pack` data)."
+      pms_id:
+        description: "The device identifier."
+        type: string
+      status:
+        description: "Attributes in the `status` element provide a secondary dataset, as opposed to the `data` element which which provides the primary dataset for the actual equipment being monitored (`pack` data)."
         type: object
         required:
-        - "id"
+        - "code"
         - "temp"
         properties:
-          id:
-            description: "The device identifier."
-            type: string
+          code:
+            $ref: "#/definitions/equipmentStatus"
           temp:
             description: "The Ehub's self-monitored temperature."
             type: number
@@ -698,7 +699,6 @@ definitions:
           - "temp"
           - "cell"
           - "fet"
-          - "status"
           properties:
             id:
               description: "The pack identifier. The value is provided by the pack’s acquisition board."
@@ -781,17 +781,25 @@ definitions:
                     minimum: 1
                     maximum: 2
                     example: "[1,2]"
-            status:
-              $ref: "#/definitions/equipmentStatus"
   mpptDataset:
     description: "Contains data for a MPPT charge controller and its connected pv strings, batteries, and DC loads."
     type: object
     required:
-    - "mppt"
+    - "mppt_id"
+    - "status"
     - "data"      
     properties:
-      mppt:
-        $ref: "#/definitions/genericDevice"
+      mppt_id:
+        description: "The device identifier."
+        type: string
+      status:
+        description: "Attributes in the `status` element provide a secondary dataset, as opposed to the `data` element which which provides the primary dataset for the actual equipment being monitored."
+        type: object
+        required:
+        - "code"
+        properties:
+          code:
+            $ref: "#/definitions/equipmentStatus"
       data:
         $ref: "#/definitions/mpptData"
   mpptData:
@@ -804,7 +812,6 @@ definitions:
       - "pv"
       - "battery"
       - "load"
-      - "status"
       properties:
         time_local:
           $ref: "#/definitions/eventTime"
@@ -814,8 +821,6 @@ definitions:
           $ref: "#/definitions/battery"
         load:
           $ref: "#/definitions/load"
-        status:
-          $ref: "#/definitions/equipmentStatus"
   productCatalogueItem:
     description: "A product catalogue item definition."
     type: object
