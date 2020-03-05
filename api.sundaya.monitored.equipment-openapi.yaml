@@ -903,13 +903,14 @@ definitions:
           minimum: 0
           example: "48.000"
       amps:
-        description: "An ordered set of Current readings for Loads (corresponding to voltage readings in 'load.volts'."
+        description: "An ordered set of Current readings for Loads (corresponding to voltage readings in 'load.volts'. Load amps are always negative."
         type: array
         minItems: 1
         maxItems: 2
         items:
           type: number
           format: float
+          maximum: 0
           example: "1.02"
   grid:
     description: "A data subset for the connected grid supply."
@@ -967,10 +968,11 @@ definitions:
           minimum: 0
           example: "48.000"
       amps:
-        description: "An ordered set of Current readings for PV strings (corresponding to voltage readings in 'pv.volts'."
+        description: "An ordered set of Current readings for PV strings (corresponding to voltage readings in 'pv.volts'. PV amps are always positive."
         type: array
         minItems: 1
         maxItems: 4
+        minimum: 0
         items:
           type: number
           format: float
