@@ -26,7 +26,7 @@ The following provides names of all data elements used in the API, in the contex
 
 - `store.in` and `store.out` indicate *charge* and *discharge* flows for batteries.
 
-- `buy.out` and `buy.in` indicate mains use, and feed-in flows into the public grid.
+- `buy.out` and `buy.in` indicate mains use, and feed-in flows from/to the public grid.
 
 - `harvest` indicates renewable generation and always implies `.out`. 
 
